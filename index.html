@@ -1277,12 +1277,12 @@ function openLedger(id) {
   activeClientId = id;
   const c = clients.find(x => x.id === id);
   if (!c) return;
-  selectedEntryId = null;
+  selectedEntryIds.clear();
   ledgerPage = 1;
   ledgerFilter = '';
   renderLedger(c);
+  updateSelectedPrintBtn();
   goPage('ledger');
-  document.getElementById('btn-print-selected').disabled = true;
   log('sys', 'Opened ledger: ' + c.accNo + ' — ' + c.name);
 }
 
@@ -1523,13 +1523,6 @@ function updateSelectedPrintBtn() {
 function selectRow(entryId) {
   toggleSelectEntry(entryId);
 }
-  } else {
-    selectedEntryId = entryId;
-    document.getElementById('btn-print-selected').disabled = false;
-  }
-  const c = clients.find(x => x.id === activeClientId);
-  if (c) renderLedgerBody(c);
-}
 
 // ── ADD CASE ENTRY ──
 function openAddCase() {
@@ -1739,9 +1732,9 @@ async function delEntry(clientId, entryId) {
   const { error } = await supa.from('ledger_entries').delete().eq('id', entryId);
   if (error) { toast('Error deleting: ' + error.message, 'e'); return; }
   log('del', 'Entry deleted from ' + clientId + ': ' + (entry ? entry.details : entryId));
-  if (selectedEntryId == entryId) {
-    selectedEntryId = null;
-    document.getElementById('btn-print-selected').disabled = true;
+  if (selectedEntryIds.has(entryId)) {
+    selectedEntryIds.delete(entryId);
+    updateSelectedPrintBtn();
   }
   await loadAllData();
   openLedger(clientId);
@@ -2007,6 +2000,8 @@ function openSelectedPrint() {
   setTimeout(() => generateQRs(c), 150);
   log('exp', 'Print preview for ' + selectedEntryIds.size + ' selected entries generated');
   openMo('mo-receipt');
+}
+
 function generateQRs(c) {
   const bal = clientBalance(c);
   const qrText = c.accNo + ' | ' + c.name + ' | Balance: PKR ' + fmt(Math.abs(bal));
