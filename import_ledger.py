@@ -1,222 +1,268 @@
-import pandas as pd
+import openpyxl
 import json
-from datetime import datetime
+from datetime import datetime, date
 import string
 import random
 import sys
 
-# Set UTF-8 encoding for output
-if sys.platform == 'win32':
-    import codecs
-    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+sys.stdout.reconfigure(encoding='utf-8')
 
 def generate_id():
     timestamp_part = hex(int(datetime.now().timestamp() * 1000))[2:]
     random_part = ''.join(random.choices(string.ascii_lowercase + string.digits, k=4))
     return timestamp_part + random_part
 
-def parse_date(date_val):
-    """Parse Excel date to YYYY-MM-DD format"""
-    if pd.isna(date_val):
+def clean_val(v):
+    if v is None:
         return ""
-    
-    if isinstance(date_val, datetime):
-        return date_val.strftime("%Y-%m-%d")
-    
-    if isinstance(date_val, str):
-        try:
-            dt = pd.to_datetime(date_val)
-            return dt.strftime("%Y-%m-%d")
-        except:
-            return ""
-    
-    try:
-        dt = pd.to_datetime(date_val, unit='D', origin='1899-12-30')
-        return dt.strftime("%Y-%m-%d")
-    except:
-        return ""
+    if isinstance(v, float) and v.is_integer():
+        return str(int(v))
+    return str(v).strip()
 
-def process_client_sheet(sheet_name, client_name):
-    """Extract ledger entries from a client's individual sheet"""
+def clean_num(v):
+    if v is None:
+        return 0.0
+    if isinstance(v, (int, float)):
+        return float(v)
     try:
-        print(f"  Processing sheet: {sheet_name}")
-        df = pd.read_excel('Ledger (CONSULTANTS).xlsx', sheet_name=sheet_name, header=None)
-        
-        # Find the header row
-        header_row = None
-        for i in range(min(20, len(df))):
-            row_vals = [str(df.iloc[i, col]).upper() if pd.notna(df.iloc[i, col]) else "" for col in df.columns]
-            if "DATE" in row_vals and "DETAILS" in row_vals:
-                header_row = i
-                break
-        
-        if header_row is None:
-            print(f"  Warning: Could not find header row")
+        s = str(v).replace(',', '').replace('PKR', '').replace('pkr', '').replace(' ', '').strip()
+        if not s or s == '-':
+            return 0.0
+        return float(s)
+    except:
+        return 0.0
+
+def parse_date(v):
+    if v is None:
+        return ""
+    if isinstance(v, (datetime, date)):
+        return v.strftime("%Y-%m-%d")
+    s = str(v).strip()
+    if not s or s.lower() == 'none' or s.lower() == 'nan':
+        return ""
+    for fmt in ["%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%m/%d/%Y", "%d.%m.%Y", "%Y.%m.%d", "%d-%b-%Y", "%d-%b-%y"]:
+        try:
+            return datetime.strptime(s, fmt).strftime("%Y-%m-%d")
+        except:
+            continue
+    return s[:10]
+
+def parse_sheet_entries(ws, sheet_name):
+    rows = list(ws.iter_rows(values_only=True))
+    if not rows:
+        return []
+    
+    # Locate header row
+    header_idx = None
+    for idx, row in enumerate(rows[:10]):
+        row_str = [str(c).upper() for c in row if c is not None]
+        if any('DATE' in c for c in row_str) and (any('DETAIL' in c for c in row_str) or any('DUE' in c for c in row_str) or any('RECEIVED' in c for c in row_str)):
+            header_idx = idx
+            break
+            
+    if header_idx is None:
+        if len(rows) > 3:
+            header_idx = 3
+        else:
             return []
+
+    header = [str(c).upper().strip() if c is not None else "" for c in rows[header_idx]]
+    
+    date_col = 0
+    folder_col = 1
+    stage_col = 2
+    tm_col = 3
+    details_col = 4
+    due_col = 5
+    received_col = 6
+    
+    for i, col_name in enumerate(header):
+        if 'DATE' in col_name:
+            date_col = i
+        elif 'FOLDER' in col_name:
+            folder_col = i
+        elif 'STAGE' in col_name:
+            stage_col = i
+        elif 'TM' in col_name:
+            tm_col = i
+        elif 'DETAIL' in col_name:
+            details_col = i
+        elif 'DUE' in col_name:
+            due_col = i
+        elif 'REC' in col_name:
+            received_col = i
+
+    entries = []
+    for row in rows[header_idx + 1:]:
+        if not any(c is not None for c in row):
+            continue
+            
+        def get_col(idx):
+            return row[idx] if idx < len(row) else None
+
+        d_val = parse_date(get_col(date_col))
+        folder_val = clean_val(get_col(folder_col))
+        stage_val = clean_val(get_col(stage_col)).upper()
+        tm_val = clean_val(get_col(tm_col))
+        details_val = clean_val(get_col(details_col))
+        due_val = clean_num(get_col(due_col))
+        rec_val = clean_num(get_col(received_col))
         
-        # Get column indices
-        date_col = folder_col = stage_col = tm_col = details_col = due_col = received_col = None
+        # Check if row is meaningful
+        if not details_val and not folder_val and not tm_val and due_val == 0 and rec_val == 0:
+            continue
+            
+        # Filter out total footer row
+        if ('TOTAL' in details_val.upper() or 'BALANCE' in details_val.upper()) and (due_val == 0 and rec_val == 0 or not d_val):
+            continue
+            
+        entry_type = "payment" if rec_val > 0 or "PAYMENT" in details_val.upper() or "REC" in details_val.upper() else "case"
         
-        for col in df.columns:
-            val = str(df.iloc[header_row, col]).upper() if pd.notna(df.iloc[header_row, col]) else ""
-            if "DATE" in val:
-                date_col = col
-            elif "FOLDER" in val:
-                folder_col = col
-            elif "STAGE" in val:
-                stage_col = col
-            elif "TM" in val and "NO" in val:
-                tm_col = col
-            elif "DETAILS" in val:
-                details_col = col
-            elif "DUE" in val:
-                due_col = col
-            elif "RECEIVED" in val:
-                received_col = col
+        entry = {
+            "id": generate_id(),
+            "type": entry_type,
+            "folderNo": folder_val,
+            "date": d_val if d_val else datetime.now().strftime("%Y-%m-%d"),
+            "stage": stage_val if stage_val in ["S1", "S2", "S3", "S4"] else (stage_val if stage_val else "S1"),
+            "tmNo": tm_val,
+            "details": details_val if details_val else ("Payment Received" if entry_type == "payment" else "Case Entry"),
+            "due": due_val,
+            "received": rec_val,
+            "createdAt": datetime.now().isoformat()
+        }
+        entries.append(entry)
         
-        entries = []
+    return entries
+
+def main():
+    print("Opening Ledger (CONSULTANTS).xlsx ...")
+    wb = openpyxl.load_workbook('Ledger (CONSULTANTS).xlsx', data_only=True)
+    
+    # 1. Read Dashboard clients
+    dashboard_ws = wb['Dashboard']
+    dash_rows = list(dashboard_ws.iter_rows(values_only=True))
+    
+    client_dict = {}
+    for row in dash_rows[2:]:
+        if not row or len(row) < 4:
+            continue
+        acc_no = clean_val(row[1])
+        name = clean_val(row[2])
+        balance = clean_num(row[3])
         
-        # Process all data rows
-        for i in range(header_row + 1, len(df)):
-            row = df.iloc[i]
-            
-            # Skip completely empty rows
-            if all(pd.isna(row[col]) for col in df.columns):
-                continue
-            
-            # Extract values
-            date_val = parse_date(row[date_col]) if date_col is not None else ""
-            folder_no = str(row[folder_col]).strip() if folder_col is not None and pd.notna(row[folder_col]) else ""
-            stage = str(row[stage_col]).strip().upper() if stage_col is not None and pd.notna(row[stage_col]) else ""
-            tm_no = str(row[tm_col]).strip() if tm_col is not None and pd.notna(row[tm_col]) else ""
-            details = str(row[details_col]).strip() if details_col is not None and pd.notna(row[details_col]) else ""
-            due = float(row[due_col]) if due_col is not None and pd.notna(row[due_col]) else 0
-            received = float(row[received_col]) if received_col is not None and pd.notna(row[received_col]) else 0
-            
-            # Skip rows with no meaningful data
-            if not details and not folder_no and due == 0 and received == 0:
-                continue
-            
-            entry_type = "payment" if "PAYMENT" in details.upper() or received > 0 else "case"
-            
-            entry = {
-                "id": generate_id(),
-                "type": entry_type,
-                "folderNo": folder_no if folder_no else "",
-                "date": date_val if date_val else datetime.now().strftime("%Y-%m-%d"),
-                "stage": stage if stage else "S1",
-                "tmNo": tm_no,
-                "details": details if details else "Imported Entry",
-                "due": due,
-                "received": received,
-                "createdAt": datetime.now().isoformat()
+        if acc_no and acc_no.startswith(('A-', 'X-', 'B-')) and name and name.upper() != 'NAME':
+            if acc_no not in client_dict:
+                client_dict[acc_no] = {
+                    "accNo": acc_no,
+                    "name": name,
+                    "expected_balance": balance
+                }
+                
+    # Also add any sheets that might not be in Dashboard
+    for s in wb.sheetnames:
+        if s not in ['Dashboard', '__COLOR_REF__'] and s not in client_dict:
+            client_dict[s] = {
+                "accNo": s,
+                "name": f"Client {s}",
+                "expected_balance": 0.0
             }
             
-            entries.append(entry)
+    print(f"Total Unique Clients to process: {len(client_dict)}")
+    
+    all_clients = []
+    total_entries_count = 0
+    total_balance_sum = 0.0
+    
+    blacklist_words = ['FOLDER', 'DATE', 'STAGE', 'TM', 'DETAIL', 'DUE', 'REC', 'BALANCE', 'LEDGER', 'HOME', 'OFFICE', 'BANK', 'TITLE', 'STATEMENT', 'PKR', 'PAGE', 'BRANDEX']
+    
+    for acc, c in client_dict.items():
+        name = c['name']
+        entries = []
         
-        print(f"  Total entries found: {len(entries)}")
-        return entries
-        
-    except Exception as e:
-        print(f"  Error: {str(e)}")
-        return []
-
-def process_excel():
-    # Get client list from Dashboard sheet
-    dashboard_df = pd.read_excel('Ledger (CONSULTANTS).xlsx', sheet_name='Dashboard', header=1)
-    
-    # Get all sheet names
-    excel_file = pd.ExcelFile('Ledger (CONSULTANTS).xlsx')
-    sheet_names = excel_file.sheet_names
-    
-    clients = []
-    processed_count = 0
-    skipped_count = 0
-    
-    print("Processing all clients...")
-    
-    # Process all clients
-    for index, row in dashboard_df.iterrows():
+        if acc in wb.sheetnames:
+            ws = wb[acc]
+            entries = parse_sheet_entries(ws, acc)
             
-        ledger_no = row.get('LEDGER NO')
-        name = row.get('NAME')
-        
-        if pd.isna(ledger_no) or pd.isna(name):
-            skipped_count += 1
-            continue
+            # If name is generic or missing, check sheet header
+            if not name or name.startswith("Client ") or name.upper() in blacklist_words:
+                header_rows = list(ws.iter_rows(values_only=True))[:4]
+                for hr in header_rows:
+                    for cell in hr:
+                        if cell is not None and isinstance(cell, str) and len(cell.strip()) > 2:
+                            cell_clean = cell.strip()
+                            if cell_clean != acc and not any(w in cell_clean.upper() for w in blacklist_words):
+                                name = cell_clean
+                                break
+                                
+        if not entries and c['expected_balance'] != 0:
+            entries.append({
+                "id": generate_id(),
+                "type": "case",
+                "folderNo": "Opening",
+                "date": datetime.now().strftime("%Y-%m-%d"),
+                "stage": "S1",
+                "tmNo": "",
+                "details": "Opening Balance",
+                "due": max(0.0, c['expected_balance']),
+                "received": max(0.0, -c['expected_balance']) if c['expected_balance'] < 0 else 0.0,
+                "createdAt": datetime.now().isoformat()
+            })
             
-        ledger_no = str(ledger_no).strip()
-        name = str(name).strip()
+        client_due = sum(e['due'] for e in entries)
+        client_rec = sum(e['received'] for e in entries)
+        client_bal = client_due - client_rec
+        total_balance_sum += client_bal
+        total_entries_count += len(entries)
         
-        if not ledger_no or not name or ledger_no.lower() == 'nan' or name.lower() == 'nan':
-            skipped_count += 1
-            continue
-        
-        print(f"\nClient {processed_count+1}: {ledger_no} - {name}")
-        
-        # Check if there's a corresponding sheet for this client
-        if ledger_no in sheet_names:
-            entries = process_client_sheet(ledger_no, name)
-        else:
-            print(f"  No sheet found, using opening balance")
-            # Fall back to opening balance from Dashboard
-            balance = row.get('BALANCE')
-            due_amount = 0
-            if not pd.isna(balance):
-                try:
-                    due_amount = float(balance)
-                except ValueError:
-                    due_amount = 0
-            
-            entries = []
-            if due_amount > 0:
-                entries.append({
-                    "id": generate_id(),
-                    "type": "case",
-                    "folderNo": "Opening",
-                    "date": datetime.now().strftime("%Y-%m-%d"),
-                    "stage": "S1",
-                    "tmNo": "",
-                    "details": "Opening Balance (Imported from Dashboard)",
-                    "due": due_amount,
-                    "received": 0,
-                    "createdAt": datetime.now().isoformat()
-                })
-        
-        client_id = generate_id()
-        client = {
-            "id": client_id,
-            "accNo": ledger_no,
+        all_clients.append({
+            "id": generate_id(),
+            "accNo": acc,
             "name": name,
             "city": "",
             "phone": "",
-            "notes": "Imported from Ledger (CONSULTANTS).xlsx with complete ledger entries",
+            "notes": f"Ledger account {acc} with {len(entries)} entries",
             "date": datetime.now().strftime("%Y-%m-%d"),
             "entries": entries,
             "createdAt": datetime.now().isoformat()
-        }
-        clients.append(client)
-        processed_count += 1
+        })
+        print(f"[{acc}] {name}: {len(entries)} entries | Due: PKR {client_due:,.0f} | Rec: PKR {client_rec:,.0f} | Bal: PKR {client_bal:,.0f}")
+
+    print("="*60)
+    print(f"Total Clients Imported: {len(all_clients)}")
+    print(f"Total Entries Imported: {total_entries_count}")
+    print(f"Total Portfolio Balance: PKR {total_balance_sum:,.2f}")
+    print("="*60)
     
-    print(f"\n" + "="*50)
-    print(f"Complete Import Summary:")
-    print(f"Successfully processed: {processed_count} clients")
-    print(f"Skipped: {skipped_count} invalid entries")
-    print(f"Total entries extracted: {sum(len(c['entries']) for c in clients)}")
-    print(f"="*50)
-        
     backup_data = {
-        "clients": clients,
-        "actLog": [{"type": "sys", "msg": f"Complete import of {processed_count} clients with full ledger entries", "ts": datetime.now().isoformat()}],
-        "settings": {"s1": 9000, "s2": 10000, "s3": 10500, "s4": 15000, "prefix": "A"},
+        "clients": all_clients,
+        "actLog": [
+            {
+                "type": "sys",
+                "msg": f"Full Ledger Import: {len(all_clients)} client accounts and {total_entries_count} entries successfully imported from Excel ledger.",
+                "ts": datetime.now().isoformat()
+            }
+        ],
+        "settings": {
+            "s1": 9000,
+            "s2": 10000,
+            "s3": 10500,
+            "s4": 15000,
+            "prefix": "A"
+        },
         "version": "2.0",
         "exportedAt": datetime.now().isoformat()
     }
     
     with open('backup.json', 'w', encoding='utf-8') as f:
         json.dump(backup_data, f, indent=2, ensure_ascii=False)
-        
-    print(f"Complete data saved to backup.json")
+    print("Saved complete data to backup.json")
+    
+    with open('initial_data.js', 'w', encoding='utf-8') as f:
+        f.write("// Brandex Ledger Initial Seed Data\n")
+        f.write("const defaultData = ")
+        json.dump(backup_data, f, indent=2, ensure_ascii=False)
+        f.write(";\n")
+    print("Saved complete data to initial_data.js")
 
-if __name__ == "__main__":
-    process_excel()
+if __name__ == '__main__':
+    main()

@@ -1137,8 +1137,8 @@ let clients  = load('bla_clients', []);
 let actLog   = load('bla_log', []);
 let settings = load('bla_settings', { s1:9000, s2:10000, s3:10500, s4:15000, prefix:'A' });
 
-// Initialize from default data if empty
-if (clients.length === 0 && typeof defaultData !== 'undefined' && defaultData.clients) {
+// Initialize from default data if empty or outdated test data
+if ((clients.length <= 5 || !clients.length) && typeof defaultData !== 'undefined' && defaultData.clients && defaultData.clients.length > clients.length) {
   clients = defaultData.clients;
   if (defaultData.actLog) actLog = defaultData.actLog;
   save();
