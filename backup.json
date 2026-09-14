@@ -1,0 +1,1123 @@
+{
+  "clients": [
+    {
+      "id": "1a09d3dbbe6cxgk",
+      "accNo": "A-001",
+      "name": "NOOR BAAF",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe6iqpc",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 27500.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.846846"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.846846"
+    },
+    {
+      "id": "1a09d3dbbe642ld",
+      "accNo": "A-002",
+      "name": "MR FURQAN BRAND EXPERTS",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe6bkrl",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 50000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.846846"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.846846"
+    },
+    {
+      "id": "1a09d3dbbe6bn6m",
+      "accNo": "A-003",
+      "name": "MUMTAZ ALI GHUARI MULTAN",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.846846"
+    },
+    {
+      "id": "1a09d3dbbe62op4",
+      "accNo": "A-004",
+      "name": "HMMAS BADAR PEW",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe67q2e",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 154000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.846846"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.846846"
+    },
+    {
+      "id": "1a09d3dbbe7edht",
+      "accNo": "A-005",
+      "name": "NAMEEM LAW ASSOCIATES",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.847844"
+    },
+    {
+      "id": "1a09d3dbbe7a2v4",
+      "accNo": "A-006A",
+      "name": "UMAIR",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.847844"
+    },
+    {
+      "id": "1a09d3dbbe7v567",
+      "accNo": "A-006B",
+      "name": "IRFAN",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.847844"
+    },
+    {
+      "id": "1a09d3dbbe7d5m6",
+      "accNo": "A-007A",
+      "name": "IMRAN",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.847844"
+    },
+    {
+      "id": "1a09d3dbbe7oupf",
+      "accNo": "A-007B",
+      "name": "UMAIR",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.847844"
+    },
+    {
+      "id": "1a09d3dbbe7isg4",
+      "accNo": "A-008",
+      "name": "RAJA WAQAR RWP CA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.847844"
+    },
+    {
+      "id": "1a09d3dbbe8qdwb",
+      "accNo": "A-009",
+      "name": "M IMTIAZ MULTAN CO FAIZ RASOOL X559",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe8ecua",
+      "accNo": "A-010",
+      "name": "MANSOR KHI AIMA XYC",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe832m2",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 39350.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.848843"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe8xxtz",
+      "accNo": "A-011",
+      "name": "ANDAN ADV FSD",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe84twj",
+      "accNo": "A-012",
+      "name": "ABID BLUE AREA ISB",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe88b60",
+      "accNo": "A-013",
+      "name": "ADVOCATE SHAFIQUE ISLAMABD",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe8d9yy",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 6000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.848843"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe82dos",
+      "accNo": "A-014",
+      "name": "ASIM SALEEM LAHORE A SUFI COUNSULTANT",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe840jg",
+      "accNo": "A-015",
+      "name": "M DANISH CO A022 EHTISHAM",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.848843"
+    },
+    {
+      "id": "1a09d3dbbe9o88i",
+      "accNo": "A-016",
+      "name": "SHEER M DAR FSD TAX",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbe9vk4i",
+      "accNo": "A-017",
+      "name": "SHAFIQ MS TAX CONSULTANT",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe9tsmw",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 15000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.849843"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbe91yrn",
+      "accNo": "A-018",
+      "name": "KASHIF PWD RWP ZIVA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe93p1h",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 10000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.849843"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbe9uag9",
+      "accNo": "A-019",
+      "name": "ASIM QURESHI RWP",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe9sy0w",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 10000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.849843"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbe9x7e2",
+      "accNo": "A-020",
+      "name": "MR SIBTAIN APRICART KARACHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbe9azsb",
+      "accNo": "A-021",
+      "name": "FAIZ RASOOL JAMPUR",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbe9xmy9",
+      "accNo": "A-022",
+      "name": "EHTSAM ALI CHEEMA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbe9j406",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 8500.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.849843"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.849843"
+    },
+    {
+      "id": "1a09d3dbbea2lo1",
+      "accNo": "A-023",
+      "name": "WASEEM HYD",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.850841"
+    },
+    {
+      "id": "1a09d3dbbeag63b",
+      "accNo": "A-024",
+      "name": "WAJAHAT XYC PRIDE",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.850841"
+    },
+    {
+      "id": "1a09d3dbbea03bk",
+      "accNo": "A-025",
+      "name": "IBRAHIM XYC KARACHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.850841"
+    },
+    {
+      "id": "1a09d3dbbeaqt9c",
+      "accNo": "A-026",
+      "name": "DESIRED TECHNOLOGIES",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.850841"
+    },
+    {
+      "id": "1a09d3dbbeavj3f",
+      "accNo": "A-027",
+      "name": "FAHIM ADV OKARA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.850841"
+    },
+    {
+      "id": "1a09d3dbbebdixk",
+      "accNo": "A-028A",
+      "name": "AZIZ UR REHMAN RWP",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbebex8s",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 15000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.851845"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.851845"
+    },
+    {
+      "id": "1a09d3dbbeb8zff",
+      "accNo": "A-028B",
+      "name": "AZIZ UR REHMAN RWP",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.851845"
+    },
+    {
+      "id": "1a09d3dbbebgl26",
+      "accNo": "A-030",
+      "name": "ZEESHAN ADV FAISALABAD",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.851845"
+    },
+    {
+      "id": "1a09d3dbbeb3wtz",
+      "accNo": "A-031",
+      "name": "AFTAB ADV GUJRANWALA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbebpfey",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 18000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.851845"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.851845"
+    },
+    {
+      "id": "1a09d3dbbeba3p0",
+      "accNo": "A-032",
+      "name": "MMH MM HASSAN",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbebataj",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 9200.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.851845"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.851845"
+    },
+    {
+      "id": "1a09d3dbbebe19l",
+      "accNo": "A-033",
+      "name": "AKK AWAIS KK CONSULTANT",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.851845"
+    },
+    {
+      "id": "1a09d3dbbebgusr",
+      "accNo": "A-034A",
+      "name": "SHOAIB ADV ISB",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbebb9cj",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 30000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.851845"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.852845"
+    },
+    {
+      "id": "1a09d3dbbedafk5",
+      "accNo": "A-034B",
+      "name": "SHOAIB ADV ISB",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.853849"
+    },
+    {
+      "id": "1a09d3dbbedt9re",
+      "accNo": "A-035",
+      "name": "KHURRAM SHAHZAD ADV",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbed3lxs",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 7000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.853849"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.853849"
+    },
+    {
+      "id": "1a09d3dbbeezhp5",
+      "accNo": "A-036",
+      "name": "MEHWISH BUISNESS BABA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.854846"
+    },
+    {
+      "id": "1a09d3dbbeeoj9m",
+      "accNo": "A-037",
+      "name": "RAJA ARSHAD SAHIWAL SIP",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbeenkbx",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 16000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.854846"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.854846"
+    },
+    {
+      "id": "1a09d3dbbee61bx",
+      "accNo": "A-038",
+      "name": "DR ALI KHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbeecgop",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 24000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.854846"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.854846"
+    },
+    {
+      "id": "1a09d3dbbeea5wj",
+      "accNo": "A-039",
+      "name": "AMJAD PESHAWAR UME COSMATICS",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.854846"
+    },
+    {
+      "id": "1a09d3dbbefrtqk",
+      "accNo": "A-040",
+      "name": "SHARJEEL AYUB SHARUKH KHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.855847"
+    },
+    {
+      "id": "1a09d3dbbefaeso",
+      "accNo": "A-041",
+      "name": "M TARIQ AFTAB RWP",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbef9r0m",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 72000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.855847"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.855847"
+    },
+    {
+      "id": "1a09d3dbbeflfcn",
+      "accNo": "A-042",
+      "name": "KKC KAMRAN ISLAMABAD",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbef7c64",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 19000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.855847"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.855847"
+    },
+    {
+      "id": "1a09d3dbbf0mptq",
+      "accNo": "A-043",
+      "name": "WAQAS CONSULTANT ISB",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf02lok",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 4000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.856848"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.856848"
+    },
+    {
+      "id": "1a09d3dbbf0jdfn",
+      "accNo": "A-044A",
+      "name": "ISO MURTAZA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf0nrr9",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 16000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.856848"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.857360"
+    },
+    {
+      "id": "1a09d3dbbf13auq",
+      "accNo": "A-045",
+      "name": "MR SARMAD PSW",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf1y88g",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 17000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.857384"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.857384"
+    },
+    {
+      "id": "1a09d3dbbf1bgu5",
+      "accNo": "A-046",
+      "name": "SHAZAD KHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.857384"
+    },
+    {
+      "id": "1a09d3dbbf1cndn",
+      "accNo": "A-047",
+      "name": "JUNAID PESHAWAR CO MR SARMAD X073",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf171gi",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 1000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.857384"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.857384"
+    },
+    {
+      "id": "1a09d3dbbf1ujcb",
+      "accNo": "A-048",
+      "name": "ALI WARAICH ADVOCATE SAHIWAL",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.857384"
+    },
+    {
+      "id": "1a09d3dbbf2pl84",
+      "accNo": "A-049",
+      "name": "ITNA CONSULTANT RWP NABEEL",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf2h5f7",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 1100.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.858371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.858371"
+    },
+    {
+      "id": "1a09d3dbbf27t5o",
+      "accNo": "A-050",
+      "name": "MIAN USMAN BURYWALA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.858371"
+    },
+    {
+      "id": "1a09d3dbbf21isr",
+      "accNo": "A-051",
+      "name": "MR AURANGZAIB PRINTER RWP",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf2xo5r",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 6000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.858371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.858371"
+    },
+    {
+      "id": "1a09d3dbbf2f3ii",
+      "accNo": "A-052",
+      "name": "TARIQ ADV HYDRABAD",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.858371"
+    },
+    {
+      "id": "1a09d3dbbf32opx",
+      "accNo": "A-053",
+      "name": "IRFAN CHEENA CO A022 IHTASHAM",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf3jxmq",
+      "accNo": "A-054",
+      "name": "KAMRAN SADIQ",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf3x9sh",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 18000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.859371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf3439w",
+      "accNo": "A-055",
+      "name": "MALIK ZAID",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf3xel3",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 38200.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.859371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf3m5pn",
+      "accNo": "A-056",
+      "name": "AIMA MANAGEMENT",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf3zge4",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 1000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.859371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf3fck6",
+      "accNo": "A-057",
+      "name": "IRFAN CHEEMA",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf30zr1",
+      "accNo": "A-058",
+      "name": "M ASIF FAROOQ",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf3rsl7",
+      "accNo": "A-059",
+      "name": "WAQAS ILYAAS",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf38r97",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 1000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.859371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.859371"
+    },
+    {
+      "id": "1a09d3dbbf4h95o",
+      "accNo": "A-060",
+      "name": "SHAHZAD KARACHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.860371"
+    },
+    {
+      "id": "1a09d3dbbf4xu32",
+      "accNo": "A-061",
+      "name": "SHAHZAD KARACHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [
+        {
+          "id": "1a09d3dbbf48rkg",
+          "type": "case",
+          "folderNo": "Opening",
+          "date": "2026-09-14",
+          "stage": "S1",
+          "tmNo": "",
+          "details": "Opening Balance (Imported)",
+          "due": 10000.0,
+          "received": 0,
+          "createdAt": "2026-09-14T05:07:43.860371"
+        }
+      ],
+      "createdAt": "2026-09-14T05:07:43.860371"
+    },
+    {
+      "id": "1a09d3dbbf4gqzj",
+      "accNo": "A-062",
+      "name": "SHAHZAD KARACHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.860371"
+    },
+    {
+      "id": "1a09d3dbbf4uh57",
+      "accNo": "A-063",
+      "name": "SHAHZAD KARACHI",
+      "city": "",
+      "phone": "",
+      "notes": "Imported from Ledger (CONSULTANTS).xlsx",
+      "date": "2026-09-14",
+      "entries": [],
+      "createdAt": "2026-09-14T05:07:43.860371"
+    }
+  ],
+  "actLog": [
+    {
+      "type": "sys",
+      "msg": "Imported 66 clients from Excel",
+      "ts": "2026-09-14T05:07:43.933845"
+    }
+  ],
+  "settings": {
+    "s1": 9000,
+    "s2": 10000,
+    "s3": 10500,
+    "s4": 15000,
+    "prefix": "A"
+  },
+  "version": "2.0",
+  "exportedAt": "2026-09-14T05:07:43.933845"
+}

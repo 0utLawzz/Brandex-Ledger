@@ -1118,6 +1118,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 <!-- TOAST -->
 <div class="toast" id="toast-el"></div>
 
+<script src="initial_data.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // DATA LAYER
@@ -1125,6 +1126,13 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 let clients  = load('bla_clients', []);
 let actLog   = load('bla_log', []);
 let settings = load('bla_settings', { s1:9000, s2:10000, s3:10500, s4:15000, prefix:'A' });
+
+// Initialize from default data if empty
+if (clients.length === 0 && typeof defaultData !== 'undefined' && defaultData.clients) {
+  clients = defaultData.clients;
+  if (defaultData.actLog) actLog = defaultData.actLog;
+  save();
+}
 
 let activeClientId = null; // currently open ledger
 
