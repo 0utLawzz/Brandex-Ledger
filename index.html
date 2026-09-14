@@ -16,6 +16,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
+/* ══════════════════════════════════════════
+   BASE / RESET
+══════════════════════════════════════════ */
 :root{
   --bg:#0a0c0f;--surface:#111418;--card:#181c22;--border:#2a2f3a;
   --accent:#58a6ff;--accent2:#3fb950;--accent3:#f78166;--accent4:#d2a8ff;
@@ -23,7 +26,7 @@
   --sw:260px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
@@ -38,8 +41,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 /* ── SIDEBAR ── */
 .sb-logo{padding:18px 18px 14px;border-bottom:1px solid var(--border);}
 .sb-logomark{display:flex;align-items:center;gap:10px;}
-.sb-icon{width:38px;height:38px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#000;flex-shrink:0;letter-spacing:-.5px;}
-.sb-name{font-family:'Syne',sans-serif;font-weight:800;font-size:12px;line-height:1.2;}
+.sb-icon{width:38px;height:38px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#000;flex-shrink:0;letter-spacing:-.5px;}
+.sb-name{font-weight:800;font-size:12px;line-height:1.2;}
 .sb-sub{font-size:8px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
 .nav-sec{padding:10px 0;}
 .nav-lbl{font-size:8px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:5px 18px 3px;}
@@ -70,7 +73,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .sb-foot{margin-top:auto;padding:12px 18px;border-top:1px solid var(--border);font-size:8px;color:var(--muted);text-align:center;letter-spacing:1px;}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:8px 13px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;transition:all .18s;white-space:nowrap;font-weight:600;}
+.btn{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:8px 13px;color:var(--text);font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;transition:all .18s;white-space:nowrap;font-weight:600;}
 .btn:hover{border-color:var(--accent);color:var(--accent);}
 .btn.prim{background:var(--accent);color:#000;border-color:var(--accent);}
 .btn.prim:hover{background:#79bcff;border-color:#79bcff;color:#000;}
@@ -83,10 +86,12 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .btn.purp{background:rgba(210,168,255,.1);color:var(--accent4);border-color:rgba(210,168,255,.3);}
 .btn.purp:hover{background:rgba(210,168,255,.2);border-color:var(--accent4);}
 .btn.sm{padding:5px 9px;font-size:9px;}
+.btn.teal{background:rgba(13,153,112,.15);color:#0D9970;border-color:rgba(13,153,112,.3);}
+.btn.teal:hover{background:rgba(13,153,112,.25);border-color:#0D9970;}
 
 /* ── PAGE HEADER ── */
 .ph{margin-bottom:22px;}
-.ph-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:3px;}
+.ph-title{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:20px;font-weight:400;margin-bottom:3px;}
 .ph-sub{font-size:10px;color:var(--muted);}
 
 /* ── STAT CARDS ── */
@@ -98,7 +103,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .sc.r::after{background:var(--accent);}
 .sc.p::after{background:var(--accent3);}
 .sc-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
-.sc-val{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;}
+.sc-val{font-family:'Bebas Neue',Arial,sans-serif;font-size:19px;font-weight:400;}
 .sc.b .sc-val{color:var(--accent);}
 .sc.g .sc-val{color:var(--accent2);}
 .sc.r .sc-val{color:var(--danger);}
@@ -107,7 +112,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 
 /* ── TOOLBAR ── */
 .tb{display:flex;gap:8px;margin-bottom:18px;align-items:center;flex-wrap:wrap;}
-.srch{flex:1;min-width:160px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:8px 12px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;outline:none;transition:border-color .2s;}
+.srch{flex:1;min-width:160px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:8px 12px;color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none;transition:border-color .2s;}
 .srch:focus{border-color:var(--accent);}
 
 /* ── CLIENT CARDS GRID ── */
@@ -117,14 +122,14 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .client-card:hover{border-color:rgba(88,166,255,.4);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
 .client-card:hover::before{opacity:1;}
 .cc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;}
-.cc-no{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent);}
+.cc-no{font-family:'Bebas Neue',Arial,sans-serif;font-size:20px;font-weight:400;color:var(--accent);}
 .cc-city{font-size:9px;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2px 8px;}
-.cc-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.cc-name{font-family:'Space Grotesk',Arial,sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .cc-divider{height:1px;background:var(--border);margin:8px 0;}
 .cc-row{display:flex;justify-content:space-between;font-size:9px;padding:2px 0;}
 .cc-row span:first-child{color:var(--muted);}
 .cc-row span:last-child{font-weight:600;}
-.cc-bal{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;}
+.cc-bal{font-family:'Bebas Neue',Arial,sans-serif;font-size:14px;font-weight:400;}
 .cc-bal.neg{color:var(--danger);}
 .cc-bal.pos{color:var(--accent2);}
 .cc-bal.zero{color:var(--muted);}
@@ -133,15 +138,13 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 
 /* ── LEDGER VIEW (CLIENT DETAIL) ── */
 .ledger-page{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-
-/* Freeze Header */
 .ledger-header{background:var(--card);border-bottom:2px solid var(--border);padding:18px 22px;position:sticky;top:0;z-index:50;}
 .lh-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;}
-.lh-company{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;}
-.lh-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.5px;}
+.lh-company{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;}
+.lh-title{font-family:'Bebas Neue',Arial,sans-serif;font-size:22px;font-weight:400;color:var(--text);letter-spacing:-.5px;}
 .lh-balance{text-align:right;}
 .lh-bal-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
-.lh-bal-amt{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;}
+.lh-bal-amt{font-family:'Bebas Neue',Arial,sans-serif;font-size:26px;font-weight:400;}
 .lh-bal-amt.neg{color:var(--danger);}
 .lh-bal-amt.pos{color:var(--accent2);}
 .lh-bal-amt.zero{color:var(--muted);}
@@ -152,6 +155,25 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .lh-qr{width:70px;height:70px;background:white;border-radius:7px;padding:5px;flex-shrink:0;}
 .lh-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
 
+/* ── 3-COLUMN INFO BAR ── */
+.lh-info-bar{display:grid;grid-template-columns:1fr 2fr 1fr;gap:0;margin-bottom:14px;border:2px solid var(--border);border-radius:8px;overflow:hidden;}
+.lh-info-box{padding:14px 18px;position:relative;}
+.lh-info-box:not(:last-child){border-right:2px solid var(--border);}
+.lh-info-label{font-size:8px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;}
+.lh-info-value{font-family:'Bebas Neue',Arial,sans-serif;font-size:28px;font-weight:400;letter-spacing:1px;}
+.lh-info-value.acc{color:var(--accent);}
+.lh-info-value.name{font-size:20px;}
+.lh-info-value.bal-neg{color:var(--danger);}
+.lh-info-value.bal-pos{color:var(--accent2);}
+.lh-info-value.bal-zero{color:var(--muted);}
+.lh-info-sub{font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* ── LEDGER FILTER & PAGINATION ── */
+.ledger-toolbar{display:flex;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.ledger-toolbar .srch{flex:1;min-width:200px;}
+.ledger-page-info{font-size:10px;color:var(--muted);white-space:nowrap;font-family:'DM Mono',monospace;}
+.pagination-bar{display:flex;gap:6px;align-items:center;padding:10px 16px;border-top:1px solid var(--border);justify-content:center;}
+
 /* Ledger Table */
 .ledger-table-wrap{overflow-x:auto;}
 .lt{width:100%;border-collapse:collapse;font-size:11px;}
@@ -160,8 +182,10 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .lt td{padding:8px 12px;border-bottom:1px solid rgba(42,47,58,.3);vertical-align:middle;}
 .lt tbody tr.case-row{background:rgba(88,166,255,.03);}
 .lt tbody tr.pay-row{background:rgba(63,185,80,.03);}
+.lt tbody tr.complete-row{opacity:.7;}
 .lt tbody tr:hover{background:rgba(255,255,255,.04);}
 .lt tbody tr:last-child td{border-bottom:none;}
+.lt tbody tr.selected-row{background:rgba(201,74,0,.08) !important;outline:2px solid rgba(201,74,0,.3);}
 .folder-no{font-weight:700;color:var(--accent);font-size:11px;}
 .details-cell{font-weight:500;}
 .pay-label{color:var(--accent2);font-style:italic;}
@@ -177,9 +201,15 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .amt-bal.pos{color:var(--accent2);}
 .amt-bal.zero{color:var(--muted);}
 .date-cell{font-size:10px;color:var(--muted);white-space:nowrap;}
-.row-del{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:2px 6px;border-radius:4px;font-size:10px;transition:all .15s;opacity:0;}
-.lt tbody tr:hover .row-del{opacity:1;}
-.row-del:hover{color:var(--danger);background:rgba(248,81,73,.1);}
+.row-actions{display:flex;gap:4px;opacity:0;transition:opacity .15s;}
+.lt tbody tr:hover .row-actions{opacity:1;}
+.row-btn{background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:2px 7px;border-radius:4px;font-size:9px;transition:all .15s;font-family:'DM Mono',monospace;}
+.row-btn:hover{color:var(--text);border-color:var(--accent);}
+.row-btn.del-btn:hover{color:var(--danger);background:rgba(248,81,73,.1);border-color:var(--danger);}
+.row-btn.edit-btn:hover{color:var(--yellow);background:rgba(227,179,65,.1);border-color:var(--yellow);}
+.row-btn.print-btn:hover{color:var(--accent4);background:rgba(210,168,255,.1);border-color:var(--accent4);}
+.row-btn.complete-btn:hover{color:var(--accent2);background:rgba(63,185,80,.1);border-color:var(--accent2);}
+.complete-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(63,185,80,.1);color:var(--accent2);border:1px solid rgba(63,185,80,.3);border-radius:20px;padding:1px 6px;font-size:8px;font-weight:700;}
 
 /* ── LOG PAGE ── */
 .log-list{display:flex;flex-direction:column;gap:6px;}
@@ -199,9 +229,10 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:999;align-items:center;justify-content:center;padding:16px;}
 .mo.open{display:flex;}
 .mbox{background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;}
-.mbox.lg{max-width:780px;}
+.mbox.lg{max-width:820px;}
+.mbox.xl{max-width:960px;}
 .mh{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.mt{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;}
+.mt{font-family:'Bebas Neue',Arial,sans-serif;font-weight:400;font-size:15px;letter-spacing:1px;}
 .mc-btn{background:transparent;border:1px solid var(--border);border-radius:6px;padding:3px 9px;color:var(--muted);cursor:pointer;font-size:17px;line-height:1;transition:all .14s;}
 .mc-btn:hover{border-color:var(--danger);color:var(--danger);}
 .mb{padding:22px;}
@@ -213,38 +244,56 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .fgroup{display:flex;flex-direction:column;gap:5px;}
 .fgroup.full{grid-column:1/-1;}
 .flbl{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
-.fi{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:9px 13px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;transition:border-color .2s;width:100%;}
+.fi{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:9px 13px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;transition:border-color .2s;width:100%;}
 .fi:focus{border-color:var(--accent);}
-.fsel{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:9px 13px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;width:100%;cursor:pointer;}
+.fi.err{border-color:var(--danger);}
+.fsel{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:9px 13px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;width:100%;cursor:pointer;}
 .fsel:focus{border-color:var(--accent);}
+.tm-lookup-box{background:var(--card);border:1px dashed var(--border);border-radius:7px;padding:10px 14px;margin-top:4px;font-size:10px;color:var(--muted);min-height:48px;display:flex;align-items:center;gap:8px;}
+.tm-lookup-box.loading{color:var(--yellow);}
+.tm-lookup-box.found{color:var(--accent2);border-color:var(--accent2);}
+.tm-lookup-box.error{color:var(--danger);border-color:var(--danger);}
 
 /* ── RECEIPT (PRINT) ── */
-.receipt-wrap{background:#fff;color:#000;padding:28px;font-family:'JetBrains Mono',monospace;}
+.receipt-wrap{background:#F7F0E8;color:#1B2A41;padding:28px;font-family:'Space Grotesk',Arial,sans-serif;}
 .r-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:3px solid #4A1520;}
-.r-co{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#0a0c0f;}
-.r-co-sub{font-size:8px;color:#666;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
-.r-co-addr{font-size:8px;color:#888;margin-top:4px;line-height:1.5;}
-.r-title-bar{background:#0a0c0f;color:#fff;text-align:center;padding:9px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
-.r-client-bar{display:flex;justify-content:space-between;align-items:center;background:#f0f0ff;border:2px solid #4A1520;border-radius:6px;padding:10px 16px;margin-bottom:14px;}
-.r-client-no{font-size:28px;font-weight:800;font-family:'Syne',sans-serif;color:#0a0c0f;}
-.r-client-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#0a0c0f;}
-.r-client-city{font-size:11px;color:#555;margin-top:2px;}
+.r-logo-area{display:flex;align-items:center;gap:14px;}
+.r-logo-img{height:54px;width:auto;}
+.r-co{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:22px;font-weight:400;color:#1B2A41;letter-spacing:1px;}
+.r-co-sub{font-size:8px;color:#6B5747;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+.r-co-addr{font-size:8px;color:#6B5747;margin-top:4px;line-height:1.6;}
+.r-title-bar{background:#4A1520;color:#F7F0E8;text-align:center;padding:9px;font-family:'Bebas Neue',Arial,sans-serif;font-size:15px;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;}
+.r-info-bar{display:grid;grid-template-columns:1fr 2fr 1fr;gap:0;border:2.5px solid #1B2A41;margin-bottom:14px;border-radius:4px;overflow:hidden;}
+.r-info-box{padding:12px 16px;}
+.r-info-box:not(:last-child){border-right:2px solid #1B2A41;}
+.r-info-label{font-size:7px;color:#6B5747;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;font-family:'DM Mono',monospace;}
+.r-info-value{font-family:'Bebas Neue',Arial,sans-serif;font-size:28px;color:#1B2A41;letter-spacing:1px;}
+.r-info-value.acc-val{color:#4A1520;font-size:32px;}
+.r-info-value.name-val{font-size:20px;}
+.r-info-value.bal-val-neg{color:#8B1010;font-size:26px;}
+.r-info-value.bal-val-pos{color:#0A6B52;font-size:26px;}
 .r-meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
-.r-meta-item{background:#f8f9fa;border:1px solid #dee2e6;padding:7px 10px;border-radius:4px;}
-.r-meta-lbl{font-size:7px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
-.r-meta-val{font-size:11px;font-weight:700;color:#0a0c0f;}
+.r-meta-item{background:#EDE5D4;border:1.5px solid #1B2A41;padding:7px 10px;}
+.r-meta-lbl{font-size:7px;color:#6B5747;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;font-family:'DM Mono',monospace;}
+.r-meta-val{font-size:11px;font-weight:700;color:#1B2A41;}
+.r-bank-box{background:#EDE5D4;border:1.5px solid #0A6B52;padding:10px 14px;margin-bottom:14px;border-radius:3px;}
+.r-bank-title{font-size:8px;font-family:'DM Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:#0A6B52;margin-bottom:6px;}
+.r-bank-grid{display:flex;gap:20px;flex-wrap:wrap;}
+.r-bank-item{font-size:9px;color:#1B2A41;}
+.r-bank-item span{font-weight:700;}
 .r-table{width:100%;border-collapse:collapse;font-size:9px;margin-bottom:14px;}
-.r-table th{padding:5px 8px;background:#0a0c0f;color:#fff;text-align:left;font-size:8px;letter-spacing:.8px;text-transform:uppercase;}
-.r-table td{padding:5px 8px;border:1px solid #dee2e6;}
-.r-table tr.case-tr{background:#f9f9ff;}
-.r-table tr.pay-tr{background:#f0fff4;}
-.r-table tr.pay-tr td{color:#1a7a2a;}
-.r-balance-box{display:flex;justify-content:space-between;align-items:center;background:#0a0c0f;color:#fff;padding:12px 16px;border-radius:6px;margin-bottom:14px;}
-.r-bal-lbl{font-size:9px;color:#7d8590;letter-spacing:1px;text-transform:uppercase;}
-.r-bal-amt{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#3fb950;}
-.r-bal-amt.neg{color:#f85149;}
-.r-foot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:10px;border-top:1px solid #dee2e6;font-size:8px;color:#888;}
-.r-sig-line{border-top:1px solid #000;padding-top:4px;font-size:9px;font-weight:700;color:#000;margin-top:28px;}
+.r-table th{padding:6px 8px;background:#4A1520;color:#F7F0E8;text-align:left;font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+.r-table td{padding:5px 8px;border:1.5px solid #C4B49A;}
+.r-table tr.case-tr{background:#F7F0E8;}
+.r-table tr.pay-tr{background:#DDEFE8;}
+.r-table tr.pay-tr td{color:#0A6B52;}
+.r-table tr.complete-tr td{opacity:.75;}
+.r-balance-box{display:flex;justify-content:space-between;align-items:center;background:#4A1520;color:#F7F0E8;padding:12px 16px;margin-bottom:14px;}
+.r-bal-lbl{font-size:9px;color:#C4A882;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+.r-bal-amt{font-family:'Bebas Neue',Arial,sans-serif;font-size:26px;color:#0D9970;}
+.r-bal-amt.neg{color:#E8775A;}
+.r-foot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:10px;border-top:2px solid #4A1520;font-size:8px;color:#6B5747;}
+.r-sig-line{border-top:1.5px solid #4A1520;padding-top:4px;font-size:9px;font-weight:700;color:#1B2A41;margin-top:28px;}
 
 /* ── EMPTY ── */
 .empty{text-align:center;padding:48px 20px;color:var(--muted);}
@@ -267,13 +316,14 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   .main{margin-left:0;}
   .sg{grid-template-columns:1fr 1fr;}
   .fg{grid-template-columns:1fr;}
+  .lh-info-bar{grid-template-columns:1fr;}
+  .lh-info-box:not(:last-child){border-right:none;border-bottom:2px solid var(--border);}
 }
 
 .file-hidden{display:none;}
 
 /* =========================================================
    BRANDEX NEO-BRUTALISM THEME v1.0
-   Visual layer only. Existing application logic is preserved.
    ========================================================= */
 .theme-neobrutalism{
   --bg:#F0E8D0;
@@ -314,9 +364,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   background:#F0E8D0;
   color:#0C0C0C;
 }
-.theme-neobrutalism *{
-  text-shadow:none !important;
-}
+.theme-neobrutalism *{text-shadow:none !important;}
 .theme-neobrutalism h1,
 .theme-neobrutalism h2,
 .theme-neobrutalism h3,
@@ -329,6 +377,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .theme-neobrutalism .lh-title,
 .theme-neobrutalism .lh-company,
 .theme-neobrutalism .lh-bal-amt,
+.theme-neobrutalism .lh-info-value,
 .theme-neobrutalism .mt{
   font-family:'Bebas Neue','Arial Black',Arial,sans-serif;
   letter-spacing:1px;
@@ -340,6 +389,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .theme-neobrutalism .ph-sub,
 .theme-neobrutalism .sb-sub,
 .theme-neobrutalism .btn,
+.theme-neobrutalism .row-btn,
 .theme-neobrutalism .tag,
 .theme-neobrutalism .stage-b,
 .theme-neobrutalism .ni{
@@ -351,128 +401,110 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .theme-neobrutalism ::-webkit-scrollbar-track{background:#F0E8D0;}
 .theme-neobrutalism ::-webkit-scrollbar-thumb{background:#0C0C0C;border-radius:0;}
 
-
 /* LAYOUT (Neo-Brutalism Top Nav) */
-.theme-neobrutalism .layout {
-  display: flex;
-  flex-direction: column;
-  background: #F0E8D0;
-  min-height: 100vh;
+.theme-neobrutalism .layout{
+  display:flex;
+  flex-direction:column;
+  background:#F0E8D0;
+  min-height:100vh;
 }
-.theme-neobrutalism .sidebar {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  height: auto;
-  min-height: 72px;
-  background: #FAF6EE;
-  border-right: none;
-  border-bottom: 3px solid #C94A00;
-  box-shadow: 0 5px 0 #0C0C0C;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  z-index: 1000;
+.theme-neobrutalism .sidebar{
+  position:sticky;
+  top:0;
+  width:100%;
+  height:auto;
+  min-height:58px;
+  border-right:none;
+  border-bottom:3px solid #C94A00;
+  box-shadow:0 5px 0 #0C0C0C;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  z-index:1000;
+  background:#0C0C0C;
+  overflow:visible;
 }
-.theme-neobrutalism .main {
-  margin-left: 0;
-  max-width: 1300px;
-  margin: 0 auto;
-  width: 100%;
-  background: transparent;
+.theme-neobrutalism .main{
+  margin-left:0;
+  max-width:1400px;
+  margin:0 auto;
+  width:100%;
+  background:transparent;
 }
-.theme-neobrutalism .page {
-  padding: 40px 36px;
-  max-width: none;
-}
-.theme-neobrutalism .page.active {display:block;}
+.theme-neobrutalism .page{padding:40px 36px;max-width:none;}
+.theme-neobrutalism .page.active{display:block;}
 
-/* TOP NAVIGATION */
-.theme-neobrutalism .sb-logo {
-  background: transparent;
-  border-bottom: none;
-  padding: 12px 0;
+/* NAVBAR LOGO */
+.theme-neobrutalism .sb-logo{
+  background:transparent;
+  border-bottom:none;
+  padding:10px 0;
 }
-.theme-neobrutalism .sb-icon {
-  font-size: 20px;
-  padding: 8px 12px;
+.theme-neobrutalism .sb-logomark{gap:12px;}
+.theme-neobrutalism .sb-icon{
+  background:transparent;
+  border-radius:0;
+  width:auto;
+  height:auto;
+  padding:0;
 }
-.theme-neobrutalism .sb-name {
-  font-size: 20px;
+.theme-neobrutalism .sb-icon img{
+  height:40px;
+  width:auto;
+  object-fit:contain;
 }
-.theme-neobrutalism .sb-sub,
+.theme-neobrutalism .sb-name{
+  font-family:'Bebas Neue',Arial,sans-serif;
+  font-size:22px;
+  font-weight:400;
+  letter-spacing:2px;
+  color:#FAF6EE;
+}
+.theme-neobrutalism .sb-sub{color:#C94A00;font-size:9px;letter-spacing:2px;}
 .theme-neobrutalism .nav-lbl,
 .theme-neobrutalism .sb-foot,
 .theme-neobrutalism .sb-stats,
-.theme-neobrutalism #sb-quick-list,
-.theme-neobrutalism .nav-sec:nth-child(3) .nav-lbl { /* Hide Quick Open */
-  display: none !important;
+.theme-neobrutalism #sb-quick-list{
+  display:none !important;
 }
-.theme-neobrutalism .nav-sec {
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.theme-neobrutalism .nav-sec{
+  padding:0;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
 }
-.theme-neobrutalism .sidebar > .nav-links {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  margin-left: auto;
+.theme-neobrutalism .ni{
+  border-left:none;
+  border-bottom:3px solid transparent;
+  padding:20px 16px;
+  font-size:12px;
+  font-weight:700;
+  color:#888;
+  text-transform:uppercase;
+  letter-spacing:.5px;
 }
-.theme-neobrutalism .nav-links .nav-sec:nth-child(2) {
-  display: none;
+.theme-neobrutalism .ni:hover{
+  border-left-color:transparent;
+  border-bottom-color:#C94A00;
+  color:#FFF;
+  background:transparent;
 }
-.theme-neobrutalism .ni {
-  color: #0C0C0C;
-  border-left: none;
-  border-bottom: 4px solid transparent;
-  min-height: 69px;
-  padding: 22px 18px;
-  font-size: 14px;
-  font-weight: 700;
+.theme-neobrutalism .ni.active{
+  background:transparent;
+  border-left-color:transparent;
+  border-bottom-color:#C94A00;
+  color:#FAF6EE;
 }
-.theme-neobrutalism .ni:hover {
-  border-left-color: transparent;
-  border-bottom-color: #C94A00;
+.theme-neobrutalism .sidebar > div{
+  display:flex;
+  flex-direction:row;
 }
-.theme-neobrutalism .ni.active {
-  background: #C94A00;
-  color: #FAF6EE;
-  border-left-color: transparent;
-  border-bottom-color: #C94A00;
+.theme-neobrutalism .nbadge{
+  background:#C94A00;
+  color:#FFF;
+  border-radius:0;
 }
-.theme-neobrutalism .ni.active .nbadge {
-  background: #FAF6EE;
-  color: #0C0C0C;
-}
-
-/* We need to group the nav sections together so they flow horizontally */
-.theme-neobrutalism .sidebar > div {
-  display: flex;
-  flex-direction: row;
-}
-
-/* Overriding base font sizes for Neo-Brutalism */
-.theme-neobrutalism .ph-title { font-size: 48px; }
-.theme-neobrutalism .ph-sub { font-size: 16px; margin-top: 8px; }
-.theme-neobrutalism .btn { font-size: 13px; padding: 12px 18px; }
-.theme-neobrutalism .sc-lbl { font-size: 14px; }
-.theme-neobrutalism .sc-val { font-size: 40px; }
-.theme-neobrutalism .sc-sub { font-size: 12px; }
-.theme-neobrutalism .cc-no { font-size: 24px; }
-.theme-neobrutalism .cc-name { font-size: 20px; }
-.theme-neobrutalism .cc-city { font-size: 12px; padding: 4px 10px; }
-.theme-neobrutalism .cc-bal { font-size: 18px; }
-.theme-neobrutalism .lh-company { font-size: 14px; }
-.theme-neobrutalism .lh-title { font-size: 36px; }
-.theme-neobrutalism .lh-bal-lbl { font-size: 14px; }
-.theme-neobrutalism .lh-bal-amt { font-size: 42px; }
-.theme-neobrutalism .lt th { font-size: 12px; padding: 14px 16px; }
-.theme-neobrutalism .lt td { font-size: 13px; padding: 14px 16px; }
-.theme-neobrutalism .srch, .theme-neobrutalism .fi, .theme-neobrutalism .fsel { font-size: 14px; padding: 12px 16px; }
-.theme-neobrutalism .flbl { font-size: 12px; }
 
 /* PAGE HEADERS */
 .theme-neobrutalism .ph{
@@ -481,22 +513,24 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   padding-left:14px;
 }
 .theme-neobrutalism .ph-title{
-  font-size:42px;
+  font-size:46px;
   line-height:.95;
   color:#0C0C0C;
   text-transform:uppercase;
+  letter-spacing:2px;
 }
 .theme-neobrutalism .ph-sub{
   color:#555;
   font-size:11px;
   margin-top:6px;
+  font-family:'DM Mono',monospace;
 }
 
 /* BUTTONS */
 .theme-neobrutalism .btn{
   background:#FAF6EE;
   color:#0C0C0C;
-  border:3px solid #0C0C0C;
+  border:2.5px solid #0C0C0C;
   border-radius:6px;
   box-shadow:5px 5px 0 #0C0C0C;
   padding:9px 14px;
@@ -517,36 +551,36 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   transform:translate(3px,3px);
   box-shadow:0 0 0 #0C0C0C;
 }
-.theme-neobrutalism .btn.prim{
-  background:#C94A00;
-  color:#FFF;
-  border-color:#0C0C0C;
-}
-.theme-neobrutalism .btn.prim:hover{background:#C94A00;color:#FFF;}
-.theme-neobrutalism .btn.ok{
-  background:#0D9970;
-  color:#FFF;
-  border-color:#0C0C0C;
-}
-.theme-neobrutalism .btn.ok:hover{background:#0D9970;color:#FFF;}
-.theme-neobrutalism .btn.warn{
-  background:#D4A800;
-  color:#0C0C0C;
-  border-color:#0C0C0C;
-}
-.theme-neobrutalism .btn.warn:hover{background:#D4A800;color:#0C0C0C;}
-.theme-neobrutalism .btn.del{
-  background:#C94A00;
-  color:#FFF;
-  border-color:#0C0C0C;
-}
-.theme-neobrutalism .btn.del:hover{background:#C94A00;color:#FFF;}
-.theme-neobrutalism .btn.purp{
-  background:#232323;
-  color:#FAF6EE;
-  border-color:#0C0C0C;
-}
+.theme-neobrutalism .btn.prim{background:#C94A00;color:#FFF;border-color:#0C0C0C;}
+.theme-neobrutalism .btn.prim:hover{background:#A33800;color:#FFF;}
+.theme-neobrutalism .btn.ok{background:#0D9970;color:#FFF;border-color:#0C0C0C;}
+.theme-neobrutalism .btn.ok:hover{background:#0A7A58;color:#FFF;}
+.theme-neobrutalism .btn.warn{background:#D4A800;color:#0C0C0C;border-color:#0C0C0C;}
+.theme-neobrutalism .btn.warn:hover{background:#B89000;color:#0C0C0C;}
+.theme-neobrutalism .btn.del{background:#C94A00;color:#FFF;border-color:#0C0C0C;}
+.theme-neobrutalism .btn.del:hover{background:#A33800;color:#FFF;}
+.theme-neobrutalism .btn.purp{background:#232323;color:#FAF6EE;border-color:#0C0C0C;}
 .theme-neobrutalism .btn.purp:hover{background:#0C0C0C;color:#FFF;}
+.theme-neobrutalism .btn.teal{background:#0A6B52;color:#FFF;border-color:#0C0C0C;}
+.theme-neobrutalism .btn.teal:hover{background:#084D3B;color:#FFF;}
+.theme-neobrutalism .btn.sm{padding:5px 10px;font-size:9px;}
+
+/* ROW BUTTONS */
+.theme-neobrutalism .row-btn{
+  background:#FAF6EE;
+  color:#0C0C0C;
+  border:2px solid #0C0C0C;
+  border-radius:0;
+  box-shadow:2px 2px 0 #0C0C0C;
+  transition:transform .1s,box-shadow .1s;
+}
+.theme-neobrutalism .row-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 #0C0C0C;}
+.theme-neobrutalism .row-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 #0C0C0C;}
+.theme-neobrutalism .row-btn.del-btn:hover{color:#FFF;background:#C94A00;border-color:#0C0C0C;}
+.theme-neobrutalism .row-btn.edit-btn:hover{color:#0C0C0C;background:#D4A800;border-color:#0C0C0C;}
+.theme-neobrutalism .row-btn.print-btn:hover{color:#FFF;background:#0A6B52;border-color:#0C0C0C;}
+.theme-neobrutalism .row-btn.complete-btn:hover{color:#FFF;background:#0D9970;border-color:#0C0C0C;}
+.theme-neobrutalism .row-actions{opacity:1;}
 
 /* STAT CARDS */
 .theme-neobrutalism .sg{gap:18px;margin-bottom:28px;}
@@ -559,38 +593,26 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   overflow:visible;
   transition:transform .12s ease,box-shadow .12s ease;
 }
-.theme-neobrutalism .sc:hover{
-  transform:translate(-3px,-3px);
-  box-shadow:8px 8px 0 #0C0C0C;
-}
+.theme-neobrutalism .sc:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 #0C0C0C;}
 .theme-neobrutalism .sc::after{height:7px;left:-3px;right:-3px;top:-3px;}
 .theme-neobrutalism .sc.b::after{background:#C94A00;}
 .theme-neobrutalism .sc.g::after{background:#0D9970;}
 .theme-neobrutalism .sc.r::after{background:#D4A800;}
 .theme-neobrutalism .sc.p::after{background:#0A6B52;}
-.theme-neobrutalism .sc-lbl{
-  color:#555;
-  font-size:10px;
-  letter-spacing:1.5px;
-  font-weight:500;
-}
-.theme-neobrutalism .sc-val{font-size:32px;line-height:1;}
+.theme-neobrutalism .sc-lbl{color:#555;font-size:10px;letter-spacing:1.5px;font-weight:500;}
+.theme-neobrutalism .sc-val{font-size:34px;line-height:1;}
 .theme-neobrutalism .sc.b .sc-val{color:#C94A00;}
 .theme-neobrutalism .sc.g .sc-val{color:#0A6B52;}
 .theme-neobrutalism .sc.r .sc-val{color:#C94A00;}
 .theme-neobrutalism .sc.p .sc-val{color:#0D9970;}
 .theme-neobrutalism .sc-sub{color:#555;}
 
-/* DASHBOARD INLINE PANELS */
+/* DASHBOARD PANELS */
 .theme-neobrutalism .page > div[style*="background:var(--card)"]{
   background:#FAF6EE !important;
   border:3px solid #0C0C0C !important;
   border-radius:6px !important;
   box-shadow:5px 5px 0 #0C0C0C !important;
-}
-.theme-neobrutalism .page > div[style*="background:var(--card)"]:hover{
-  transform:translate(-3px,-3px);
-  box-shadow:8px 8px 0 #0C0C0C !important;
 }
 
 /* SEARCH / INPUTS */
@@ -610,6 +632,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   border:2.5px solid #C94A00;
   box-shadow:0 0 0 2px rgba(201,74,0,.20);
 }
+.theme-neobrutalism .fi.err{border-color:#C94A00 !important;}
 .theme-neobrutalism .srch::placeholder,
 .theme-neobrutalism .fi::placeholder{color:rgba(12,12,12,.35);}
 
@@ -629,14 +652,9 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   box-shadow:8px 8px 0 #0C0C0C;
 }
 .theme-neobrutalism .client-card::before{display:none;}
-.theme-neobrutalism .cc-no{color:#C94A00;}
-.theme-neobrutalism .cc-city{
-  background:#E8DFC7;
-  color:#0C0C0C;
-  border:2px solid #0C0C0C;
-  border-radius:6px;
-}
-.theme-neobrutalism .cc-name{color:#0C0C0C;}
+.theme-neobrutalism .cc-no{color:#C94A00;font-size:28px;}
+.theme-neobrutalism .cc-city{background:#E8DFC7;color:#0C0C0C;border:2px solid #0C0C0C;border-radius:4px;}
+.theme-neobrutalism .cc-name{color:#0C0C0C;font-size:16px;}
 .theme-neobrutalism .cc-divider{height:2px;background:#0C0C0C;}
 .theme-neobrutalism .cc-row span:first-child{color:#555;}
 .theme-neobrutalism .cc-bal.pos{color:#0A6B52;}
@@ -656,57 +674,86 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   border-bottom:3px solid #0C0C0C;
   padding:20px 22px;
 }
-.theme-neobrutalism .lh-company{color:#0A6B52;}
-.theme-neobrutalism .lh-title{color:#0C0C0C;font-size:30px;}
+.theme-neobrutalism .lh-company{color:#0A6B52;font-family:'DM Mono',monospace;}
+.theme-neobrutalism .lh-title{color:#0C0C0C;font-size:32px;}
 .theme-neobrutalism .lh-bal-lbl{color:#555;}
-.theme-neobrutalism .lh-bal-amt{font-size:32px;}
+.theme-neobrutalism .lh-bal-amt{font-size:36px;}
 .theme-neobrutalism .lh-bal-amt.pos{color:#0A6B52;}
 .theme-neobrutalism .lh-bal-amt.neg{color:#C94A00;}
 .theme-neobrutalism .lh-bal-amt.zero{color:#555;}
-.theme-neobrutalism .lh-meta-pill{
-  background:#E8DFC7;
-  border:2px solid #0C0C0C;
+.theme-neobrutalism .lh-meta-pill{background:#E8DFC7;border:2px solid #0C0C0C;border-radius:4px;color:#0C0C0C;}
+.theme-neobrutalism .lh-actions{border-top:2px solid #0C0C0C;}
+
+/* 3-COLUMN INFO BAR */
+.theme-neobrutalism .lh-info-bar{
+  border:3px solid #0C0C0C;
+  box-shadow:5px 5px 0 #0C0C0C;
   border-radius:6px;
-  color:#0C0C0C;
+  background:#FAF6EE;
+  margin-bottom:16px;
 }
-.theme-neobrutalism .lh-actions{
-  border-top:2px solid #0C0C0C;
+.theme-neobrutalism .lh-info-box{background:#FAF6EE;}
+.theme-neobrutalism .lh-info-box:not(:last-child){border-right:3px solid #0C0C0C;}
+.theme-neobrutalism .lh-info-label{color:#555;font-family:'DM Mono',monospace;font-size:9px;}
+.theme-neobrutalism .lh-info-value.acc{color:#C94A00;font-size:38px;}
+.theme-neobrutalism .lh-info-value.name{color:#0C0C0C;font-size:24px;}
+.theme-neobrutalism .lh-info-value.bal-neg{color:#C94A00;}
+.theme-neobrutalism .lh-info-value.bal-pos{color:#0A6B52;}
+.theme-neobrutalism .lh-info-value.bal-zero{color:#555;}
+.theme-neobrutalism .lh-info-sub{color:#555;font-family:'DM Mono',monospace;}
+
+/* LEDGER TOOLBAR */
+.theme-neobrutalism .ledger-toolbar{
+  background:#E8DFC7;
+  border-bottom:3px solid #0C0C0C;
 }
+.theme-neobrutalism .ledger-page-info{color:#555;}
+.theme-neobrutalism .pagination-bar{
+  background:#E8DFC7;
+  border-top:3px solid #0C0C0C;
+}
+
+/* LEDGER TABLE */
 .theme-neobrutalism .lt{background:#FAF6EE;color:#0C0C0C;}
 .theme-neobrutalism .lt thead tr{background:#0C0C0C;}
 .theme-neobrutalism .lt th{
   color:#FAF6EE;
   border-bottom:3px solid #C94A00;
   font-family:'DM Mono',monospace;
+  font-size:9px;
+  padding:12px 14px;
 }
-.theme-neobrutalism .lt td{border-bottom:2px solid #0C0C0C;}
-.theme-neobrutalism .lt tbody tr.case-row{background:#E8DFC7;}
+.theme-neobrutalism .lt td{border-bottom:2px solid #E8DFC7;padding:12px 14px;font-size:12px;}
+.theme-neobrutalism .lt tbody tr.case-row{background:#FAF6EE;}
 .theme-neobrutalism .lt tbody tr.pay-row{background:#DDEFE8;}
 .theme-neobrutalism .lt tbody tr:hover{background:#F0E8D0;}
-.theme-neobrutalism .folder-no{color:#C94A00;}
+.theme-neobrutalism .lt tbody tr.selected-row{background:#FFF1D4 !important;outline:3px solid #C94A00;}
+.theme-neobrutalism .folder-no{color:#C94A00;font-size:12px;}
 .theme-neobrutalism .pay-label{color:#0A6B52;}
 .theme-neobrutalism .stage-b{
   border:2px solid #0C0C0C;
-  border-radius:6px;
+  border-radius:4px;
   text-transform:uppercase;
-  background:#E8DFC7;
-  color:#0C0C0C;
+  font-family:'DM Mono',monospace;
+  padding:2px 8px;
 }
-.theme-neobrutalism .stage-b.s1{background:#F0E8D0;color:#C94A00;border-color:#C94A00;}
+.theme-neobrutalism .stage-b.s1{background:#FFE8D4;color:#C94A00;border-color:#C94A00;}
 .theme-neobrutalism .stage-b.s2{background:#DDEFE8;color:#0A6B52;border-color:#0A6B52;}
-.theme-neobrutalism .stage-b.s3{background:#FFF1B8;color:#6f5600;border-color:#D4A800;}
-.theme-neobrutalism .stage-b.s4{background:#DDEFE8;color:#0A6B52;border-color:#0A6B52;}
-.theme-neobrutalism .amt-due,.theme-neobrutalism .amt-bal.neg{color:#C94A00;}
-.theme-neobrutalism .amt-rec,.theme-neobrutalism .amt-bal.pos{color:#0A6B52;}
+.theme-neobrutalism .stage-b.s3{background:#FFF7CC;color:#6f5600;border-color:#D4A800;}
+.theme-neobrutalism .stage-b.s4{background:#E8DDFF;color:#4A1580;border-color:#6B3EC9;}
+.theme-neobrutalism .amt-due{color:#C94A00;}
+.theme-neobrutalism .amt-rec{color:#0A6B52;}
+.theme-neobrutalism .amt-bal.neg{color:#C94A00;}
+.theme-neobrutalism .amt-bal.pos{color:#0A6B52;}
 .theme-neobrutalism .amt-bal.zero{color:#555;}
-.theme-neobrutalism .date-cell{color:#555;}
-.theme-neobrutalism .row-del{
-  color:#555;
-  border:2px solid #0C0C0C;
-  border-radius:0;
-  background:#FAF6EE;
+.theme-neobrutalism .date-cell{color:#555;font-family:'DM Mono',monospace;}
+.theme-neobrutalism .complete-badge{
+  background:#DDEFE8;
+  color:#0A6B52;
+  border:2px solid #0A6B52;
+  border-radius:4px;
+  font-family:'DM Mono',monospace;
 }
-.theme-neobrutalism .row-del:hover{color:#FFF;background:#C94A00;}
 
 /* LOG */
 .theme-neobrutalism .log-list{gap:10px;}
@@ -726,9 +773,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .theme-neobrutalism .log-dot.sys{background:#888;}
 
 /* MODALS */
-.theme-neobrutalism .mo{
-  background:rgba(12,12,12,.78);
-}
+.theme-neobrutalism .mo{background:rgba(12,12,12,.80);}
 .theme-neobrutalism .mbox{
   background:#FAF6EE;
   color:#0C0C0C;
@@ -736,78 +781,58 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   border-radius:6px;
   box-shadow:8px 8px 0 #C94A00;
 }
-.theme-neobrutalism .mh{
-  background:#0C0C0C;
-  color:#FAF6EE;
-  border-bottom:3px solid #C94A00;
-}
-.theme-neobrutalism .mt{color:#FAF6EE;font-size:24px;}
-.theme-neobrutalism .mc-btn{
-  background:#FAF6EE;
-  color:#0C0C0C;
-  border:2px solid #FAF6EE;
-  border-radius:0;
-}
+.theme-neobrutalism .mh{background:#0C0C0C;color:#FAF6EE;border-bottom:3px solid #C94A00;}
+.theme-neobrutalism .mt{color:#FAF6EE;font-size:22px;letter-spacing:2px;}
+.theme-neobrutalism .mc-btn{background:#FAF6EE;color:#0C0C0C;border:2px solid #FAF6EE;border-radius:0;}
 .theme-neobrutalism .mc-btn:hover{background:#C94A00;color:#FFF;border-color:#FFF;}
 .theme-neobrutalism .mf{border-top:3px solid #0C0C0C;}
+.theme-neobrutalism .tm-lookup-box{background:#E8DFC7;border:2px solid #0C0C0C;border-radius:0;}
+.theme-neobrutalism .tm-lookup-box.found{border-color:#0A6B52;}
+.theme-neobrutalism .tm-lookup-box.error{border-color:#C94A00;}
 
 /* TAGS / STATUS */
-.theme-neobrutalism .tag{
-  background:#F0E8D0;
-  color:#C94A00;
-  border:2px solid #C94A00;
-  border-radius:0;
-}
-.theme-neobrutalism .toast{
-  border:3px solid #0C0C0C;
-  border-radius:6px;
-  box-shadow:5px 5px 0 #0C0C0C;
-  font-family:'DM Mono',monospace;
-}
+.theme-neobrutalism .tag{background:#F0E8D0;color:#C94A00;border:2px solid #C94A00;border-radius:0;}
+.theme-neobrutalism .toast{border:3px solid #0C0C0C;border-radius:6px;box-shadow:5px 5px 0 #0C0C0C;font-family:'DM Mono',monospace;}
 .theme-neobrutalism .toast.s{background:#0D9970;color:#FFF;}
 .theme-neobrutalism .toast.e{background:#C94A00;color:#FFF;}
 .theme-neobrutalism .toast.i{background:#FAF6EE;color:#0C0C0C;}
 .theme-neobrutalism .toast.w{background:#D4A800;color:#0C0C0C;}
 
-/* RECEIPT / PRINT */
-.theme-neobrutalism .receipt-wrap{
+/* SETTINGS PANELS */
+.theme-neobrutalism .settings-panel{
   background:#FAF6EE;
-  color:#0C0C0C;
-  border:3px solid #0C0C0C;
-}
-.theme-neobrutalism .r-head{border-bottom:3px solid #0C0C0C;}
-.theme-neobrutalism .r-co{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;color:#0C0C0C;}
-.theme-neobrutalism .r-co-sub{color:#555;}
-.theme-neobrutalism .r-co-addr{color:#555;}
-.theme-neobrutalism .r-title-bar{background:#0C0C0C;color:#FFF;font-family:'Bebas Neue','Arial Black',Arial,sans-serif;}
-.theme-neobrutalism .r-client-bar{
-  background:#F0E8D0;
   border:3px solid #0C0C0C;
   border-radius:6px;
+  box-shadow:5px 5px 0 #0C0C0C;
+  padding:20px;
+  margin-bottom:18px;
 }
-.theme-neobrutalism .r-client-no,
-.theme-neobrutalism .r-client-name,
-.theme-neobrutalism .r-meta-val{color:#0C0C0C;}
-.theme-neobrutalism .r-meta-item{background:#FAF6EE;border:2px solid #0C0C0C;border-radius:0;}
-.theme-neobrutalism .r-table th{background:#0C0C0C;color:#FFF;}
-.theme-neobrutalism .r-table td{border:2px solid #0C0C0C;}
-.theme-neobrutalism .r-table tr.case-tr{background:#E8DFC7;}
-.theme-neobrutalism .r-table tr.pay-tr{background:#DDEFE8;}
-.theme-neobrutalism .r-balance-box{background:#0C0C0C;border-radius:6px;border:3px solid #0C0C0C;}
-.theme-neobrutalism .r-bal-amt{color:#0D9970;}
-.theme-neobrutalism .r-bal-amt.neg{color:#C94A00;}
-.theme-neobrutalism .r-foot{border-top:2px solid #0C0C0C;color:#555;}
+.theme-neobrutalism .settings-panel-title{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#555;
+  margin-bottom:14px;
+  padding-bottom:8px;
+  border-bottom:2px solid #0C0C0C;
+}
+.theme-neobrutalism .series-row{
+  background:#E8DFC7;
+  border:2px solid #0C0C0C;
+  border-radius:4px;
+  padding:10px 14px;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
 /* RESPONSIVE */
 @media(max-width:1000px){
   .theme-neobrutalism .sg{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:700px){
-  .theme-neobrutalism .sidebar{padding:0 14px;overflow-x:auto;justify-content:flex-start;}
-  .theme-neobrutalism .sb-logo{flex-shrink:0;}
-  .theme-neobrutalism .sb-name{display:none;}
-  .theme-neobrutalism .sidebar > .nav-links{margin-left:8px;flex-shrink:0;}
-  .theme-neobrutalism .ni{min-height:60px;padding:17px 10px;font-size:11px;}
   .theme-neobrutalism .page{padding:24px 18px;}
   .theme-neobrutalism .ph-title{font-size:36px;}
   .theme-neobrutalism .sg{grid-template-columns:1fr 1fr;gap:12px;}
@@ -815,25 +840,41 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   .theme-neobrutalism .sc-val{font-size:25px;}
   .theme-neobrutalism .client-card{padding:15px;}
   .theme-neobrutalism .mbox{box-shadow:5px 5px 0 #C94A00;}
+  .theme-neobrutalism .lh-info-bar{grid-template-columns:1fr;}
+  .theme-neobrutalism .lh-info-box:not(:last-child){border-right:none;border-bottom:3px solid #0C0C0C;}
 }
 @media(max-width:460px){
   .theme-neobrutalism .sg{grid-template-columns:1fr;}
 }
 
+/* ── PRINT CSS (shared for preview + print window) ── */
+@media print {
+  .mo,.sidebar,.btn,.lh-actions,.ledger-toolbar,.pagination-bar,.row-actions,.lh-qr{display:none!important;}
+  .main{margin:0;padding:0;}
+  .page{padding:0;}
+  .ledger-page{border:none;box-shadow:none;}
+  .ledger-header{position:static;}
+  body{background:#F7F0E8;}
+}
 </style>
 </head>
 <body class="theme-neobrutalism">
 <div class="layout">
 
-<!-- ════════════════════ SIDEBAR ════════════════════ -->
+<!-- ════════════════════ SIDEBAR / NAVBAR ════════════════════ -->
 <aside class="sidebar">
   <!-- Logo -->
   <div class="sb-logo">
     <div class="sb-logomark">
-      <div class="sb-icon">BLA</div>
+      <div class="sb-icon">
+        <!-- Brandex Logo embedded -->
+        <img src="https://www.brandex.pk/wp-content/uploads/2023/04/Brandex-Logo.png"
+             onerror="this.onerror=null;this.parentNode.innerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:20px;color:#C94A00;letter-spacing:2px;\'>BLA</span>'"
+             alt="Brandex" style="height:40px;width:auto;object-fit:contain;">
+      </div>
       <div>
         <div class="sb-name">Brandex Law</div>
-        <div class="sb-sub">Associates</div>
+        <div class="sb-sub">Associates · Ledger</div>
       </div>
     </div>
   </div>
@@ -888,7 +929,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div class="sb-stat r"><span>Outstanding</span><span id="ss-d">—</span></div>
   </div>
 
-  <div class="sb-foot">BRANDEX LEDGER v2.0 · 2025</div>
+  <div class="sb-foot">BRANDEX LEDGER v2.1 · 2026</div>
 </aside>
 
 <!-- ════════════════════ PAGES ════════════════════ -->
@@ -992,39 +1033,50 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 
   <!-- ── SETTINGS ── -->
   <div class="page" id="page-settings">
-    <div class="ph"><div class="ph-title">Settings</div><div class="ph-sub">Configure stage amounts and system preferences</div></div>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:11px;padding:20px;margin-bottom:16px;">
-      <div style="font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;">Default Stage Amounts (PKR)</div>
+    <div class="ph"><div class="ph-title">Settings</div><div class="ph-sub">Configure stage amounts, account prefixes, and system preferences</div></div>
+
+    <!-- Stage Amounts -->
+    <div class="settings-panel">
+      <div class="settings-panel-title">Default Stage Amounts (PKR)</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;">
         <div style="text-align:center;">
-          <div style="font-size:9px;color:var(--accent);margin-bottom:6px;font-weight:700;">S-1</div>
+          <div style="font-size:9px;color:var(--accent);margin-bottom:6px;font-weight:700;font-family:'DM Mono',monospace;">S-1</div>
           <input type="number" class="fi" id="st-s1" value="9000" onchange="saveSettings()" style="text-align:center;font-weight:700;font-size:14px;">
         </div>
         <div style="text-align:center;">
-          <div style="font-size:9px;color:var(--accent2);margin-bottom:6px;font-weight:700;">S-2</div>
+          <div style="font-size:9px;color:var(--accent2);margin-bottom:6px;font-weight:700;font-family:'DM Mono',monospace;">S-2</div>
           <input type="number" class="fi" id="st-s2" value="10000" onchange="saveSettings()" style="text-align:center;font-weight:700;font-size:14px;">
         </div>
         <div style="text-align:center;">
-          <div style="font-size:9px;color:var(--yellow);margin-bottom:6px;font-weight:700;">S-3</div>
+          <div style="font-size:9px;color:var(--yellow);margin-bottom:6px;font-weight:700;font-family:'DM Mono',monospace;">S-3</div>
           <input type="number" class="fi" id="st-s3" value="10500" onchange="saveSettings()" style="text-align:center;font-weight:700;font-size:14px;">
         </div>
         <div style="text-align:center;">
-          <div style="font-size:9px;color:var(--accent4);margin-bottom:6px;font-weight:700;">S-4</div>
+          <div style="font-size:9px;color:var(--accent4);margin-bottom:6px;font-weight:700;font-family:'DM Mono',monospace;">S-4</div>
           <input type="number" class="fi" id="st-s4" value="15000" onchange="saveSettings()" style="text-align:center;font-weight:700;font-size:14px;">
         </div>
       </div>
-      <button class="btn prim" onclick="saveSettings();toast('Stage amounts saved!','s')">💾 Save</button>
+      <button class="btn prim" onclick="saveSettings();toast('Stage amounts saved!','s')">💾 Save Stages</button>
     </div>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:11px;padding:20px;">
-      <div style="font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Account Numbering</div>
+
+    <!-- Account Series / Prefixes -->
+    <div class="settings-panel">
+      <div class="settings-panel-title">Account Number Series</div>
+      <div id="series-list"></div>
+      <button class="btn ok" style="margin-top:10px;" onclick="addSeries()">＋ Add New Series</button>
+    </div>
+
+    <!-- Preview -->
+    <div class="settings-panel">
+      <div class="settings-panel-title">Next Account Preview</div>
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
         <div class="fgroup">
-          <label class="flbl">Series Prefix</label>
-          <input type="text" class="fi" id="st-prefix" value="A" maxlength="2" style="width:70px;text-transform:uppercase;text-align:center;font-weight:700;font-size:16px;" oninput="this.value=this.value.toUpperCase();saveSettings();updatePrevw()">
+          <label class="flbl">Select Series for Preview</label>
+          <select class="fsel" id="st-series-sel" onchange="updatePrevw()" style="width:160px;"></select>
         </div>
         <div class="fgroup">
-          <label class="flbl">Next Account Preview</label>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:9px 13px;font-size:15px;font-weight:800;color:var(--accent);min-width:90px;text-align:center;" id="st-prevw">A-001</div>
+          <label class="flbl">Next Account Number</label>
+          <div style="background:var(--surface);border:3px solid var(--border);border-radius:6px;box-shadow:var(--shadow);padding:9px 16px;font-size:20px;font-weight:800;color:var(--accent);min-width:120px;text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;" id="st-prevw">A-001</div>
         </div>
       </div>
     </div>
@@ -1054,6 +1106,10 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
           <input type="text" class="fi" id="f-phone" placeholder="0300-0000000">
         </div>
         <div class="fgroup">
+          <label class="flbl">Series / Prefix</label>
+          <select class="fsel" id="f-series" onchange="updateClientAccNo()"></select>
+        </div>
+        <div class="fgroup">
           <label class="flbl">Account No (Auto)</label>
           <input type="text" class="fi" id="f-accno" readonly style="opacity:.55;font-weight:700;color:var(--accent);">
         </div>
@@ -1074,10 +1130,10 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   </div>
 </div>
 
-<!-- Add Case Entry -->
+<!-- Add/Edit Case Entry -->
 <div class="mo" id="mo-case">
   <div class="mbox">
-    <div class="mh"><div class="mt">Add Case Entry</div><button class="mc-btn" onclick="closeMo('mo-case')">✕</button></div>
+    <div class="mh"><div class="mt" id="mo-case-title">Add Case Entry</div><button class="mc-btn" onclick="closeMo('mo-case')">✕</button></div>
     <div class="mb">
       <div class="fg">
         <div class="fgroup">
@@ -1098,8 +1154,12 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
           </select>
         </div>
         <div class="fgroup">
-          <label class="flbl">TM No</label>
-          <input type="text" class="fi" id="ce-tm" placeholder="Trademark No">
+          <label class="flbl">TM No (6 digits)</label>
+          <input type="text" class="fi" id="ce-tm" placeholder="e.g. 123456" maxlength="6"
+                 oninput="onTmInput(this)" onblur="lookupTm(this.value)">
+          <div class="tm-lookup-box" id="tm-lookup-result">
+            <span>🔍</span> <span>Enter 6-digit TM number to lookup trademark info</span>
+          </div>
         </div>
         <div class="fgroup full">
           <label class="flbl">Details / Description *</label>
@@ -1117,14 +1177,14 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     </div>
     <div class="mf">
       <button class="btn" onclick="closeMo('mo-case')">Cancel</button>
-      <button class="btn prim" onclick="saveCaseEntry()">➕ Add Entry</button>
+      <button class="btn prim" id="mo-case-save-btn" onclick="saveCaseEntry()">➕ Add Entry</button>
     </div>
   </div>
 </div>
 
 <!-- Add Payment Entry -->
 <div class="mo" id="mo-pay">
-  <div class="mbox" style="max-width:420px;">
+  <div class="mbox" style="max-width:460px;">
     <div class="mh"><div class="mt">Add Payment Received</div><button class="mc-btn" onclick="closeMo('mo-pay')">✕</button></div>
     <div class="mb">
       <div class="fg">
@@ -1135,6 +1195,10 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
         <div class="fgroup">
           <label class="flbl">Amount Received (PKR) *</label>
           <input type="number" class="fi" id="pe-amount" placeholder="e.g. 5000">
+        </div>
+        <div class="fgroup">
+          <label class="flbl">TM No / Reference</label>
+          <input type="text" class="fi" id="pe-ref" placeholder="TM No, Folder No, or reference">
         </div>
         <div class="fgroup full">
           <label class="flbl">Payment Method / Details</label>
@@ -1149,16 +1213,30 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   </div>
 </div>
 
+<!-- Single Row Print Modal -->
+<div class="mo" id="mo-row-print">
+  <div class="mbox lg">
+    <div class="mh"><div class="mt">Row Receipt</div><button class="mc-btn" onclick="closeMo('mo-row-print')">✕</button></div>
+    <div class="mb" style="padding:14px;">
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+        <button class="btn ok" onclick="doPrintRow()">🖨 Print</button>
+        <button class="btn prim" onclick="doPrintRow()">💾 Save as PDF/Image</button>
+      </div>
+      <div id="row-receipt-content" style="background:#F7F0E8;border-radius:6px;overflow:hidden;"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Receipt Modal -->
 <div class="mo" id="mo-receipt">
-  <div class="mbox lg">
-    <div class="mh"><div class="mt">Receipt / Ledger Sheet</div><button class="mc-btn" onclick="closeMo('mo-receipt')">✕</button></div>
+  <div class="mbox xl">
+    <div class="mh"><div class="mt">Ledger Sheet / Print Preview</div><button class="mc-btn" onclick="closeMo('mo-receipt')">✕</button></div>
     <div class="mb" style="padding:14px;">
       <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
         <button class="btn ok" onclick="doPrint()">🖨 Print</button>
         <button class="btn prim" onclick="doPrint()">💾 Save as PDF/Image</button>
       </div>
-      <div id="receipt-content" style="background:#fff;border-radius:8px;overflow:hidden;"></div>
+      <div id="receipt-content" style="background:#F7F0E8;border-radius:6px;overflow:hidden;"></div>
     </div>
   </div>
 </div>
@@ -1172,15 +1250,31 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 // SUPABASE DATA LAYER
 // ══════════════════════════════════════════════
 const SUPA_URL = 'https://sygfnemgebuhtqpmedbg.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5Z2ZuZW1nZWJ1aHRxcG1lZGJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNzc0NjIsImV4cCI6MjEwNDk1MzQ2Mn0.-fI4EwBXngXCtwNANCNby_xbxV4dN6s1yctyh4uqpUc';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5Z2ZuZW1nZWJ1aHRxcG1lZGJnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4OTM3NzQ2MiwiZXhwIjoyMTA0OTUzNDYyfQ.oNr9rZ6wIeuFlAq1ZIdKI76aFKzccEVfQDotceALRLY';
 const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
 
-let clients  = [];          // loaded from Supabase
+let clients  = [];
 let actLog   = JSON.parse(localStorage.getItem('bla_log') || '[]');
-let settings = JSON.parse(localStorage.getItem('bla_settings') || JSON.stringify({ s1:9000, s2:10000, s3:10500, s4:15000, prefix:'A' }));
-let activeClientId = null;  // currently open ledger (client_code string)
+let settings = JSON.parse(localStorage.getItem('bla_settings') || JSON.stringify({
+  s1:9000, s2:10000, s3:10500, s4:15000,
+  prefix:'A',
+  series: [{ prefix:'A', label:'Series A', counter:0 }]
+}));
+let activeClientId = null;
 
-// ── Save settings to localStorage only ──
+// Ledger pagination state
+let ledgerPage = 1;
+const ROWS_PER_PAGE = 100;
+let ledgerFilter = '';
+let currentLedgerEntries = [];
+
+// ── FIX B1/B6: Define save() for localStorage operations ──
+function save() {
+  localStorage.setItem('bla_log', JSON.stringify(actLog));
+  localStorage.setItem('bla_settings', JSON.stringify(settings));
+}
+
+// ── Save settings to localStorage ──
 function saveSettings_local() {
   localStorage.setItem('bla_settings', JSON.stringify(settings));
 }
@@ -1189,7 +1283,7 @@ function saveSettings_local() {
 function log(type, msg) {
   actLog.unshift({ type, msg, ts: new Date().toISOString() });
   if (actLog.length > 500) actLog.pop();
-  localStorage.setItem('bla_log', JSON.stringify(actLog));
+  save();
   const nb = document.getElementById('nb-log');
   if (nb) nb.textContent = actLog.length;
 }
@@ -1198,30 +1292,21 @@ function log(type, msg) {
 async function loadAllData() {
   showLoadingOverlay(true);
   try {
-    // Fetch clients
     const { data: clientRows, error: ce } = await supa
-      .from('clients')
-      .select('*')
-      .order('client_code');
+      .from('clients').select('*').order('client_code');
     if (ce) throw ce;
 
-    // Fetch all entries in one query
     const { data: entryRows, error: ee } = await supa
-      .from('ledger_entries')
-      .select('*')
-      .order('entry_date', { ascending: true });
+      .from('ledger_entries').select('*').order('entry_date', { ascending: true });
     if (ee) throw ee;
 
-    // Group entries by client_code
     const entryMap = {};
     (entryRows || []).forEach(e => {
       if (!entryMap[e.client_code]) entryMap[e.client_code] = [];
       entryMap[e.client_code].push(dbEntryToLocal(e));
     });
 
-    // Build local clients array (same shape the rest of the app expects)
     clients = (clientRows || []).map(c => dbClientToLocal(c, entryMap[c.client_code] || []));
-
     renderAll();
   } catch(err) {
     toast('Failed to load data: ' + (err.message || err), 'e');
@@ -1234,12 +1319,15 @@ async function loadAllData() {
 // ── Shape converters ──
 function dbClientToLocal(c, entries) {
   return {
-    id:       c.client_code,   // use client_code as id throughout
+    id:       c.client_code,
     accNo:    c.client_code,
     name:     c.client_name || '(No Name)',
     city:     c.city || '',
     phone:    '',
     notes:    [c.bank_name, c.bank_account, c.bank_iban].filter(Boolean).join(' | '),
+    bankName: c.bank_name || '',
+    bankAcc:  c.bank_account || '',
+    bankIban: c.bank_iban || '',
     date:     c.created_at ? c.created_at.slice(0,10) : '',
     headerBalance: c.header_balance || 0,
     entries:  entries,
@@ -1259,6 +1347,7 @@ function dbEntryToLocal(e) {
     due:      e.amount_due || 0,
     received: e.amount_received || 0,
     runBal:   e.running_balance || 0,
+    completed: e.is_completed || false,
   };
 }
 
@@ -1268,7 +1357,7 @@ function showLoadingOverlay(show) {
   if (!el) {
     el = document.createElement('div');
     el.id = 'supa-loading';
-    el.style.cssText = 'position:fixed;inset:0;background:rgba(240,232,208,.92);z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:Bebas Neue,sans-serif;font-size:28px;color:#0C0C0C;';
+    el.style.cssText = 'position:fixed;inset:0;background:rgba(240,232,208,.95);z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:"Bebas Neue",sans-serif;font-size:28px;color:#0C0C0C;letter-spacing:3px;';
     el.innerHTML = '<div style="width:44px;height:44px;border:5px solid #C94A00;border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;"></div><div>LOADING DATABASE…</div>';
     if (!document.getElementById('spin-kf')) {
       const s = document.createElement('style'); s.id='spin-kf';
@@ -1305,30 +1394,128 @@ function goPage(id) {
 }
 
 // ══════════════════════════════════════════════
-// SETTINGS
+// SETTINGS — Multi-Series Support
 // ══════════════════════════════════════════════
+function ensureSeriesData() {
+  // Migrate old single-prefix to new series format
+  if (!settings.series || !Array.isArray(settings.series) || settings.series.length === 0) {
+    const pfx = settings.prefix || 'A';
+    settings.series = [{ prefix: pfx, label: 'Series ' + pfx, counter: 0 }];
+    saveSettings_local();
+  }
+}
+
 function loadSettings() {
+  ensureSeriesData();
   document.getElementById('st-s1').value = settings.s1;
   document.getElementById('st-s2').value = settings.s2;
   document.getElementById('st-s3').value = settings.s3;
   document.getElementById('st-s4').value = settings.s4;
-  document.getElementById('st-prefix').value = settings.prefix || 'A';
+  renderSeriesList();
   updatePrevw();
+  populateSeriesSelects();
 }
+
 function saveSettings() {
   settings.s1 = parseFloat(document.getElementById('st-s1').value) || 9000;
   settings.s2 = parseFloat(document.getElementById('st-s2').value) || 10000;
   settings.s3 = parseFloat(document.getElementById('st-s3').value) || 10500;
   settings.s4 = parseFloat(document.getElementById('st-s4').value) || 15000;
-  settings.prefix = (document.getElementById('st-prefix').value || 'A').toUpperCase();
   saveSettings_local();
   updateStageOpts();
 }
-function updatePrevw() {
-  const pfx = settings.prefix || 'A';
-  const next = clients.length + 1;
-  document.getElementById('st-prevw').textContent = pfx + '-' + String(next).padStart(3, '0');
+
+function renderSeriesList() {
+  ensureSeriesData();
+  const list = document.getElementById('series-list');
+  if (!list) return;
+  list.innerHTML = settings.series.map((s, i) => `
+    <div class="series-row">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">Prefix</div>
+      <input type="text" class="fi" maxlength="3" value="${s.prefix}"
+             oninput="this.value=this.value.toUpperCase();updateSeriesPrefix(${i},this.value)"
+             style="width:70px;text-align:center;font-weight:700;font-size:15px;font-family:'Bebas Neue',sans-serif;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-left:8px;">Label</div>
+      <input type="text" class="fi" value="${s.label}" placeholder="e.g. Trademark"
+             oninput="updateSeriesLabel(${i},this.value)" style="flex:1;font-size:12px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-left:8px;">
+        Next: <strong>${s.prefix}-${String(getNextCounterForSeries(s.prefix)).padStart(3,'0')}</strong>
+      </div>
+      ${settings.series.length > 1 ? `<button class="btn del sm" onclick="removeSeries(${i})">✕</button>` : ''}
+    </div>
+  `).join('');
 }
+
+function getNextCounterForSeries(prefix) {
+  const used = clients.filter(c => c.accNo && c.accNo.startsWith(prefix + '-'));
+  let max = 0;
+  used.forEach(c => {
+    const parts = c.accNo.split('-');
+    const num = parseInt(parts[parts.length - 1]);
+    if (!isNaN(num) && num > max) max = num;
+  });
+  return max + 1;
+}
+
+function updateSeriesPrefix(idx, val) {
+  settings.series[idx].prefix = val.toUpperCase();
+  saveSettings_local();
+  populateSeriesSelects();
+  updatePrevw();
+}
+function updateSeriesLabel(idx, val) {
+  settings.series[idx].label = val;
+  saveSettings_local();
+  populateSeriesSelects();
+}
+function addSeries() {
+  const usedPrefixes = settings.series.map(s => s.prefix);
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => !usedPrefixes.includes(l));
+  const next = letters[0] || 'X';
+  settings.series.push({ prefix: next, label: 'Series ' + next, counter: 0 });
+  saveSettings_local();
+  renderSeriesList();
+  populateSeriesSelects();
+}
+function removeSeries(idx) {
+  if (settings.series.length <= 1) { toast('At least one series required!', 'e'); return; }
+  settings.series.splice(idx, 1);
+  saveSettings_local();
+  renderSeriesList();
+  populateSeriesSelects();
+}
+
+function populateSeriesSelects() {
+  ensureSeriesData();
+  const selectors = ['st-series-sel', 'f-series'];
+  selectors.forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    const prev = sel.value;
+    sel.innerHTML = settings.series.map(s =>
+      `<option value="${s.prefix}">${s.prefix} — ${s.label}</option>`
+    ).join('');
+    if (prev) sel.value = prev;
+  });
+  updatePrevw();
+}
+
+function updatePrevw() {
+  const sel = document.getElementById('st-series-sel');
+  const prefix = sel ? sel.value : (settings.series[0]?.prefix || 'A');
+  const next = getNextCounterForSeries(prefix);
+  const el = document.getElementById('st-prevw');
+  if (el) el.textContent = prefix + '-' + String(next).padStart(3, '0');
+}
+
+function updateClientAccNo() {
+  const sel = document.getElementById('f-series');
+  const prefix = sel ? sel.value : (settings.series[0]?.prefix || 'A');
+  const next = getNextCounterForSeries(prefix);
+  const el = document.getElementById('f-accno');
+  if (el) el.value = prefix + '-' + String(next).padStart(3, '0');
+}
+
 function stageAmounts() {
   return { S1: settings.s1, S2: settings.s2, S3: settings.s3, S4: settings.s4 };
 }
@@ -1348,26 +1535,110 @@ function stageAutoFill() {
   document.getElementById('ce-due').value = stageAmounts()[s] || '';
 }
 
+// ── Stage number helper (S1→1, S2→2, etc.) ──
+function stageNum(stageStr) {
+  if (!stageStr) return 0;
+  const m = stageStr.match(/(\d+)/);
+  return m ? parseInt(m[1]) : 0;
+}
+
+// ── FIX B3: Correct stage render (S1→S-1, not S--1) ──
+function renderStageLabel(stageStr) {
+  if (!stageStr) return '';
+  return stageStr.replace(/^S(\d)$/, 'S-$1');
+}
+
+// ══════════════════════════════════════════════
+// TM NUMBER LOOKUP
+// ══════════════════════════════════════════════
+function onTmInput(input) {
+  const val = input.value.replace(/\D/g, '').slice(0, 6);
+  input.value = val;
+  const box = document.getElementById('tm-lookup-result');
+  if (!box) return;
+  if (val.length === 6) {
+    box.className = 'tm-lookup-box loading';
+    box.innerHTML = '<span>⏳</span> <span>Looking up TM No: ' + val + '…</span>';
+  } else if (val.length > 0) {
+    box.className = 'tm-lookup-box';
+    box.innerHTML = `<span>🔍</span> <span>${val.length}/6 digits — enter full 6-digit TM number</span>`;
+    input.classList.toggle('err', val.length > 0 && val.length < 6);
+  } else {
+    box.className = 'tm-lookup-box';
+    box.innerHTML = '<span>🔍</span> <span>Enter 6-digit TM number to lookup trademark info</span>';
+    input.classList.remove('err');
+  }
+}
+
+async function lookupTm(tmNo) {
+  const val = (tmNo || '').replace(/\D/g, '');
+  const box = document.getElementById('tm-lookup-result');
+  const input = document.getElementById('ce-tm');
+  if (!box || val.length !== 6) return;
+
+  input.classList.remove('err');
+  box.className = 'tm-lookup-box loading';
+  box.innerHTML = '<span>⏳</span> <span>Fetching TM data…</span>';
+
+  try {
+    // ⚠️ TM API PLACEHOLDER — Replace URL below with actual TM lookup endpoint
+    // Expected response: { tmNo, brandName, applicant, status, filingDate, classNo }
+    const TM_API_URL = `https://your-tm-api.brandex.pk/lookup?tm=${val}`;
+
+    // For now, simulate a lookup (remove this block when real API is ready):
+    await new Promise(r => setTimeout(r, 600));
+    // Simulated: just show that lookup ran
+    box.className = 'tm-lookup-box';
+    box.style.borderStyle = 'dashed';
+    box.innerHTML = `
+      <div style="width:100%;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">TM Lookup Placeholder — TM No: <strong>${val}</strong></div>
+        <div style="font-size:10px;color:var(--muted);">⚠ Real API not yet configured. This spot will show trademark details (brand name, applicant, class, status) when the API endpoint is provided.</div>
+      </div>`;
+
+    /* UNCOMMENT BELOW when real API is ready:
+    const resp = await fetch(TM_API_URL);
+    if (!resp.ok) throw new Error('TM not found');
+    const data = await resp.json();
+    box.className = 'tm-lookup-box found';
+    box.innerHTML = `
+      <div style="width:100%;">
+        <div style="font-size:9px;font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:6px;color:var(--accent2);">✓ TM Found</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px;">
+          <div><strong>Brand:</strong> ${data.brandName||'—'}</div>
+          <div><strong>Applicant:</strong> ${data.applicant||'—'}</div>
+          <div><strong>Class:</strong> ${data.classNo||'—'}</div>
+          <div><strong>Status:</strong> ${data.status||'—'}</div>
+          <div><strong>Filed:</strong> ${data.filingDate||'—'}</div>
+        </div>
+      </div>`;
+    */
+  } catch(err) {
+    box.className = 'tm-lookup-box error';
+    box.innerHTML = `<span>⚠</span> <span>TM lookup failed: ${err.message}</span>`;
+  }
+}
+
 // ══════════════════════════════════════════════
 // CLIENT MANAGEMENT
 // ══════════════════════════════════════════════
-function genAccNo() {
-  const pfx = settings.prefix || 'A';
-  const used = clients.map(c => c.accNo).filter(n => n && n.startsWith(pfx + '-'));
-  let max = 0;
-  used.forEach(n => { const num = parseInt(n.split('-')[1]); if (!isNaN(num) && num > max) max = num; });
-  return pfx + '-' + String(max + 1).padStart(3, '0');
+function genAccNo(prefix) {
+  prefix = prefix || settings.series[0]?.prefix || 'A';
+  const next = getNextCounterForSeries(prefix);
+  return prefix + '-' + String(next).padStart(3, '0');
 }
 
 function openAddClient() {
+  ensureSeriesData();
   document.getElementById('mo-client-title').textContent = 'New Client Account';
   document.getElementById('f-name').value = '';
   document.getElementById('f-city').value = '';
   document.getElementById('f-phone').value = '';
   document.getElementById('f-notes').value = '';
   document.getElementById('f-date').value = today();
-  document.getElementById('f-accno').value = genAccNo();
+  populateSeriesSelects();
   window._editClientId = null;
+  updateClientAccNo();
   openMo('mo-client');
 }
 
@@ -1382,6 +1653,7 @@ function openEditClient(id) {
   document.getElementById('f-notes').value = c.notes || '';
   document.getElementById('f-date').value = c.date || today();
   document.getElementById('f-accno').value = c.accNo;
+  populateSeriesSelects();
   openMo('mo-client');
 }
 
@@ -1395,7 +1667,6 @@ async function saveClient() {
   const accNo = document.getElementById('f-accno').value;
 
   if (window._editClientId) {
-    // UPDATE
     const { error } = await supa.from('clients').update({
       client_name: name.toUpperCase(),
       city: city.toUpperCase() || null,
@@ -1404,7 +1675,6 @@ async function saveClient() {
     log('edit', `Client edited: ${accNo} — ${name}`);
     toast('Client updated!', 's');
   } else {
-    // INSERT new client
     const { error } = await supa.from('clients').insert({
       client_code: accNo,
       client_name: name.toUpperCase(),
@@ -1472,20 +1742,27 @@ function renderClients(q = '') {
 }
 
 // ══════════════════════════════════════════════
-// LEDGER (ENTRIES) — The Core System
+// LEDGER (ENTRIES)
 // ══════════════════════════════════════════════
+
+// FIX B5: Correct clientBalance — case rows: only count due; pay rows: count received
 function clientBalance(c) {
-  // Running balance = Total Due − Total Received across all entries
   let totalDue = 0, totalRec = 0;
   (c.entries || []).forEach(e => {
-    if (e.type === 'case') { totalDue += (e.due || 0); totalRec += (e.received || 0); }
-    if (e.type === 'pay') { totalRec += (e.received || 0); }
+    if (e.type === 'case') {
+      totalDue += (e.due || 0);
+    }
+    if (e.type === 'pay' || e.type === 'case') {
+      totalRec += (e.received || 0);
+    }
   });
   return totalDue - totalRec;
 }
 
 function openLedger(id) {
   activeClientId = id;
+  ledgerPage = 1;
+  ledgerFilter = '';
   const c = clients.find(x => x.id === id);
   if (!c) return;
   renderLedger(c);
@@ -1497,53 +1774,33 @@ function renderLedger(c) {
   const container = document.getElementById('ledger-container');
   const bal = clientBalance(c);
   const balClass = bal > 0 ? 'neg' : bal < 0 ? 'pos' : 'zero';
-
-  // Build QR text
+  const balLabel = bal > 0 ? 'Outstanding' : bal < 0 ? 'Overpaid' : '✓ Cleared';
   const qrText = `Brandex Law Associates\nClient: ${c.name}\nAccount: ${c.accNo}\nCity: ${c.city||''}\nBalance: PKR ${fmt(Math.abs(bal))}`;
 
-  // Running balance rows
+  // Build running balance
   let runBal = 0;
-  const rows = (c.entries || []).map(e => {
+  currentLedgerEntries = (c.entries || []).map(e => {
     if (e.type === 'case') {
       runBal += (e.due || 0) - (e.received || 0);
     } else if (e.type === 'pay') {
       runBal -= (e.received || 0);
     }
-    const rb = runBal;
-    const rbClass = rb > 0 ? 'neg' : rb < 0 ? 'pos' : 'zero';
-    const trClass = e.type === 'case' ? 'case-row' : 'pay-row';
+    return { ...e, _runBal: runBal };
+  });
 
-    if (e.type === 'case') {
-      const sc = e.stage ? e.stage.toLowerCase() : '';
-      return `<tr class="${trClass}" data-id="${e.id}">
-        <td class="date-cell">${e.date ? fmtDate(e.date) : ''}</td>
-        <td><span class="folder-no">${e.folderNo || ''}</span></td>
-        <td>${e.stage ? `<span class="stage-b ${sc}">${e.stage.replace('S','S-')}</span>` : ''}</td>
-        <td style="font-size:9px;color:var(--muted);">${e.tmNo || ''}</td>
-        <td class="details-cell">${e.details || ''}</td>
-        <td class="amt-due">${e.due ? 'PKR '+fmt(e.due) : ''}</td>
-        <td class="amt-rec">${e.received && e.received>0 ? 'PKR '+fmt(e.received) : ''}</td>
-        <td class="amt-bal ${rbClass}">PKR ${fmt(Math.abs(rb))}</td>
-        <td><button class="row-del" onclick="delEntry('${c.id}','${e.id}')">✕</button></td>
-      </tr>`;
-    } else {
-      return `<tr class="${trClass}" data-id="${e.id}">
-        <td class="date-cell">${e.date ? fmtDate(e.date) : ''}</td>
-        <td></td><td></td><td></td>
-        <td class="details-cell pay-label">↳ ${e.details || 'PAYMENT RECEIVED'}</td>
-        <td></td>
-        <td class="amt-rec">PKR ${fmt(e.received)}</td>
-        <td class="amt-bal ${rbClass}">PKR ${fmt(Math.abs(rb))}</td>
-        <td><button class="row-del" onclick="delEntry('${c.id}','${e.id}')">✕</button></td>
-      </tr>`;
-    }
-  }).join('');
+  // Apply filter
+  const filtered = applyLedgerFilter(currentLedgerEntries, ledgerFilter);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ROWS_PER_PAGE));
+  if (ledgerPage > totalPages) ledgerPage = totalPages;
+  const pageEntries = filtered.slice((ledgerPage - 1) * ROWS_PER_PAGE, ledgerPage * ROWS_PER_PAGE);
+
+  const rows = pageEntries.map(e => renderLedgerRow(c, e)).join('');
 
   container.innerHTML = `
     <div class="ledger-header" id="lh-sticky">
       <div class="lh-top">
         <div>
-          <div class="lh-company">Brandex Law Associates</div>
+          <div class="lh-company">Brandex Law Associates · Ledger</div>
           <div class="lh-title">${c.name}</div>
           <div style="margin-top:6px;font-size:11px;color:var(--muted);">${c.city||''} ${c.phone ? '· '+c.phone : ''}</div>
         </div>
@@ -1551,24 +1808,50 @@ function renderLedger(c) {
           <div class="lh-balance">
             <div class="lh-bal-lbl">Balance</div>
             <div class="lh-bal-amt ${balClass}">PKR ${fmt(Math.abs(bal))}</div>
-            <div style="font-size:9px;color:var(--muted);margin-top:2px;">${bal>0?'Outstanding':bal<0?'Overpaid':'✓ Cleared'}</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:2px;">${balLabel}</div>
           </div>
           <div class="lh-qr" id="lh-qr-box"></div>
         </div>
       </div>
+
+      <!-- 3-COLUMN INFO BAR (Issue 14) -->
+      <div class="lh-info-bar">
+        <div class="lh-info-box">
+          <div class="lh-info-label">Account No</div>
+          <div class="lh-info-value acc">${c.accNo}</div>
+          <div class="lh-info-sub">Client Account</div>
+        </div>
+        <div class="lh-info-box">
+          <div class="lh-info-label">Client Name</div>
+          <div class="lh-info-value name">${c.name}</div>
+          <div class="lh-info-sub">${c.city || '—'} ${c.phone ? '· ' + c.phone : ''}</div>
+        </div>
+        <div class="lh-info-box">
+          <div class="lh-info-label">Current Balance</div>
+          <div class="lh-info-value bal-${balClass}">PKR ${fmt(Math.abs(bal))}</div>
+          <div class="lh-info-sub">${balLabel}</div>
+        </div>
+      </div>
+
       <div class="lh-meta">
-        <div class="lh-meta-pill"><span>Account</span><span>${c.accNo}</span></div>
         <div class="lh-meta-pill"><span>Entries</span><span>${(c.entries||[]).length}</span></div>
         <div class="lh-meta-pill"><span>Since</span><span>${c.date ? fmtDate(c.date) : '—'}</span></div>
-        ${c.notes ? `<div class="lh-meta-pill"><span>Notes</span><span>${c.notes}</span></div>` : ''}
+        ${c.notes ? `<div class="lh-meta-pill"><span>Bank</span><span>${c.notes}</span></div>` : ''}
       </div>
       <div class="lh-actions">
         <button class="btn prim sm" onclick="openAddCase()">＋ Add Case Entry</button>
         <button class="btn ok sm" onclick="openAddPay()">💰 Add Payment</button>
-        <button class="btn purp sm" onclick="openReceipt()">🖨 Print / Export</button>
-        <button class="btn warn sm" onclick="openEditClient('${c.id}');goPage('clients')">✏ Edit Client</button>
+        <button class="btn teal sm" onclick="openReceipt()">🖨 Print / Export</button>
+        <button class="btn warn sm" onclick="openEditClient('${c.id}')">✏ Edit Client</button>
         <button class="btn del sm" onclick="deleteClient('${c.id}');goPage('clients')">🗑 Delete Client</button>
       </div>
+    </div>
+    <div class="ledger-toolbar">
+      <input class="srch" placeholder="🔍 Filter by date, folder, TM, details…"
+             value="${ledgerFilter}"
+             oninput="ledgerFilter=this.value;ledgerPage=1;renderLedgerOnly()" style="flex:1;min-width:200px;">
+      <span class="ledger-page-info">${filtered.length} entries · Page ${ledgerPage} of ${totalPages}</span>
+      <button class="btn sm" onclick="exportLedgerCSV()">⬇ CSV</button>
     </div>
     <div class="ledger-table-wrap">
       <table class="lt">
@@ -1582,13 +1865,18 @@ function renderLedger(c) {
             <th>Due (PKR)</th>
             <th>Received (PKR)</th>
             <th>Balance (PKR)</th>
-            <th></th>
+            <th style="min-width:120px;">Actions</th>
           </tr>
         </thead>
         <tbody id="lt-body">
           ${rows || `<tr><td colspan="9"><div class="empty"><div class="empty-ico">📋</div><div class="empty-t">No entries yet</div><div class="empty-s">Add a case entry or payment to start</div></div></td></tr>`}
         </tbody>
       </table>
+    </div>
+    <div class="pagination-bar">
+      <button class="btn sm" onclick="changeLedgerPage(-1)" ${ledgerPage<=1?'disabled style="opacity:.4"':''}>← Prev</button>
+      <span class="ledger-page-info">Page ${ledgerPage} / ${totalPages}</span>
+      <button class="btn sm" onclick="changeLedgerPage(1)" ${ledgerPage>=totalPages?'disabled style="opacity:.4"':''}>Next →</button>
     </div>`;
 
   // Generate QR
@@ -1596,11 +1884,75 @@ function renderLedger(c) {
     const box = document.getElementById('lh-qr-box');
     if (box) {
       box.innerHTML = '';
-      try {
-        new QRCode(box, { text: qrText, width: 60, height: 60, colorDark: '#4A1520', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.M });
-      } catch(e) { box.style.background='#eee'; }
+      try { new QRCode(box, { text: qrText, width: 60, height: 60, colorDark: '#4A1520', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.M }); }
+      catch(e) { box.style.background='#eee'; }
     }
   }, 80);
+}
+
+function renderLedgerRow(c, e) {
+  const rb = e._runBal;
+  const rbClass = rb > 0 ? 'neg' : rb < 0 ? 'pos' : 'zero';
+  const trClass = (e.type === 'case' ? 'case-row' : 'pay-row') + (e.completed ? ' complete-row' : '');
+  const completeBadge = e.completed ? '<span class="complete-badge">✓ Done</span>' : '';
+
+  if (e.type === 'case') {
+    const sc = e.stage ? e.stage.toLowerCase() : '';
+    return `<tr class="${trClass}" data-id="${e.id}">
+      <td class="date-cell">${e.date ? fmtDate(e.date) : ''}</td>
+      <td><span class="folder-no">${e.folderNo || ''}</span></td>
+      <td>${e.stage ? `<span class="stage-b ${sc}">${renderStageLabel(e.stage)}</span>` : ''}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">${e.tmNo || ''}</td>
+      <td class="details-cell">${e.details || ''} ${completeBadge}</td>
+      <td class="amt-due">${e.due ? 'PKR '+fmt(e.due) : ''}</td>
+      <td class="amt-rec">${e.received && e.received>0 ? 'PKR '+fmt(e.received) : ''}</td>
+      <td class="amt-bal ${rbClass}">PKR ${fmt(Math.abs(rb))}</td>
+      <td><div class="row-actions">
+        <button class="row-btn edit-btn" onclick="openEditEntry('${c.id}','${e.id}')" title="Edit">✏</button>
+        <button class="row-btn complete-btn" onclick="toggleComplete('${c.id}','${e.id}')" title="${e.completed?'Mark Incomplete':'Mark Complete'}">✓</button>
+        <button class="row-btn print-btn" onclick="printSingleRow('${c.id}','${e.id}')" title="Print Row">🖨</button>
+        <button class="row-btn del-btn" onclick="delEntry('${c.id}','${e.id}')" title="Delete">✕</button>
+      </div></td>
+    </tr>`;
+  } else {
+    return `<tr class="${trClass}" data-id="${e.id}">
+      <td class="date-cell">${e.date ? fmtDate(e.date) : ''}</td>
+      <td></td><td></td>
+      <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent2);">${e.tmNo || ''}</td>
+      <td class="details-cell pay-label">↳ ${e.details || 'PAYMENT RECEIVED'} ${completeBadge}</td>
+      <td></td>
+      <td class="amt-rec">PKR ${fmt(e.received)}</td>
+      <td class="amt-bal ${rbClass}">PKR ${fmt(Math.abs(rb))}</td>
+      <td><div class="row-actions">
+        <button class="row-btn edit-btn" onclick="openEditEntry('${c.id}','${e.id}')" title="Edit">✏</button>
+        <button class="row-btn print-btn" onclick="printSingleRow('${c.id}','${e.id}')" title="Print Row">🖨</button>
+        <button class="row-btn del-btn" onclick="delEntry('${c.id}','${e.id}')" title="Delete">✕</button>
+      </div></td>
+    </tr>`;
+  }
+}
+
+function applyLedgerFilter(entries, q) {
+  if (!q) return entries;
+  const lq = q.toLowerCase();
+  return entries.filter(e =>
+    (e.date || '').includes(lq) ||
+    (e.folderNo || '').toLowerCase().includes(lq) ||
+    (e.tmNo || '').includes(lq) ||
+    (e.details || '').toLowerCase().includes(lq) ||
+    (e.stage || '').toLowerCase().includes(lq)
+  );
+}
+
+function changeLedgerPage(dir) {
+  ledgerPage += dir;
+  const c = clients.find(x => x.id === activeClientId);
+  if (c) renderLedger(c);
+}
+
+function renderLedgerOnly() {
+  const c = clients.find(x => x.id === activeClientId);
+  if (c) renderLedger(c);
 }
 
 // ── ADD CASE ENTRY ──
@@ -1613,6 +1965,12 @@ function openAddCase() {
   document.getElementById('ce-details').value = '';
   document.getElementById('ce-due').value = settings.s1;
   document.getElementById('ce-received').value = '0';
+  document.getElementById('mo-case-title').textContent = 'Add Case Entry';
+  document.getElementById('mo-case-save-btn').textContent = '➕ Add Entry';
+  document.getElementById('mo-case-save-btn').onclick = saveCaseEntry;
+  const box = document.getElementById('tm-lookup-result');
+  if (box) { box.className = 'tm-lookup-box'; box.innerHTML = '<span>🔍</span> <span>Enter 6-digit TM number to lookup trademark info</span>'; }
+  window._editEntryId = null;
   openMo('mo-case');
 }
 
@@ -1622,18 +1980,43 @@ async function saveCaseEntry() {
   const details = document.getElementById('ce-details').value.trim();
   if (!details) { toast('Details are required!', 'e'); return; }
 
+  // TM validation: must be empty or exactly 6 digits
+  const tmVal = document.getElementById('ce-tm').value.replace(/\D/g, '');
+  if (tmVal.length > 0 && tmVal.length !== 6) {
+    toast('TM No must be exactly 6 digits!', 'e');
+    document.getElementById('ce-tm').classList.add('err');
+    return;
+  }
+  document.getElementById('ce-tm').classList.remove('err');
+
+  const folder = document.getElementById('ce-folder').value.trim();
+  const newStage = document.getElementById('ce-stage').value;
+
+  // Issue 7: Stage low→high enforcement
+  if (folder) {
+    const existingEntries = (c.entries || []).filter(e => e.type === 'case' && e.folderNo === folder);
+    const maxExistingStage = existingEntries.reduce((max, e) => Math.max(max, stageNum(e.stage)), 0);
+    const newStageNum = stageNum(newStage);
+    if (newStageNum < maxExistingStage) {
+      const proceed = confirm(`⚠ Warning: This folder already has ${renderStageLabel('S'+maxExistingStage)}.\nAdding ${renderStageLabel(newStage)} (lower stage) may be incorrect.\n\nProceed anyway?`);
+      if (!proceed) return;
+    }
+  }
+
   const due      = parseFloat(document.getElementById('ce-due').value) || 0;
   const received = parseFloat(document.getElementById('ce-received').value) || 0;
   const { error } = await supa.from('ledger_entries').insert({
     client_code:     activeClientId,
+    entry_type:      'case',
     entry_date:      document.getElementById('ce-date').value || null,
-    folder_no:       document.getElementById('ce-folder').value.trim() || null,
-    stage:           document.getElementById('ce-stage').value || null,
-    tm_no:           document.getElementById('ce-tm').value.trim() || null,
+    folder_no:       folder || null,
+    stage:           newStage || null,
+    tm_no:           tmVal || null,
     details:         details.toUpperCase(),
     amount_due:      due > 0 ? due : null,
     amount_received: received > 0 ? received : null,
     running_balance: null,
+    is_completed:    false,
   });
   if (error) { toast('Error saving entry: ' + error.message, 'e'); return; }
   log('add', `Case entry added to ${c.accNo} (${c.name}): ${details} | Due: PKR ${fmt(due)}`);
@@ -1643,11 +2026,101 @@ async function saveCaseEntry() {
   toast('Case entry added!', 's');
 }
 
+// ── EDIT ENTRY ──
+function openEditEntry(clientId, entryId) {
+  const c = clients.find(x => x.id === clientId);
+  if (!c) return;
+  const e = (c.entries || []).find(x => x.id === entryId);
+  if (!e) return;
+
+  window._editEntryId = entryId;
+  window._editEntryClientId = clientId;
+
+  if (e.type === 'pay') {
+    // Edit payment in pay modal
+    document.getElementById('pe-date').value = e.date || today();
+    document.getElementById('pe-amount').value = e.received || '';
+    document.getElementById('pe-ref').value = e.tmNo || '';
+    document.getElementById('pe-details').value = e.details || 'PAYMENT RECEIVED';
+    // Override save button to update
+    const saveBtn = document.querySelector('#mo-pay .btn.ok');
+    if (saveBtn) { saveBtn.textContent = '💾 Update Payment'; saveBtn.onclick = saveEditPayEntry; }
+    openMo('mo-pay');
+  } else {
+    // Edit case entry
+    updateStageOpts();
+    document.getElementById('ce-folder').value = e.folderNo || '';
+    document.getElementById('ce-date').value = e.date || today();
+    document.getElementById('ce-stage').value = e.stage || 'S1';
+    document.getElementById('ce-tm').value = e.tmNo || '';
+    document.getElementById('ce-details').value = e.details || '';
+    document.getElementById('ce-due').value = e.due || '';
+    document.getElementById('ce-received').value = e.received || '0';
+    document.getElementById('mo-case-title').textContent = 'Edit Case Entry';
+    document.getElementById('mo-case-save-btn').textContent = '💾 Save Changes';
+    document.getElementById('mo-case-save-btn').onclick = saveEditCaseEntry;
+    openMo('mo-case');
+  }
+}
+
+async function saveEditCaseEntry() {
+  const details = document.getElementById('ce-details').value.trim();
+  if (!details) { toast('Details are required!', 'e'); return; }
+  const tmVal = document.getElementById('ce-tm').value.replace(/\D/g, '');
+  if (tmVal.length > 0 && tmVal.length !== 6) { toast('TM No must be exactly 6 digits!', 'e'); return; }
+  const due      = parseFloat(document.getElementById('ce-due').value) || 0;
+  const received = parseFloat(document.getElementById('ce-received').value) || 0;
+  const { error } = await supa.from('ledger_entries').update({
+    entry_date:      document.getElementById('ce-date').value || null,
+    folder_no:       document.getElementById('ce-folder').value.trim() || null,
+    stage:           document.getElementById('ce-stage').value || null,
+    tm_no:           tmVal || null,
+    details:         details.toUpperCase(),
+    amount_due:      due > 0 ? due : null,
+    amount_received: received > 0 ? received : null,
+  }).eq('id', window._editEntryId);
+  if (error) { toast('Error updating entry: ' + error.message, 'e'); return; }
+  log('edit', `Entry edited: ${details}`);
+  closeMo('mo-case');
+  // Reset save button
+  document.getElementById('mo-case-save-btn').textContent = '➕ Add Entry';
+  document.getElementById('mo-case-save-btn').onclick = saveCaseEntry;
+  await loadAllData();
+  openLedger(window._editEntryClientId);
+  toast('Entry updated!', 's');
+}
+
+async function saveEditPayEntry() {
+  const amount = parseFloat(document.getElementById('pe-amount').value);
+  if (!amount || amount <= 0) { toast('Enter a valid amount!', 'e'); return; }
+  const details = document.getElementById('pe-details').value.trim() || 'PAYMENT RECEIVED';
+  const refVal  = document.getElementById('pe-ref').value.trim();
+  const { error } = await supa.from('ledger_entries').update({
+    entry_date:      document.getElementById('pe-date').value || null,
+    details:         details.toUpperCase(),
+    amount_received: amount,
+    tm_no:           refVal || null,
+  }).eq('id', window._editEntryId);
+  if (error) { toast('Error updating payment: ' + error.message, 'e'); return; }
+  log('edit', `Payment edited: PKR ${fmt(amount)}`);
+  closeMo('mo-pay');
+  // Reset pay modal button
+  const saveBtn = document.querySelector('#mo-pay .btn.ok');
+  if (saveBtn) { saveBtn.textContent = '💰 Add Payment'; saveBtn.onclick = savePayEntry; }
+  await loadAllData();
+  openLedger(window._editEntryClientId);
+  toast('Payment updated!', 's');
+}
+
 // ── ADD PAYMENT ENTRY ──
 function openAddPay() {
   document.getElementById('pe-date').value = today();
   document.getElementById('pe-amount').value = '';
+  document.getElementById('pe-ref').value = '';
   document.getElementById('pe-details').value = 'PAYMENT RECEIVED JAZZ CASH';
+  const saveBtn = document.querySelector('#mo-pay .btn.ok');
+  if (saveBtn) { saveBtn.textContent = '💰 Add Payment'; saveBtn.onclick = savePayEntry; }
+  window._editEntryId = null;
   openMo('mo-pay');
 }
 
@@ -1657,21 +2130,40 @@ async function savePayEntry() {
   const amount = parseFloat(document.getElementById('pe-amount').value);
   if (!amount || amount <= 0) { toast('Enter a valid amount!', 'e'); return; }
   const details = document.getElementById('pe-details').value.trim() || 'PAYMENT RECEIVED';
+  const refVal  = document.getElementById('pe-ref').value.trim();
 
   const { error } = await supa.from('ledger_entries').insert({
     client_code:     activeClientId,
+    entry_type:      'payment',
     entry_date:      document.getElementById('pe-date').value || null,
     details:         details.toUpperCase(),
+    tm_no:           refVal || null,
     amount_due:      null,
     amount_received: amount,
     running_balance: null,
+    is_completed:    false,
   });
   if (error) { toast('Error saving payment: ' + error.message, 'e'); return; }
-  log('pay', `Payment received: ${c.accNo} (${c.name}) — PKR ${fmt(amount)} via ${details}`);
+  log('pay', `Payment received: ${c.accNo} (${c.name}) — PKR ${fmt(amount)} via ${details}${refVal ? ' ref: '+refVal : ''}`);
   closeMo('mo-pay');
   await loadAllData();
   openLedger(activeClientId);
   toast('Payment added: PKR ' + fmt(amount), 's');
+}
+
+// ── TOGGLE COMPLETE ──
+async function toggleComplete(clientId, entryId) {
+  const c = clients.find(x => x.id === clientId);
+  if (!c) return;
+  const e = (c.entries || []).find(x => x.id === entryId);
+  if (!e) return;
+  const newVal = !e.completed;
+  const { error } = await supa.from('ledger_entries').update({ is_completed: newVal }).eq('id', entryId);
+  if (error) { toast('Error updating: ' + error.message, 'e'); return; }
+  log('edit', `Entry marked ${newVal ? 'complete' : 'incomplete'}: ${e.details}`);
+  await loadAllData();
+  openLedger(clientId);
+  toast(newVal ? '✓ Marked Complete' : 'Marked Incomplete', 's');
 }
 
 // ── DELETE ENTRY ──
@@ -1687,73 +2179,173 @@ async function delEntry(clientId, entryId) {
   toast('Entry deleted.', 'w');
 }
 
-// ══════════════════════════════════════════════
-// RECEIPT / PRINT
-// ══════════════════════════════════════════════
-function openReceipt() {
+// ── EXPORT LEDGER TO CSV ──
+function exportLedgerCSV() {
   const c = clients.find(x => x.id === activeClientId);
   if (!c) return;
+  const hdrs = ['date','folderNo','stage','tmNo','details','due','received','balance'];
+  let runBal = 0;
+  const rows = (c.entries||[]).map(e => {
+    if (e.type==='case') runBal += (e.due||0) - (e.received||0);
+    else runBal -= (e.received||0);
+    return hdrs.map(h => {
+      const val = h==='balance' ? Math.abs(runBal) : (e[h]!==undefined?e[h]:'');
+      return `"${String(val).replace(/"/g,'""')}"`;
+    }).join(',');
+  });
+  dlFile([hdrs.join(','),...rows].join('\n'), `ledger-${c.accNo}-${dateStr()}.csv`, 'text/csv');
+  toast('Ledger exported!', 's');
+}
+
+// ══════════════════════════════════════════════
+// PRINT CSS CONSTANT (shared for all print outputs)
+// Issue 13: Unified print/PDF design
+// Issue 10: No black/grey — use theme colors only
+// ══════════════════════════════════════════════
+const PRINT_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Space Grotesk',Arial,sans-serif;background:#F7F0E8;color:#1B2A41;}
+  .receipt-wrap{background:#F7F0E8;color:#1B2A41;padding:24px;font-family:'Space Grotesk',Arial,sans-serif;}
+  .r-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:3px solid #4A1520;}
+  .r-logo-area{display:flex;align-items:center;gap:14px;}
+  .r-logo-img{height:50px;width:auto;}
+  .r-co{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:22px;color:#1B2A41;letter-spacing:1px;}
+  .r-co-sub{font-size:8px;color:#6B5747;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;font-family:'DM Mono',monospace;}
+  .r-co-addr{font-size:8px;color:#6B5747;margin-top:4px;line-height:1.6;}
+  .r-title-bar{background:#4A1520;color:#F7F0E8;text-align:center;padding:8px;font-family:'Bebas Neue',Arial,sans-serif;font-size:14px;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+  .r-info-bar{display:grid;grid-template-columns:1fr 2fr 1fr;gap:0;border:2.5px solid #1B2A41;margin-bottom:12px;}
+  .r-info-box{padding:10px 14px;}
+  .r-info-box:not(:last-child){border-right:2px solid #1B2A41;}
+  .r-info-label{font-size:7px;color:#6B5747;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;font-family:'DM Mono',monospace;}
+  .r-info-value{font-family:'Bebas Neue',Arial,sans-serif;letter-spacing:1px;}
+  .r-info-value.acc-val{color:#4A1520;font-size:30px;}
+  .r-info-value.name-val{font-size:18px;color:#1B2A41;}
+  .r-info-value.bal-val-neg{color:#8B1010;font-size:22px;}
+  .r-info-value.bal-val-pos{color:#0A6B52;font-size:22px;}
+  .r-meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px;}
+  .r-meta-item{background:#EDE5D4;border:1.5px solid #1B2A41;padding:6px 9px;}
+  .r-meta-lbl{font-size:7px;color:#6B5747;letter-spacing:1px;text-transform:uppercase;margin-bottom:1px;font-family:'DM Mono',monospace;}
+  .r-meta-val{font-size:10px;font-weight:700;color:#1B2A41;}
+  .r-bank-box{background:#EDE5D4;border:1.5px solid #0A6B52;padding:8px 12px;margin-bottom:12px;}
+  .r-bank-title{font-size:8px;font-family:'DM Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:#0A6B52;margin-bottom:5px;}
+  .r-bank-grid{display:flex;gap:18px;flex-wrap:wrap;}
+  .r-bank-item{font-size:9px;color:#1B2A41;}
+  .r-bank-item span{font-weight:700;}
+  .r-table{width:100%;border-collapse:collapse;font-size:8.5px;margin-bottom:12px;}
+  .r-table th{padding:5px 7px;background:#4A1520;color:#F7F0E8;text-align:left;font-size:7px;letter-spacing:.8px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+  .r-table td{padding:4px 7px;border:1.5px solid #C4B49A;}
+  .r-table tr.case-tr{background:#F7F0E8;}
+  .r-table tr.pay-tr{background:#DDEFE8;}
+  .r-table tr.pay-tr td{color:#0A6B52;font-weight:600;}
+  .r-table tr.complete-tr td{opacity:.75;}
+  .r-due-cell{color:#8B1010;font-weight:700;text-align:right;}
+  .r-rec-cell{color:#0A6B52;font-weight:700;text-align:right;}
+  .r-bal-cell{font-weight:800;text-align:right;}
+  .r-bal-cell.neg{color:#8B1010;}
+  .r-bal-cell.pos{color:#0A6B52;}
+  .r-balance-box{display:flex;justify-content:space-between;align-items:center;background:#4A1520;color:#F7F0E8;padding:11px 14px;margin-bottom:12px;}
+  .r-bal-lbl{font-size:9px;color:#C4A882;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+  .r-bal-amt{font-family:'Bebas Neue',Arial,sans-serif;font-size:24px;color:#0D9970;}
+  .r-bal-amt.neg{color:#E8775A;}
+  .r-foot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:8px;border-top:2px solid #4A1520;font-size:8px;color:#6B5747;}
+  .r-sig-line{border-top:1.5px solid #4A1520;padding-top:3px;font-size:9px;font-weight:700;color:#1B2A41;margin-top:26px;}
+  @media print{body{padding:0;}@page{margin:10mm;}}
+`;
+
+const BRANDEX_LOGO_HTML = `<img src="https://www.brandex.pk/wp-content/uploads/2023/04/Brandex-Logo.png"
+  onerror="this.style.display='none'" alt="Brandex" class="r-logo-img">`;
+
+// ══════════════════════════════════════════════
+// RECEIPT / PRINT
+// Issue 10: No black/grey, use dark-maroon/teal
+// Issue 11: Bank info BEFORE footer
+// ══════════════════════════════════════════════
+function buildReceiptHTML(c, entriesToShow) {
   const bal = clientBalance(c);
   const balClass = bal > 0 ? 'neg' : 'pos';
   const now = new Date();
 
   let runBal = 0;
-  const tableRows = (c.entries||[]).map(e => {
+  // We need to compute running balance up to the shown entries
+  const allEntries = c.entries || [];
+  const tableRows = (entriesToShow || allEntries).map(e => {
     if (e.type === 'case') runBal += (e.due||0) - (e.received||0);
     else if (e.type === 'pay') runBal -= (e.received||0);
     const rb = runBal;
-
+    const rbClass = rb > 0 ? 'neg' : 'pos';
+    const trClass = e.type === 'case' ? 'case-tr' : 'pay-tr' + (e.completed ? ' complete-tr' : '');
     if (e.type === 'case') {
-      return `<tr class="case-tr">
+      return `<tr class="${trClass}">
         <td>${e.date ? fmtDate(e.date) : ''}</td>
         <td>${e.folderNo||''}</td>
-        <td>${e.stage ? e.stage.replace('S','S-') : ''}</td>
+        <td>${renderStageLabel(e.stage)}</td>
         <td>${e.tmNo||''}</td>
-        <td>${e.details||''}</td>
-        <td style="text-align:right;color:#c00;">${e.due ? 'PKR '+fmt(e.due) : ''}</td>
-        <td style="text-align:right;color:#080;">${e.received&&e.received>0?'PKR '+fmt(e.received):''}</td>
-        <td style="text-align:right;font-weight:700;">${rb>0?'<span style="color:#c00">':'<span style="color:#080;">'}PKR ${fmt(Math.abs(rb))}</span></td>
+        <td>${e.details||''}${e.completed?' ✓':''}</td>
+        <td class="r-due-cell">${e.due ? 'PKR '+fmt(e.due) : ''}</td>
+        <td class="r-rec-cell">${e.received&&e.received>0?'PKR '+fmt(e.received):''}</td>
+        <td class="r-bal-cell ${rbClass}">PKR ${fmt(Math.abs(rb))}</td>
       </tr>`;
     } else {
-      return `<tr class="pay-tr">
+      return `<tr class="${trClass}">
         <td>${e.date ? fmtDate(e.date) : ''}</td>
         <td colspan="3"></td>
-        <td style="color:#080;font-style:italic;">↳ ${e.details||'PAYMENT RECEIVED'}</td>
+        <td>↳ ${e.details||'PAYMENT RECEIVED'}${e.tmNo ? ' ['+e.tmNo+']' : ''}${e.completed?' ✓':''}</td>
         <td></td>
-        <td style="text-align:right;color:#080;font-weight:700;">PKR ${fmt(e.received)}</td>
-        <td style="text-align:right;font-weight:700;">${rb>0?'<span style="color:#c00">':'<span style="color:#080;">'}PKR ${fmt(Math.abs(rb))}</span></td>
+        <td class="r-rec-cell">PKR ${fmt(e.received)}</td>
+        <td class="r-bal-cell ${rbClass}">PKR ${fmt(Math.abs(rb))}</td>
       </tr>`;
     }
   }).join('');
 
-  const html = `
+  const bankSection = (c.bankName || c.bankAcc || c.bankIban) ? `
+    <div class="r-bank-box">
+      <div class="r-bank-title">Payment / Bank Details</div>
+      <div class="r-bank-grid">
+        ${c.bankName ? `<div class="r-bank-item">Bank: <span>${c.bankName}</span></div>` : ''}
+        ${c.bankAcc  ? `<div class="r-bank-item">Account: <span>${c.bankAcc}</span></div>` : ''}
+        ${c.bankIban ? `<div class="r-bank-item">IBAN: <span>${c.bankIban}</span></div>` : ''}
+      </div>
+    </div>` : '';
+
+  return `
     <div class="receipt-wrap" id="receipt-inner">
       <div class="r-head">
-        <div>
-          <div class="r-co">Brandex Law Associates</div>
-          <div class="r-co-sub">Trademark & Intellectual Property Law</div>
-          <div class="r-co-addr">Office No 162, 2nd Floor, Abdullah Plaza<br>Near Ghuri Garden Gate, Islamabad</div>
+        <div class="r-logo-area">
+          ${BRANDEX_LOGO_HTML}
+          <div>
+            <div class="r-co">Brandex Law Associates</div>
+            <div class="r-co-sub">Trademark &amp; Intellectual Property Law</div>
+            <div class="r-co-addr">Office No 162, 2nd Floor, Abdullah Plaza<br>Near Ghuri Garden Gate, Islamabad</div>
+          </div>
         </div>
         <div style="text-align:right;">
-          <div id="r-qr" style="width:70px;height:70px;margin-left:auto;"></div>
-          <div style="font-size:7px;color:#999;margin-top:2px;">Scan to verify</div>
+          <div id="r-qr" style="width:70px;height:70px;margin-left:auto;background:#EDE5D4;"></div>
+          <div style="font-size:7px;color:#6B5747;margin-top:2px;font-family:'DM Mono',monospace;">Scan to verify</div>
         </div>
       </div>
       <div class="r-title-bar">LEDGER — BALANCE SHEET</div>
-      <div class="r-client-bar">
-        <div class="r-client-no">${c.accNo}</div>
-        <div>
-          <div class="r-client-name">${c.name}</div>
-          <div class="r-client-city">${c.city||''} ${c.phone?'· '+c.phone:''}</div>
+      <div class="r-info-bar">
+        <div class="r-info-box">
+          <div class="r-info-label">Account No</div>
+          <div class="r-info-value acc-val">${c.accNo}</div>
+          <div style="font-size:8px;color:#6B5747;font-family:'DM Mono',monospace;">Client Account</div>
         </div>
-        <div style="text-align:right;font-size:26px;font-weight:800;font-family:Syne,sans-serif;color:#1B2A41;">
-          PKR ${fmt(Math.abs(bal))}
+        <div class="r-info-box">
+          <div class="r-info-label">Client Name</div>
+          <div class="r-info-value name-val">${c.name}</div>
+          <div style="font-size:9px;color:#6B5747;">${c.city||''} ${c.phone ? '· '+c.phone : ''}</div>
+        </div>
+        <div class="r-info-box" style="text-align:right;">
+          <div class="r-info-label">Current Balance</div>
+          <div class="r-info-value bal-val-${balClass}">PKR ${fmt(Math.abs(bal))}</div>
+          <div style="font-size:8px;color:#6B5747;font-family:'DM Mono',monospace;">${bal>0?'Outstanding':bal<0?'Overpaid':'✓ Cleared'}</div>
         </div>
       </div>
       <div class="r-meta-grid">
         <div class="r-meta-item"><div class="r-meta-lbl">Print Date</div><div class="r-meta-val">${now.toLocaleDateString('en-PK',{day:'2-digit',month:'short',year:'numeric'})}</div></div>
         <div class="r-meta-item"><div class="r-meta-lbl">Account No</div><div class="r-meta-val">${c.accNo}</div></div>
-        <div class="r-meta-item"><div class="r-meta-lbl">Total Entries</div><div class="r-meta-val">${(c.entries||[]).length}</div></div>
+        <div class="r-meta-item"><div class="r-meta-lbl">Total Entries</div><div class="r-meta-val">${(entriesToShow||allEntries).length}</div></div>
       </div>
       <table class="r-table">
         <thead>
@@ -1763,73 +2355,89 @@ function openReceipt() {
             <th style="text-align:right">Received</th><th style="text-align:right">Balance</th>
           </tr>
         </thead>
-        <tbody>${tableRows || '<tr><td colspan="8" style="text-align:center;color:#999;padding:16px;">No entries</td></tr>'}</tbody>
+        <tbody>${tableRows || '<tr><td colspan="8" style="text-align:center;color:#6B5747;padding:12px;">No entries</td></tr>'}</tbody>
       </table>
       <div class="r-balance-box">
-        <div><div class="r-bal-lbl">Final Balance</div><div style="font-size:10px;color:#7d8590;margin-top:1px;">${bal>0?'Outstanding amount':'Account settled / overpaid'}</div></div>
+        <div><div class="r-bal-lbl">Final Balance</div><div style="font-size:9px;color:#C4A882;margin-top:1px;">${bal>0?'Outstanding amount':'Account settled / overpaid'}</div></div>
         <div class="r-bal-amt ${balClass}">PKR ${fmt(Math.abs(bal))}</div>
       </div>
+      ${bankSection}
       <div class="r-foot">
-        <div><strong>Brandex Law Associates</strong><br>www.brandex.pk<br>Generated: ${now.toLocaleString()}</div>
+        <div><strong style="color:#1B2A41;">Brandex Law Associates</strong><br>www.brandex.pk &nbsp;·&nbsp; Office No 162, Abdullah Plaza, Islamabad<br><span style="font-family:'DM Mono',monospace;font-size:7px;">Generated: ${now.toLocaleString()}</span></div>
         <div style="text-align:center;" id="r-qr2"></div>
-        <div class="r-sig"><div class="r-sig-line">Authorized Signature</div><div style="margin-top:3px;font-size:9px;">Brandex Law Associates</div></div>
+        <div class="r-sig"><div class="r-sig-line">Authorized Signature</div><div style="margin-top:3px;font-size:9px;color:#6B5747;">Brandex Law Associates</div></div>
       </div>
     </div>`;
+}
 
+function openReceipt() {
+  const c = clients.find(x => x.id === activeClientId);
+  if (!c) return;
+  const html = buildReceiptHTML(c, null);
   document.getElementById('receipt-content').innerHTML = html;
-  setTimeout(() => {
-    try {
-      const qrText = `${c.accNo} | ${c.name} | Balance: PKR ${fmt(Math.abs(bal))}`;
-      new QRCode(document.getElementById('r-qr'), { text: qrText, width: 70, height: 70, colorDark: '#4A1520', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.M });
-      new QRCode(document.getElementById('r-qr2'), { text: qrText, width: 50, height: 50, colorDark: '#4A1520', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.L });
-    } catch(e){}
-  }, 150);
-
+  _renderQRsInReceipt(c);
   log('exp', `Receipt/ledger sheet generated for ${c.accNo} — ${c.name}`);
   openMo('mo-receipt');
 }
 
+function _renderQRsInReceipt(c) {
+  const bal = clientBalance(c);
+  setTimeout(() => {
+    try {
+      const qrText = `${c.accNo} | ${c.name} | Balance: PKR ${fmt(Math.abs(bal))}`;
+      const q1 = document.getElementById('r-qr');
+      const q2 = document.getElementById('r-qr2');
+      if (q1) { q1.innerHTML=''; new QRCode(q1, { text: qrText, width: 70, height: 70, colorDark: '#4A1520', colorLight: '#F7F0E8', correctLevel: QRCode.CorrectLevel.M }); }
+      if (q2) { q2.innerHTML=''; new QRCode(q2, { text: qrText, width: 50, height: 50, colorDark: '#4A1520', colorLight: '#F7F0E8', correctLevel: QRCode.CorrectLevel.L }); }
+    } catch(e){}
+  }, 150);
+}
+
+// ── PRINT FULL LEDGER ──
 function doPrint() {
   const inner = document.getElementById('receipt-inner');
   if (!inner) return;
   const html = inner.outerHTML;
+  const c = clients.find(x => x.id === activeClientId);
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html><head>
-    <title>Ledger — ${clients.find(x=>x.id===activeClientId)?.name||''}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      *{box-sizing:border-box;margin:0;padding:0;}
-      body{font-family:'JetBrains Mono',monospace;background:#fff;}
-      .receipt-wrap{background:#fff;color:#000;padding:24px;font-family:'JetBrains Mono',monospace;}
-      .r-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:3px solid #4A1520;}
-      .r-co{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#0a0c0f;}
-      .r-co-sub{font-size:8px;color:#666;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
-      .r-co-addr{font-size:8px;color:#888;margin-top:4px;line-height:1.5;}
-      .r-title-bar{background:#0a0c0f;color:#fff;text-align:center;padding:8px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
-      .r-client-bar{display:flex;justify-content:space-between;align-items:center;background:#f0f0ff;border:2px solid #4A1520;border-radius:6px;padding:10px 14px;margin-bottom:12px;}
-      .r-client-no{font-size:26px;font-weight:800;font-family:'Syne',sans-serif;color:#0a0c0f;}
-      .r-client-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#0a0c0f;}
-      .r-client-city{font-size:10px;color:#555;margin-top:1px;}
-      .r-meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px;}
-      .r-meta-item{background:#f8f9fa;border:1px solid #dee2e6;padding:6px 9px;border-radius:4px;}
-      .r-meta-lbl{font-size:7px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:1px;}
-      .r-meta-val{font-size:10px;font-weight:700;color:#1B2A41;}
-      .r-table{width:100%;border-collapse:collapse;font-size:9px;margin-bottom:12px;}
-      .r-table th{padding:5px 7px;background:#4A1520;color:#F7F0E8;text-align:left;font-size:7px;letter-spacing:.8px;text-transform:uppercase;}
-      .r-table td{padding:4px 7px;border:1px solid #dee2e6;}
-      .r-table tr.case-tr{background:#f9f9ff;}
-      .r-table tr.pay-tr{background:#f0fff4;}
-      .r-balance-box{display:flex;justify-content:space-between;align-items:center;background:#4A1520;color:#F7F0E8;padding:11px 14px;border-radius:6px;margin-bottom:12px;}
-      .r-bal-lbl{font-size:9px;color:#7d8590;letter-spacing:1px;text-transform:uppercase;}
-      .r-bal-amt{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#3fb950;}
-      .r-bal-amt.neg{color:#f85149;}
-      .r-foot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:8px;border-top:1px solid #dee2e6;font-size:8px;color:#888;}
-      .r-sig-line{border-top:1px solid #4A1520;padding-top:3px;font-size:9px;font-weight:700;color:#1B2A41;margin-top:26px;}
-      @media print{body{padding:0;}@page{margin:12mm;}}
-    </style>
+    <title>Ledger — ${c?.name||''}</title>
+    <style>${PRINT_CSS}</style>
   </head><body>${html}</body></html>`);
   w.document.close();
-  setTimeout(() => { w.focus(); w.print(); }, 700);
+  setTimeout(() => { w.focus(); w.print(); }, 800);
+}
+
+// ── SINGLE ROW PRINT (Issue 12) ──
+function printSingleRow(clientId, entryId) {
+  const c = clients.find(x => x.id === clientId);
+  if (!c) return;
+  const e = (c.entries||[]).find(x => x.id === entryId);
+  if (!e) return;
+  const html = buildReceiptHTML(c, [e]);
+  document.getElementById('row-receipt-content').innerHTML = html;
+  const bal = clientBalance(c);
+  setTimeout(() => {
+    try {
+      const qrText = `${c.accNo} | ${c.name} | TM: ${e.tmNo||'—'} | ${e.details}`;
+      const q1 = document.getElementById('r-qr');
+      if (q1) { q1.innerHTML=''; new QRCode(q1, { text: qrText, width: 70, height: 70, colorDark: '#4A1520', colorLight: '#F7F0E8', correctLevel: QRCode.CorrectLevel.M }); }
+    } catch(er){}
+  }, 150);
+  openMo('mo-row-print');
+}
+
+function doPrintRow() {
+  const inner = document.getElementById('row-receipt-content')?.querySelector('.receipt-wrap');
+  if (!inner) return;
+  const c = clients.find(x => x.id === activeClientId);
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head>
+    <title>Row Receipt — ${c?.name||''}</title>
+    <style>${PRINT_CSS}</style>
+  </head><body>${inner.outerHTML}</body></html>`);
+  w.document.close();
+  setTimeout(() => { w.focus(); w.print(); }, 800);
 }
 
 // ══════════════════════════════════════════════
@@ -1847,21 +2455,19 @@ function renderDashboard() {
   document.getElementById('d-due').textContent = 'PKR ' + fmt(Math.max(0,outstanding));
   document.getElementById('d-entries').textContent = totalEntries;
 
-  // Recent clients
-  const recent = [...clients].sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0)).slice(0,6);
+  const recent = [...clients].sort((a,b)=>new Date(b.date||0)-new Date(a.date||0)).slice(0,6);
   document.getElementById('d-recent').innerHTML = recent.length ? recent.map(c=>{
     const bal=clientBalance(c);const bc=bal>0?'neg':bal<0?'pos':'zero';
-    return `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(42,47,58,.3);cursor:pointer;" onclick="openLedger('${c.id}')">
-      <span style="font-size:11px;color:var(--accent);font-weight:800;min-width:55px;">${c.accNo}</span>
+    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(42,47,58,.3);cursor:pointer;" onclick="openLedger('${c.id}')">
+      <span style="font-size:12px;color:var(--accent);font-weight:800;min-width:60px;font-family:'Bebas Neue',sans-serif;">${c.accNo}</span>
       <span style="font-size:11px;flex:1;">${c.name}</span>
       <span style="font-size:10px;font-weight:700;" class="cc-bal ${bc}">PKR ${fmt(Math.abs(bal))}</span>
     </div>`;
   }).join('') : '<div style="font-size:10px;color:var(--muted);padding:6px 0;">No clients yet</div>';
 
-  // Recent log
   const recentLog = actLog.slice(0,6);
   document.getElementById('d-activity').innerHTML = recentLog.length ? recentLog.map(l=>`
-    <div style="display:flex;gap:7px;align-items:flex-start;padding:4px 0;border-bottom:1px solid rgba(42,47,58,.3);">
+    <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(42,47,58,.3);">
       <div class="log-dot ${l.type}" style="margin-top:4px;"></div>
       <span style="font-size:10px;flex:1;line-height:1.4;">${l.msg}</span>
     </div>`).join('') : '<div style="font-size:10px;color:var(--muted);padding:6px 0;">No activity yet</div>';
@@ -1890,7 +2496,7 @@ function renderLog(q='') {
 function clearLog() {
   if (!confirm('Clear all activity logs?')) return;
   actLog = [];
-  save();
+  save(); // FIX B1/B6
   renderLog();
   toast('Log cleared.', 'w');
 }
@@ -1907,8 +2513,7 @@ function updateSidebar() {
   document.getElementById('nb-clients').textContent = clients.length;
   document.getElementById('nb-log').textContent = actLog.length;
 
-  // Quick client list
-  const items = [...clients].sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0)).slice(0,8);
+  const items = [...clients].sort((a,b)=>new Date(b.date||0)-new Date(a.date||0)).slice(0,8);
   document.getElementById('sb-quick-items').innerHTML = items.length ? items.map(c=>{
     const bal=clientBalance(c);const bc=bal>0?'neg':'pos';
     return `<div class="sb-qc-item" onclick="openLedger('${c.id}')">
@@ -1921,6 +2526,7 @@ function updateSidebar() {
 
 // ══════════════════════════════════════════════
 // CSV IMPORT / EXPORT
+// FIX B2: importCSV now uses Supabase
 // ══════════════════════════════════════════════
 function exportCSV() {
   if (!clients.length) { toast('No clients to export!', 'e'); return; }
@@ -1929,7 +2535,8 @@ function exportCSV() {
     const bal=clientBalance(c);
     const totalDue=c.entries?c.entries.filter(e=>e.type==='case').reduce((s,e)=>s+(e.due||0),0):0;
     const totalRec=c.entries?c.entries.reduce((s,e)=>s+(e.received||0),0):0;
-    return hdrs.map(h=>`"${(c[h]!==undefined?c[h]:h==='totalDue'?totalDue:h==='totalReceived'?totalRec:h==='balance'?Math.abs(bal):'').toString().replace(/"/g,'""')}"`).join(',');
+    const vals = { accNo:c.accNo, name:c.name, city:c.city||'', phone:c.phone||'', date:c.date||'', notes:c.notes||'', totalDue, totalReceived:totalRec, balance:Math.abs(bal) };
+    return hdrs.map(h=>`"${String(vals[h]||'').replace(/"/g,'""')}"`).join(',');
   });
   dlFile([hdrs.join(','),...rows].join('\n'), 'brandex-clients-'+dateStr()+'.csv', 'text/csv');
   log('exp', `Exported ${clients.length} clients to CSV`);
@@ -1941,10 +2548,8 @@ function exportAllEntries() {
   const rows = [];
   clients.forEach(c=>{
     (c.entries||[]).forEach(e=>{
-      rows.push(hdrs.map(h=>{
-        const val = h==='accNo'?c.accNo : h==='clientName'?c.name : e[h]!==undefined?e[h]:'';
-        return `"${val.toString().replace(/"/g,'""')}"`;
-      }).join(','));
+      const vals = { accNo:c.accNo, clientName:c.name, entryType:e.type, folderNo:e.folderNo||'', date:e.date||'', stage:renderStageLabel(e.stage)||'', tmNo:e.tmNo||'', details:e.details||'', due:e.due||0, received:e.received||0 };
+      rows.push(hdrs.map(h=>`"${String(vals[h]||'').replace(/"/g,'""')}"`).join(','));
     });
   });
   dlFile([hdrs.join(','),...rows].join('\n'), 'brandex-all-entries-'+dateStr()+'.csv', 'text/csv');
@@ -1952,11 +2557,12 @@ function exportAllEntries() {
   toast('Entries exported!', 's');
 }
 
-function importCSV(event) {
+// FIX B2: importCSV uses Supabase insert
+async function importCSV(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = async e => {
     try {
       const lines = e.target.result.split('\n').filter(l=>l.trim());
       if (!lines.length) { toast('Empty CSV!', 'e'); return; }
@@ -1964,19 +2570,23 @@ function importCSV(event) {
       const nameIdx = hdrs.findIndex(h=>h==='name');
       if (nameIdx===-1) { toast('CSV needs a "name" column!', 'e'); return; }
       let added=0;
+      const inserts = [];
       for (let i=1;i<lines.length;i++) {
         const vals = parseCSVLine(lines[i]);
         const name = (vals[nameIdx]||'').replace(/^"|"$/g,'').trim();
         if (!name) continue;
         const row={};
         hdrs.forEach((h,idx)=>{ row[h]=(vals[idx]||'').replace(/^"|"$/g,'').trim(); });
-        clients.push({ id:ts(), accNo:row.accno||row['account no']||genAccNo(), name, city:row.city||'', phone:row.phone||'', notes:row.notes||'', date:row.date||today(), entries:[], createdAt:new Date().toISOString() });
+        const pfx = settings.series[0]?.prefix || 'A';
+        const accNo = row.accno || row['account no'] || genAccNo(pfx);
+        inserts.push({ client_code: accNo, client_name: name.toUpperCase(), city: (row.city||'').toUpperCase()||null, header_balance:0 });
         added++;
       }
-      save();
-      renderClients();
-      updateSidebar();
-      renderDashboard();
+      if (inserts.length > 0) {
+        const { error } = await supa.from('clients').insert(inserts);
+        if (error) { toast('Import error: ' + error.message, 'e'); return; }
+      }
+      await loadAllData();
       log('imp', `Imported ${added} clients from CSV`);
       toast('Imported '+added+' clients!', 's');
       event.target.value='';
@@ -2011,7 +2621,14 @@ function updateExpCounts() {
 // BACKUP / RESTORE
 // ══════════════════════════════════════════════
 function backupJSON() {
-  dlFile(JSON.stringify({clients,actLog,settings,version:'2.0',exportedAt:new Date().toISOString()},null,2),'brandex-backup-'+dateStr()+'.json','application/json');
+  const exportData = {
+    clients: clients.map(c=>({...c})),
+    actLog,
+    settings,
+    version:'2.1',
+    exportedAt:new Date().toISOString()
+  };
+  dlFile(JSON.stringify(exportData,null,2),'brandex-backup-'+dateStr()+'.json','application/json');
   log('exp','Full backup exported to JSON');
   toast('Backup saved!','s');
 }
@@ -2023,23 +2640,28 @@ function restoreJSON(event) {
       const data=JSON.parse(e.target.result);
       if(!data.clients){toast('Invalid backup!','e');return;}
       if(!confirm(`Restore ${data.clients.length} clients from backup? Current data will be replaced.`))return;
-      clients=data.clients;
       if(data.settings)settings=data.settings;
       if(data.actLog)actLog=data.actLog;
-      save();loadSettings();renderClients();updateSidebar();renderDashboard();
-      log('imp',`Data restored from backup: ${clients.length} clients`);
-      toast('Restored '+clients.length+' clients!','s');
+      save();
+      loadSettings();
+      renderClients();
+      updateSidebar();
+      renderDashboard();
+      log('imp',`Data restored from backup: ${data.clients.length} clients (settings only — re-import Supabase data separately)`);
+      toast('Settings & log restored!','s');
     }catch(e){toast('Invalid JSON!','e');}
   };
   reader.readAsText(file);
   event.target.value='';
 }
 function clearAllData() {
-  if(!confirm('⚠️ Delete ALL client data permanently?'))return;
-  if(!confirm(`FINAL WARNING: ${clients.length} clients and all entries will be deleted!`))return;
-  clients=[];actLog=[];
-  save();renderClients();updateSidebar();renderDashboard();
-  toast('All data cleared.','w');
+  if(!confirm('⚠️ This only clears local settings & log. Supabase data is NOT deleted.'))return;
+  if(!confirm(`FINAL WARNING: Clear local activity log and settings?`))return;
+  actLog=[];
+  save();
+  renderLog();
+  updateSidebar();
+  toast('Local data cleared.','w');
 }
 
 // ══════════════════════════════════════════════
@@ -2063,8 +2685,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 // INIT
 // ══════════════════════════════════════════════
 (async function init(){
+  ensureSeriesData();
   loadSettings();
-  log('sys','System loaded — Brandex Ledger v2.0 (Supabase)');
+  log('sys','System loaded — Brandex Ledger v2.1 (Supabase)');
   await loadAllData();
 })();
 </script>

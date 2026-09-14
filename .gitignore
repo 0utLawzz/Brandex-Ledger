@@ -1,7 +1,13 @@
-﻿# .env files
+# .env files
 .env
 .env.local
 .env.production
+
+# Data dumps and exports
+new_data_unzipped/
+migrate_to_supabase.py
+*.pdf
+*.csv
 
 # Python
 __pycache__/
