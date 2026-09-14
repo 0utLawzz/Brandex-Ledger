@@ -3,13 +3,8 @@
 .env.local
 .env.production
 
-# Data dumps and exports
-new_data_unzipped/
-migrate_to_supabase.py
-*.pdf
-*.csv
-
-# Python
+# Python scripts (migration / one-off tools)
+*.py
 __pycache__/
 *.py[cod]
 *.pyo
@@ -30,7 +25,7 @@ npm-debug.log
 Thumbs.db
 desktop.ini
 
-# Supabase local dev (not needed for static hosting)
+# Supabase local dev
 supabase/.temp/
 
 # IDE
@@ -38,3 +33,9 @@ supabase/.temp/
 .idea/
 *.swp
 *.swo
+
+# Raw migration / temp data dumps — already imported to Supabase
+new_data_unzipped/
+
+# Vercel deployment artifact
+.vercel/
