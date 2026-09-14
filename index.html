@@ -15,7 +15,12 @@
 <meta name="twitter:image" content="social-preview.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+/* Auto Caps Lock / UPPERCASE Display Rule */
+input[type="text"], textarea, select, .folder-no, .details-cell, .cc-name, .cc-no, .ph-title, .lh-title, td, th {
+  text-transform: uppercase !important;
+}
 /* ══════════════════════════════════════════
    BASE / RESET
 ══════════════════════════════════════════ */
@@ -954,7 +959,7 @@ body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var
         <div id="d-activity"></div>
       </div>
     </div>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:11px;padding:16px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:11px;padding:16px;margin-bottom:16px;">
       <div style="font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Quick Actions</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <button class="btn prim" onclick="openAddClient()">＋ New Client Account</button>
@@ -963,13 +968,31 @@ body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var
         <button class="btn purp" onclick="goPage('activity')">📜 View Log</button>
       </div>
     </div>
+
+    <!-- Analytics Charts & Visual Reports -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:11px;padding:20px;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1.5px;margin-bottom:16px;color:var(--accent);">📊 FINANCIAL & SERIES ANALYTICS REPORT</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div style="background:var(--panel);border:2px solid var(--border);border-radius:6px;padding:16px;">
+          <div style="font-size:10px;font-family:'DM Mono',monospace;font-weight:700;margin-bottom:12px;color:var(--text);">SERIES FINANCIAL COMPARISON (BILLED VS RECEIVED)</div>
+          <canvas id="chart-series-revenue" style="max-height:240px;"></canvas>
+        </div>
+        <div style="background:var(--panel);border:2px solid var(--border);border-radius:6px;padding:16px;">
+          <div style="font-size:10px;font-family:'DM Mono',monospace;font-weight:700;margin-bottom:12px;color:var(--text);">CASE STAGE DISTRIBUTION (S-1 TO S-4)</div>
+          <canvas id="chart-stage-dist" style="max-height:240px;"></canvas>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ── ALL CLIENTS ── -->
   <div class="page" id="page-clients">
-    <div class="ph"><div class="ph-title">Client Accounts</div><div class="ph-sub">Click a card to open the full ledger — all entries live there</div></div>
+    <div class="ph"><div class="ph-title">Client Accounts</div><div class="ph-sub">Filter by Series (Series A, Series X) or search accounts</div></div>
     <div class="tb">
       <input class="srch" placeholder="🔍  Search by account no, name, city..." oninput="renderClients(this.value)" id="client-search">
+      <select class="fsel" id="client-series-filter" onchange="renderClients()" style="min-width:150px;font-weight:700;height:38px;padding:0 10px;">
+        <option value="ALL">ALL SERIES</option>
+      </select>
       <button class="btn prim" onclick="openAddClient()">＋ New Client</button>
       <button class="btn ok" onclick="exportCSV()">⬇ Export CSV</button>
       <button class="btn warn" onclick="document.getElementById('csv-imp').click()">⬆ Import</button>
@@ -988,10 +1011,9 @@ body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var
 
   <!-- ── ACTIVITY LOG ── -->
   <div class="page" id="page-activity">
-    <div class="ph"><div class="ph-title">Activity Log</div><div class="ph-sub">Every action is recorded here</div></div>
+    <div class="ph"><div class="ph-title">AUDIT ACTIVITY LOG (IMMUTABLE)</div><div class="ph-sub">Permanent, unalterable log of all system actions, user updates, and payments</div></div>
     <div class="tb">
-      <input class="srch" placeholder="🔍  Filter log..." oninput="renderLog(this.value)">
-      <button class="btn del" onclick="clearLog()">🗑 Clear Log</button>
+      <input class="srch" placeholder="🔍  Filter log by action, user, client..." oninput="renderLog(this.value)" id="log-search-input">
     </div>
     <div class="log-list" id="log-list"></div>
   </div>
@@ -1279,55 +1301,48 @@ function saveSettings_local() {
   localStorage.setItem('bla_settings', JSON.stringify(settings));
 }
 
-// ── Activity Log (localStorage) ──
-function log(type, msg) {
-  actLog.unshift({ type, msg, ts: new Date().toISOString() });
-  if (actLog.length > 500) actLog.pop();
+// Global Auto UPPERCASE listener for typing
+document.addEventListener('input', function(ev) {
+  if (ev.target && (ev.target.tagName === 'INPUT' && (ev.target.type === 'text' || !ev.target.type) || ev.target.tagName === 'TEXTAREA')) {
+    const s = ev.target.selectionStart, e = ev.target.selectionEnd;
+    if (typeof ev.target.value === 'string') {
+      ev.target.value = ev.target.value.toUpperCase();
+      if (s !== null && e !== null) {
+        try { ev.target.setSelectionRange(s, e); } catch(err){}
+      }
+    }
+  }
+});
+
+// ── Activity Log (Immutable & Detailed Audit Trail) ──
+function log(type, msg, clientId = '') {
+  const entry = {
+    ts: new Date().toISOString(),
+    type: (type || 'INFO').toUpperCase(),
+    user: 'SYSTEM ADMIN',
+    clientId: clientId ? clientId.toUpperCase() : 'SYSTEM',
+    msg: (msg || '').toUpperCase()
+  };
+  actLog.unshift(entry);
+  if (actLog.length > 2000) actLog.pop(); // Keep up to 2000 audit records
+  localStorage.setItem('bla_log_v2', JSON.stringify(actLog));
   save();
   const nb = document.getElementById('nb-log');
   if (nb) nb.textContent = actLog.length;
 }
 
-// ── Load ALL clients + their entries from Supabase ──
-async function loadAllData() {
-  showLoadingOverlay(true);
-  try {
-    const { data: clientRows, error: ce } = await supa
-      .from('clients').select('*').order('client_code');
-    if (ce) throw ce;
-
-    const { data: entryRows, error: ee } = await supa
-      .from('ledger_entries').select('*').order('entry_date', { ascending: true });
-    if (ee) throw ee;
-
-    const entryMap = {};
-    (entryRows || []).forEach(e => {
-      if (!entryMap[e.client_code]) entryMap[e.client_code] = [];
-      entryMap[e.client_code].push(dbEntryToLocal(e));
-    });
-
-    clients = (clientRows || []).map(c => dbClientToLocal(c, entryMap[c.client_code] || []));
-    renderAll();
-  } catch(err) {
-    toast('Failed to load data: ' + (err.message || err), 'e');
-    console.error(err);
-  } finally {
-    showLoadingOverlay(false);
-  }
-}
-
 // ── Shape converters ──
 function dbClientToLocal(c, entries) {
   return {
-    id:       c.client_code,
-    accNo:    c.client_code,
-    name:     c.client_name || '(No Name)',
-    city:     c.city || '',
+    id:       (c.client_code || '').toUpperCase(),
+    accNo:    (c.client_code || '').toUpperCase(),
+    name:     (c.client_name || '(NO NAME)').toUpperCase(),
+    city:     (c.city || '').toUpperCase(),
     phone:    '',
-    notes:    [c.bank_name, c.bank_account, c.bank_iban].filter(Boolean).join(' | '),
-    bankName: c.bank_name || '',
-    bankAcc:  c.bank_account || '',
-    bankIban: c.bank_iban || '',
+    notes:    [c.bank_name, c.bank_account, c.bank_iban].filter(Boolean).join(' | ').toUpperCase(),
+    bankName: (c.bank_name || '').toUpperCase(),
+    bankAcc:  (c.bank_account || '').toUpperCase(),
+    bankIban: (c.bank_iban || '').toUpperCase(),
     date:     c.created_at ? c.created_at.slice(0,10) : '',
     headerBalance: c.header_balance || 0,
     entries:  entries,
@@ -1336,18 +1351,20 @@ function dbClientToLocal(c, entries) {
 }
 function dbEntryToLocal(e) {
   const isPayment = e.entry_type === 'payment';
+  const detailsStr = (e.details || '').toUpperCase();
+  const isCompleted = detailsStr.includes('[✓ COMPLETED]') || Boolean(e.is_completed);
   return {
     id:       e.id,
     type:     isPayment ? 'pay' : 'case',
     date:     e.entry_date || '',
-    folderNo: e.folder_no || '',
-    stage:    e.stage || '',
-    tmNo:     e.tm_no || '',
-    details:  e.details || '',
+    folderNo: (e.folder_no || '').toUpperCase(),
+    stage:    (e.stage || '').toUpperCase(),
+    tmNo:     (e.tm_no || '').toUpperCase(),
+    details:  detailsStr,
     due:      e.amount_due || 0,
     received: e.amount_received || 0,
     runBal:   e.running_balance || 0,
-    completed: e.is_completed || false,
+    completed: isCompleted,
   };
 }
 
@@ -1497,6 +1514,22 @@ function populateSeriesSelects() {
     ).join('');
     if (prev) sel.value = prev;
   });
+
+  const filterSel = document.getElementById('client-series-filter');
+  if (filterSel) {
+    const prevFilter = filterSel.value || 'ALL';
+    const prefixes = new Set(['ALL']);
+    settings.series.forEach(s => prefixes.add(s.prefix.toUpperCase()));
+    clients.forEach(c => {
+      const pfx = (c.accNo.split('-')[0] || c.accNo.slice(0,1)).toUpperCase();
+      if (pfx) prefixes.add(pfx);
+    });
+    filterSel.innerHTML = Array.from(prefixes).map(p =>
+      `<option value="${p}">${p === 'ALL' ? 'ALL SERIES (SHOW ALL)' : 'SERIES ' + p}</option>`
+    ).join('');
+    if (Array.from(prefixes).includes(prevFilter)) filterSel.value = prevFilter;
+  }
+
   updatePrevw();
 }
 
@@ -1704,17 +1737,29 @@ async function deleteClient(id) {
 // ── CLIENT CARDS ──
 function renderClients(q = '') {
   const grid = document.getElementById('clients-grid');
+  if (!grid) return;
+  const seriesSel = document.getElementById('client-series-filter');
+  const selectedSeries = seriesSel ? seriesSel.value : 'ALL';
+  q = (q || document.getElementById('client-search')?.value || '').trim();
+
   let data = clients;
+  if (selectedSeries !== 'ALL') {
+    data = data.filter(c => {
+      const pfx = (c.accNo.split('-')[0] || c.accNo.slice(0,1)).toUpperCase();
+      return pfx === selectedSeries;
+    });
+  }
   if (q) {
     const lq = q.toLowerCase();
     data = data.filter(c => c.name.toLowerCase().includes(lq) || c.accNo.toLowerCase().includes(lq) || (c.city || '').toLowerCase().includes(lq));
   }
   if (!data.length) {
-    grid.innerHTML = `<div class="empty" style="grid-column:1/-1;"><div class="empty-ico">📂</div><div class="empty-t">${q ? 'No results' : 'No clients yet'}</div><div class="empty-s">${q ? 'Try different search' : 'Click "+ New Client" to start'}</div></div>`;
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1;"><div class="empty-ico">📂</div><div class="empty-t">${q || selectedSeries !== 'ALL' ? 'No results for filter' : 'No clients yet'}</div><div class="empty-s">${q || selectedSeries !== 'ALL' ? 'Try changing search or series filter' : 'Click "+ New Client" to start'}</div></div>`;
     document.getElementById('nb-clients').textContent = clients.length;
     return;
   }
   grid.innerHTML = data.map(c => {
+    const pfx = (c.accNo.split('-')[0] || c.accNo.slice(0,1)).toUpperCase();
     const bal = clientBalance(c);
     const balClass = bal > 0 ? 'neg' : bal < 0 ? 'pos' : 'zero';
     const balSign = bal > 0 ? '↑ Outstanding' : bal < 0 ? '↓ Overpaid' : '✓ Cleared';
@@ -1723,7 +1768,10 @@ function renderClients(q = '') {
     return `<div class="client-card" onclick="openLedger('${c.id}')">
       <div class="cc-top">
         <div class="cc-no">${c.accNo}</div>
-        <div class="cc-city">${c.city || '—'}</div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <span class="tag" style="font-size:7px;padding:2px 6px;">SERIES ${pfx}</span>
+          <div class="cc-city">${c.city || '—'}</div>
+        </div>
       </div>
       <div class="cc-name">${c.name}</div>
       <div class="cc-divider"></div>
@@ -2016,10 +2064,9 @@ async function saveCaseEntry() {
     amount_due:      due > 0 ? due : null,
     amount_received: received > 0 ? received : null,
     running_balance: null,
-    is_completed:    false,
   });
   if (error) { toast('Error saving entry: ' + error.message, 'e'); return; }
-  log('add', `Case entry added to ${c.accNo} (${c.name}): ${details} | Due: PKR ${fmt(due)}`);
+  log('ADD', `Case entry added to ${c.accNo} (${c.name}): ${details} | Due: PKR ${fmt(due)}`, activeClientId);
   closeMo('mo-case');
   await loadAllData();
   openLedger(activeClientId);
@@ -2080,7 +2127,7 @@ async function saveEditCaseEntry() {
     amount_received: received > 0 ? received : null,
   }).eq('id', window._editEntryId);
   if (error) { toast('Error updating entry: ' + error.message, 'e'); return; }
-  log('edit', `Entry edited: ${details}`);
+  log('EDIT', `Entry edited: ${details}`, window._editEntryClientId);
   closeMo('mo-case');
   // Reset save button
   document.getElementById('mo-case-save-btn').textContent = '➕ Add Entry';
@@ -2102,7 +2149,7 @@ async function saveEditPayEntry() {
     tm_no:           refVal || null,
   }).eq('id', window._editEntryId);
   if (error) { toast('Error updating payment: ' + error.message, 'e'); return; }
-  log('edit', `Payment edited: PKR ${fmt(amount)}`);
+  log('EDIT', `Payment edited: PKR ${fmt(amount)}`, window._editEntryClientId);
   closeMo('mo-pay');
   // Reset pay modal button
   const saveBtn = document.querySelector('#mo-pay .btn.ok');
@@ -2141,10 +2188,9 @@ async function savePayEntry() {
     amount_due:      null,
     amount_received: amount,
     running_balance: null,
-    is_completed:    false,
   });
   if (error) { toast('Error saving payment: ' + error.message, 'e'); return; }
-  log('pay', `Payment received: ${c.accNo} (${c.name}) — PKR ${fmt(amount)} via ${details}${refVal ? ' ref: '+refVal : ''}`);
+  log('PAYMENT', `Payment received: ${c.accNo} (${c.name}) — PKR ${fmt(amount)} via ${details}${refVal ? ' ref: '+refVal : ''}`, activeClientId);
   closeMo('mo-pay');
   await loadAllData();
   openLedger(activeClientId);
@@ -2157,13 +2203,19 @@ async function toggleComplete(clientId, entryId) {
   if (!c) return;
   const e = (c.entries || []).find(x => x.id === entryId);
   if (!e) return;
-  const newVal = !e.completed;
-  const { error } = await supa.from('ledger_entries').update({ is_completed: newVal }).eq('id', entryId);
+  const isCurrentlyCompleted = (e.details || '').includes('[✓ COMPLETED]');
+  let newDetails = e.details || '';
+  if (isCurrentlyCompleted) {
+    newDetails = newDetails.replace(/\s*\[✓ COMPLETED\]/g, '').trim();
+  } else {
+    newDetails = (newDetails + ' [✓ COMPLETED]').trim();
+  }
+  const { error } = await supa.from('ledger_entries').update({ details: newDetails }).eq('id', entryId);
   if (error) { toast('Error updating: ' + error.message, 'e'); return; }
-  log('edit', `Entry marked ${newVal ? 'complete' : 'incomplete'}: ${e.details}`);
+  log('COMPLETE', `Entry marked ${!isCurrentlyCompleted ? 'COMPLETED' : 'INCOMPLETE'}: ${newDetails}`, clientId);
   await loadAllData();
   openLedger(clientId);
-  toast(newVal ? '✓ Marked Complete' : 'Marked Incomplete', 's');
+  toast(!isCurrentlyCompleted ? '✓ Marked Complete' : 'Marked Incomplete', 's');
 }
 
 // ── DELETE ENTRY ──
@@ -2441,8 +2493,11 @@ function doPrintRow() {
 }
 
 // ══════════════════════════════════════════════
-// DASHBOARD
+// DASHBOARD & ANALYTICS CHARTS
 // ══════════════════════════════════════════════
+let seriesChartInstance = null;
+let stageChartInstance = null;
+
 function renderDashboard() {
   const totalClients = clients.length;
   const totalEntries = clients.reduce((s,c)=>s+(c.entries||[]).length,0);
@@ -2468,37 +2523,132 @@ function renderDashboard() {
   const recentLog = actLog.slice(0,6);
   document.getElementById('d-activity').innerHTML = recentLog.length ? recentLog.map(l=>`
     <div style="display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(42,47,58,.3);">
-      <div class="log-dot ${l.type}" style="margin-top:4px;"></div>
-      <span style="font-size:10px;flex:1;line-height:1.4;">${l.msg}</span>
+      <span class="tag" style="font-size:7px;padding:1px 5px;">${(l.type||'INFO').toUpperCase()}</span>
+      <span style="font-size:10px;flex:1;line-height:1.4;font-family:'DM Mono',monospace;">${(l.msg||'').toUpperCase()}</span>
     </div>`).join('') : '<div style="font-size:10px;color:var(--muted);padding:6px 0;">No activity yet</div>';
+
+  renderCharts();
+}
+
+function renderCharts() {
+  const seriesCanvas = document.getElementById('chart-series-revenue');
+  const stageCanvas = document.getElementById('chart-stage-dist');
+  if (!seriesCanvas || !stageCanvas || typeof Chart === 'undefined') return;
+
+  // 1. Group financials by series prefix
+  const seriesStats = {};
+  clients.forEach(c => {
+    const pfx = (c.accNo.split('-')[0] || c.accNo.slice(0,1) || 'A').toUpperCase();
+    if (!seriesStats[pfx]) seriesStats[pfx] = { due: 0, received: 0 };
+    (c.entries || []).forEach(e => {
+      if (e.type === 'case') seriesStats[pfx].due += (e.due || 0);
+      if (e.type === 'pay' || e.type === 'case') seriesStats[pfx].received += (e.received || 0);
+    });
+  });
+
+  const seriesKeys = Object.keys(seriesStats).sort();
+  const seriesLabels = seriesKeys.map(p => 'SERIES ' + p);
+  const seriesDue = seriesKeys.map(p => seriesStats[p].due);
+  const seriesRec = seriesKeys.map(p => seriesStats[p].received);
+
+  if (seriesChartInstance) seriesChartInstance.destroy();
+  seriesChartInstance = new Chart(seriesCanvas, {
+    type: 'bar',
+    data: {
+      labels: seriesLabels.length ? seriesLabels : ['SERIES A'],
+      datasets: [
+        { label: 'TOTAL BILLED (PKR)', data: seriesDue, backgroundColor: '#C94A00' },
+        { label: 'TOTAL COLLECTED (PKR)', data: seriesRec, backgroundColor: '#0D9970' }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#0C0C0C', font: { family: 'DM Mono', size: 10 } } } },
+      scales: {
+        x: { ticks: { color: '#0C0C0C', font: { family: 'DM Mono', size: 10 } } },
+        y: { ticks: { color: '#0C0C0C', font: { family: 'DM Mono', size: 10 } } }
+      }
+    }
+  });
+
+  // 2. Count stage distribution
+  const stageCounts = { 'S-1': 0, 'S-2': 0, 'S-3': 0, 'S-4': 0 };
+  clients.forEach(c => {
+    (c.entries || []).forEach(e => {
+      if (e.type === 'case' && e.stage) {
+        const s = e.stage.replace(/^S(\d)$/, 'S-$1').toUpperCase();
+        if (stageCounts[s] !== undefined) stageCounts[s]++;
+      }
+    });
+  });
+
+  if (stageChartInstance) stageChartInstance.destroy();
+  stageChartInstance = new Chart(stageCanvas, {
+    type: 'doughnut',
+    data: {
+      labels: ['STAGE S-1', 'STAGE S-2', 'STAGE S-3', 'STAGE S-4'],
+      datasets: [{
+        data: [stageCounts['S-1'], stageCounts['S-2'], stageCounts['S-3'], stageCounts['S-4']],
+        backgroundColor: ['#C94A00', '#0D9970', '#D4A800', '#0A6B52']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'right', labels: { color: '#0C0C0C', font: { family: 'DM Mono', size: 10 } } } }
+    }
+  });
 }
 
 // ══════════════════════════════════════════════
-// ACTIVITY LOG
+// AUDIT ACTIVITY LOG (IMMUTABLE)
 // ══════════════════════════════════════════════
 function renderLog(q='') {
-  const list = document.getElementById('log-list');
+  const container = document.getElementById('log-list');
+  if (!container) return;
   let data = actLog;
-  if (q) { const lq=q.toLowerCase(); data=data.filter(l=>l.msg.toLowerCase().includes(lq)); }
+  q = (q || document.getElementById('log-search-input')?.value || '').trim().toUpperCase();
+  if (q) {
+    data = data.filter(l =>
+      (l.msg || '').toUpperCase().includes(q) ||
+      (l.type || '').toUpperCase().includes(q) ||
+      (l.user || '').toUpperCase().includes(q) ||
+      (l.clientId || '').toUpperCase().includes(q)
+    );
+  }
   if (!data.length) {
-    list.innerHTML = `<div class="empty"><div class="empty-ico">📜</div><div class="empty-t">${q?'No matches':'No activity yet'}</div></div>`;
+    container.innerHTML = `<div class="empty"><div class="empty-ico">📜</div><div class="empty-t">${q ? 'NO AUDIT MATCHES FOUND' : 'NO AUDIT LOGS RECORDED'}</div></div>`;
+    document.getElementById('nb-log').textContent = actLog.length;
     return;
   }
-  list.innerHTML = data.map(l=>`
-    <div class="log-item">
-      <div class="log-dot ${l.type}"></div>
-      <div class="log-msg">${l.msg}</div>
-      <div class="log-time">${fmtDateTime(l.ts)}</div>
-    </div>`).join('');
+  container.innerHTML = `
+    <div style="overflow-x:auto;background:var(--panel);border:2px solid var(--border);border-radius:6px;">
+      <table class="lt">
+        <thead>
+          <tr>
+            <th>TIMESTAMP</th>
+            <th>OPERATOR</th>
+            <th>ACTION</th>
+            <th>CLIENT CODE</th>
+            <th>AUDIT DETAILS</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.map(l => `
+            <tr>
+              <td style="font-family:'DM Mono',monospace;font-size:10px;white-space:nowrap;color:#555;">${l.ts ? l.ts.replace('T',' ').slice(0,19) : '—'}</td>
+              <td style="font-weight:700;color:var(--accent);font-family:'DM Mono',monospace;">${l.user || 'SYSTEM ADMIN'}</td>
+              <td><span class="stage-b s1" style="font-size:8px;">${(l.type || 'INFO').toUpperCase()}</span></td>
+              <td style="font-weight:700;font-family:'Bebas Neue',sans-serif;font-size:16px;">${(l.clientId || 'SYSTEM').toUpperCase()}</td>
+              <td style="font-family:'DM Mono',monospace;font-size:11px;">${(l.msg || '').toUpperCase()}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
   document.getElementById('nb-log').textContent = actLog.length;
-}
-
-function clearLog() {
-  if (!confirm('Clear all activity logs?')) return;
-  actLog = [];
-  save(); // FIX B1/B6
-  renderLog();
-  toast('Log cleared.', 'w');
 }
 
 // ══════════════════════════════════════════════
