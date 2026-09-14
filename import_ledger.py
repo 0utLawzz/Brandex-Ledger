@@ -15,19 +15,24 @@ def process_excel():
     df = pd.read_excel('Ledger (CONSULTANTS).xlsx', header=1) # The actual headers are probably on row 2 (index 1)
     
     clients = []
+    skipped_count = 0
     
     for index, row in df.iterrows():
         ledger_no = row.get('LEDGER NO')
         name = row.get('NAME')
         balance = row.get('BALANCE')
         
+        # Skip rows where LEDGER NO or NAME is missing/empty
         if pd.isna(ledger_no) or pd.isna(name):
+            skipped_count += 1
             continue
             
         ledger_no = str(ledger_no).strip()
         name = str(name).strip()
         
-        if not ledger_no or not name:
+        # Skip empty strings after stripping
+        if not ledger_no or not name or ledger_no.lower() == 'nan' or name.lower() == 'nan':
+            skipped_count += 1
             continue
             
         due_amount = 0
@@ -65,10 +70,13 @@ def process_excel():
             "createdAt": datetime.now().isoformat()
         }
         clients.append(client)
+            
+    print(f"Processing complete. Skipped {skipped_count} rows with missing/empty data.")
+    print(f"Total valid clients imported: {len(clients)}")
         
     backup_data = {
         "clients": clients,
-        "actLog": [{"type": "sys", "msg": f"Imported {len(clients)} clients from Excel", "ts": datetime.now().isoformat()}],
+        "actLog": [{"type": "sys", "msg": f"Imported {len(clients)} clients from Excel (skipped {skipped_count} invalid rows)", "ts": datetime.now().isoformat()}],
         "settings": {"s1": 9000, "s2": 10000, "s3": 10500, "s4": 15000, "prefix": "A"},
         "version": "2.0",
         "exportedAt": datetime.now().isoformat()
