@@ -1143,40 +1143,126 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 <!-- TOAST -->
 <div class="toast" id="toast-el"></div>
 
-<script src="initial_data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ══════════════════════════════════════════════
-// DATA LAYER
+// SUPABASE DATA LAYER
 // ══════════════════════════════════════════════
-let clients  = load('bla_clients', []);
-let actLog   = load('bla_log', []);
-let settings = load('bla_settings', { s1:9000, s2:10000, s3:10500, s4:15000, prefix:'A' });
+const SUPA_URL = 'https://sygfnemgebuhtqpmedbg.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5Z2ZuZW1nZWJ1aHRxcG1lZGJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgwMjgxODEsImV4cCI6MjA3MzYwNDE4MX0.OEbCOE-xmGVq2qK-3Y0h6oV4oM3oK4-iqOZM38V2jCQ';
+const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
 
-// Initialize from default data if empty or outdated test data
-if ((clients.length <= 5 || !clients.length) && typeof defaultData !== 'undefined' && defaultData.clients && defaultData.clients.length > clients.length) {
-  clients = defaultData.clients;
-  if (defaultData.actLog) actLog = defaultData.actLog;
-  save();
-}
+let clients  = [];          // loaded from Supabase
+let actLog   = JSON.parse(localStorage.getItem('bla_log') || '[]');
+let settings = JSON.parse(localStorage.getItem('bla_settings') || JSON.stringify({ s1:9000, s2:10000, s3:10500, s4:15000, prefix:'A' }));
+let activeClientId = null;  // currently open ledger (client_code string)
 
-let activeClientId = null; // currently open ledger
-
-function load(k, def) {
-  try { return JSON.parse(localStorage.getItem(k)) || def; }
-  catch { return def; }
-}
-function save() {
-  localStorage.setItem('bla_clients', JSON.stringify(clients));
-  localStorage.setItem('bla_log', JSON.stringify(actLog));
+// ── Save settings to localStorage only ──
+function saveSettings_local() {
   localStorage.setItem('bla_settings', JSON.stringify(settings));
 }
 
-// ── Activity Log ──
+// ── Activity Log (localStorage) ──
 function log(type, msg) {
   actLog.unshift({ type, msg, ts: new Date().toISOString() });
   if (actLog.length > 500) actLog.pop();
-  save();
-  document.getElementById('nb-log').textContent = actLog.length;
+  localStorage.setItem('bla_log', JSON.stringify(actLog));
+  const nb = document.getElementById('nb-log');
+  if (nb) nb.textContent = actLog.length;
+}
+
+// ── Load ALL clients + their entries from Supabase ──
+async function loadAllData() {
+  showLoadingOverlay(true);
+  try {
+    // Fetch clients
+    const { data: clientRows, error: ce } = await supa
+      .from('clients')
+      .select('*')
+      .order('client_code');
+    if (ce) throw ce;
+
+    // Fetch all entries in one query
+    const { data: entryRows, error: ee } = await supa
+      .from('ledger_entries')
+      .select('*')
+      .order('entry_date', { ascending: true });
+    if (ee) throw ee;
+
+    // Group entries by client_code
+    const entryMap = {};
+    (entryRows || []).forEach(e => {
+      if (!entryMap[e.client_code]) entryMap[e.client_code] = [];
+      entryMap[e.client_code].push(dbEntryToLocal(e));
+    });
+
+    // Build local clients array (same shape the rest of the app expects)
+    clients = (clientRows || []).map(c => dbClientToLocal(c, entryMap[c.client_code] || []));
+
+    renderAll();
+  } catch(err) {
+    toast('Failed to load data: ' + (err.message || err), 'e');
+    console.error(err);
+  } finally {
+    showLoadingOverlay(false);
+  }
+}
+
+// ── Shape converters ──
+function dbClientToLocal(c, entries) {
+  return {
+    id:       c.client_code,   // use client_code as id throughout
+    accNo:    c.client_code,
+    name:     c.client_name || '(No Name)',
+    city:     c.city || '',
+    phone:    '',
+    notes:    [c.bank_name, c.bank_account, c.bank_iban].filter(Boolean).join(' | '),
+    date:     c.created_at ? c.created_at.slice(0,10) : '',
+    headerBalance: c.header_balance || 0,
+    entries:  entries,
+    _dbId:    c.id,
+  };
+}
+function dbEntryToLocal(e) {
+  const isPayment = e.entry_type === 'payment';
+  return {
+    id:       e.id,
+    type:     isPayment ? 'pay' : 'case',
+    date:     e.entry_date || '',
+    folderNo: e.folder_no || '',
+    stage:    e.stage || '',
+    tmNo:     e.tm_no || '',
+    details:  e.details || '',
+    due:      e.amount_due || 0,
+    received: e.amount_received || 0,
+    runBal:   e.running_balance || 0,
+  };
+}
+
+// ── Loading overlay ──
+function showLoadingOverlay(show) {
+  let el = document.getElementById('supa-loading');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'supa-loading';
+    el.style.cssText = 'position:fixed;inset:0;background:rgba(240,232,208,.92);z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:Bebas Neue,sans-serif;font-size:28px;color:#0C0C0C;';
+    el.innerHTML = '<div style="width:44px;height:44px;border:5px solid #C94A00;border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;"></div><div>LOADING DATABASE…</div>';
+    if (!document.getElementById('spin-kf')) {
+      const s = document.createElement('style'); s.id='spin-kf';
+      s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+      document.head.appendChild(s);
+    }
+    document.body.appendChild(el);
+  }
+  el.style.display = show ? 'flex' : 'none';
+}
+
+function renderAll() {
+  renderClients();
+  renderDashboard();
+  updateSidebar();
+  const nb = document.getElementById('nb-log');
+  if (nb) nb.textContent = actLog.length;
 }
 
 // ══════════════════════════════════════════════
@@ -1212,7 +1298,7 @@ function saveSettings() {
   settings.s3 = parseFloat(document.getElementById('st-s3').value) || 10500;
   settings.s4 = parseFloat(document.getElementById('st-s4').value) || 15000;
   settings.prefix = (document.getElementById('st-prefix').value || 'A').toUpperCase();
-  save();
+  saveSettings_local();
   updateStageOpts();
 }
 function updatePrevw() {
@@ -1276,7 +1362,7 @@ function openEditClient(id) {
   openMo('mo-client');
 }
 
-function saveClient() {
+async function saveClient() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { toast('Client name is required!', 'e'); return; }
   const city  = document.getElementById('f-city').value.trim();
@@ -1286,34 +1372,39 @@ function saveClient() {
   const accNo = document.getElementById('f-accno').value;
 
   if (window._editClientId) {
-    const idx = clients.findIndex(c => c.id === window._editClientId);
-    if (idx !== -1) {
-      clients[idx] = { ...clients[idx], name, city, phone, notes, date };
-      log('edit', `Client edited: ${accNo} — ${name}`);
-      toast('Client updated!', 's');
-    }
+    // UPDATE
+    const { error } = await supa.from('clients').update({
+      client_name: name.toUpperCase(),
+      city: city.toUpperCase() || null,
+    }).eq('client_code', window._editClientId);
+    if (error) { toast('Error saving: ' + error.message, 'e'); return; }
+    log('edit', `Client edited: ${accNo} — ${name}`);
+    toast('Client updated!', 's');
   } else {
-    clients.push({ id: ts(), accNo, name, city, phone, notes, date, entries: [], createdAt: new Date().toISOString() });
+    // INSERT new client
+    const { error } = await supa.from('clients').insert({
+      client_code: accNo,
+      client_name: name.toUpperCase(),
+      city: city.toUpperCase() || null,
+      header_balance: 0,
+    });
+    if (error) { toast('Error creating: ' + error.message, 'e'); return; }
     log('add', `New client added: ${accNo} — ${name} (${city})`);
     toast('Client created: ' + accNo, 's');
   }
-  save();
   closeMo('mo-client');
-  renderClients();
-  renderDashboard();
-  updateSidebar();
+  await loadAllData();
 }
 
-function deleteClient(id) {
+async function deleteClient(id) {
   const c = clients.find(x => x.id === id);
   if (!c) return;
   if (!confirm(`Delete client "${c.name}" (${c.accNo}) and ALL their entries?\nThis cannot be undone.`)) return;
-  clients = clients.filter(x => x.id !== id);
+  const { error } = await supa.from('clients').delete().eq('client_code', id);
+  if (error) { toast('Error deleting: ' + error.message, 'e'); return; }
   log('del', `Client deleted: ${c.accNo} — ${c.name}`);
-  save();
-  renderClients();
-  renderDashboard();
-  updateSidebar();
+  await loadAllData();
+  goPage('clients');
   toast('Client deleted.', 'w');
 }
 
@@ -1502,33 +1593,30 @@ function openAddCase() {
   openMo('mo-case');
 }
 
-function saveCaseEntry() {
+async function saveCaseEntry() {
   const c = clients.find(x => x.id === activeClientId);
   if (!c) return;
   const details = document.getElementById('ce-details').value.trim();
   if (!details) { toast('Details are required!', 'e'); return; }
 
-  const entry = {
-    id: ts(),
-    type: 'case',
-    folderNo: document.getElementById('ce-folder').value.trim(),
-    date: document.getElementById('ce-date').value,
-    stage: document.getElementById('ce-stage').value,
-    tmNo: document.getElementById('ce-tm').value.trim(),
-    details,
-    due: parseFloat(document.getElementById('ce-due').value) || 0,
-    received: parseFloat(document.getElementById('ce-received').value) || 0,
-    createdAt: new Date().toISOString()
-  };
-
-  if (!c.entries) c.entries = [];
-  c.entries.push(entry);
-  save();
-  log('add', `Case entry added to ${c.accNo} (${c.name}): ${entry.folderNo||'—'} — ${entry.details} | Due: PKR ${fmt(entry.due)}`);
+  const due      = parseFloat(document.getElementById('ce-due').value) || 0;
+  const received = parseFloat(document.getElementById('ce-received').value) || 0;
+  const { error } = await supa.from('ledger_entries').insert({
+    client_code:     activeClientId,
+    entry_date:      document.getElementById('ce-date').value || null,
+    folder_no:       document.getElementById('ce-folder').value.trim() || null,
+    stage:           document.getElementById('ce-stage').value || null,
+    tm_no:           document.getElementById('ce-tm').value.trim() || null,
+    details:         details.toUpperCase(),
+    amount_due:      due > 0 ? due : null,
+    amount_received: received > 0 ? received : null,
+    running_balance: null,
+  });
+  if (error) { toast('Error saving entry: ' + error.message, 'e'); return; }
+  log('add', `Case entry added to ${c.accNo} (${c.name}): ${details} | Due: PKR ${fmt(due)}`);
   closeMo('mo-case');
-  renderLedger(c);
-  updateSidebar();
-  renderDashboard();
+  await loadAllData();
+  openLedger(activeClientId);
   toast('Case entry added!', 's');
 }
 
@@ -1540,44 +1628,39 @@ function openAddPay() {
   openMo('mo-pay');
 }
 
-function savePayEntry() {
+async function savePayEntry() {
   const c = clients.find(x => x.id === activeClientId);
   if (!c) return;
   const amount = parseFloat(document.getElementById('pe-amount').value);
   if (!amount || amount <= 0) { toast('Enter a valid amount!', 'e'); return; }
+  const details = document.getElementById('pe-details').value.trim() || 'PAYMENT RECEIVED';
 
-  const entry = {
-    id: ts(),
-    type: 'pay',
-    date: document.getElementById('pe-date').value,
-    details: document.getElementById('pe-details').value.trim() || 'PAYMENT RECEIVED',
-    received: amount,
-    createdAt: new Date().toISOString()
-  };
-
-  if (!c.entries) c.entries = [];
-  c.entries.push(entry);
-  save();
-  log('pay', `Payment received: ${c.accNo} (${c.name}) — PKR ${fmt(amount)} via ${entry.details}`);
+  const { error } = await supa.from('ledger_entries').insert({
+    client_code:     activeClientId,
+    entry_date:      document.getElementById('pe-date').value || null,
+    details:         details.toUpperCase(),
+    amount_due:      null,
+    amount_received: amount,
+    running_balance: null,
+  });
+  if (error) { toast('Error saving payment: ' + error.message, 'e'); return; }
+  log('pay', `Payment received: ${c.accNo} (${c.name}) — PKR ${fmt(amount)} via ${details}`);
   closeMo('mo-pay');
-  renderLedger(c);
-  updateSidebar();
-  renderDashboard();
+  await loadAllData();
+  openLedger(activeClientId);
   toast('Payment added: PKR ' + fmt(amount), 's');
 }
 
 // ── DELETE ENTRY ──
-function delEntry(clientId, entryId) {
+async function delEntry(clientId, entryId) {
   if (!confirm('Delete this entry? Running balance will update.')) return;
   const c = clients.find(x => x.id === clientId);
-  if (!c) return;
-  const entry = (c.entries||[]).find(e=>e.id===entryId);
-  c.entries = (c.entries||[]).filter(e => e.id !== entryId);
-  save();
-  log('del', `Entry deleted from ${c.accNo} (${c.name}): ${entry ? entry.details : entryId}`);
-  renderLedger(c);
-  updateSidebar();
-  renderDashboard();
+  const entry = c ? (c.entries||[]).find(e=>e.id===entryId) : null;
+  const { error } = await supa.from('ledger_entries').delete().eq('id', entryId);
+  if (error) { toast('Error deleting entry: ' + error.message, 'e'); return; }
+  log('del', `Entry deleted from ${clientId}: ${entry ? entry.details : entryId}`);
+  await loadAllData();
+  openLedger(clientId);
   toast('Entry deleted.', 'w');
 }
 
@@ -1956,11 +2039,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
-(function init(){
+(async function init(){
   loadSettings();
-  updateSidebar();
-  renderDashboard();
-  log('sys','System loaded — Brandex Ledger v2.0');
+  log('sys','System loaded — Brandex Ledger v2.0 (Supabase)');
+  await loadAllData();
 })();
 </script>
 </body>

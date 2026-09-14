@@ -14,7 +14,7 @@ from pathlib import Path
 
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(encoding='utf-8-sig')
 except ImportError:
     pass
 
@@ -60,7 +60,9 @@ def extract_bank_info(header_rows):
 def parse_row(row, client_code):
     if not isinstance(row, list) or len(row) < 7:
         return None
-    entry_date      = row[0] if row[0] else None
+    raw_date = str(row[0]).strip() if row[0] else None
+    import re as _re
+    entry_date = raw_date if raw_date and _re.match(r"^\d{4}-\d{2}-\d{2}$", raw_date) else None
     folder_no       = str(row[1]).strip() if row[1] is not None else None
     stage           = str(row[2]).strip().upper() if row[2] else None
     tm_no           = str(row[3]).strip() if row[3] and str(row[3]).strip() not in ("", " ") else None
@@ -92,7 +94,7 @@ def main():
     entries_rows = []
 
     for sheet_key, c in data.items():
-        code = (c.get("client_code") or sheet_key).strip()
+        code = sheet_key.strip()  # Always use sheet key - client_code field has duplicates
         name = (c.get("client_name") or "").strip() or None
         bank_name, bank_account, bank_iban = extract_bank_info(c.get("header_rows", {}))
         clients_rows.append({
@@ -127,3 +129,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
