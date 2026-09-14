@@ -3,17 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brandex Law Associates — Ledger System</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<!-- FULL CONTENT LOADED FROM LOCAL FILE - see follow-up if truncated -->
+<title>Brandex Ledger — Loading</title>
+<style>
+body{margin:0;background:#0a0c0f;color:#e6edf3;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.box{text-align:center;padding:2rem}
+.spinner{width:40px;height:40px;border:3px solid #2a2f3a;border-top-color:#58a6ff;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
 </head>
 <body>
-<script src="initial_data.js"></script>
+<div class="box">
+  <div class="spinner"></div>
+  <p>Loading Brandex Ledger...</p>
+</div>
 <script>
-// If you see this message the full index was truncated during push.
-// Hard refresh after the complete push lands.
-document.body.innerHTML = '<div style="font-family:system-ui;padding:40px;max-width:600px;margin:40px auto;background:#181c22;color:#e6edf3;border-radius:12px;"><h1 style="color:#58a6ff">Brandex Ledger</h1><p>Full app is being restored to GitHub Pages...</p><p style="color:#7d8590">Please hard-refresh (Ctrl+Shift+R) in 30 seconds.</p><p><a href="https://github.com/0utLawzz/Brandex-Ledger" style="color:#58a6ff">GitHub Repo</a></p></div>';
+(async function() {
+  try {
+    const parts = await Promise.all([
+      fetch('part0.htmlfrag').then(r => r.text()),
+      fetch('part1.htmlfrag').then(r => r.text()),
+      fetch('part2.htmlfrag').then(r => r.text()),
+      fetch('part3.htmlfrag').then(r => r.text()).catch(() => '')
+    ]);
+    const html = parts.join('');
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (e) {
+    document.body.innerHTML = '<div class="box"><h2>Load failed</h2><p>' + e.message + '</p><p><a href="https://github.com/0utLawzz/Brandex-Ledger" style="color:#58a6ff">GitHub</a></p></div>';
+  }
+})();
 </script>
 </body>
 </html>
