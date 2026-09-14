@@ -364,6 +364,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   top: 0;
   width: 100%;
   height: auto;
+  min-height: 72px;
+  background: #FAF6EE;
   border-right: none;
   border-bottom: 3px solid #C94A00;
   box-shadow: 0 5px 0 #0C0C0C;
@@ -413,10 +415,21 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   flex-direction: row;
   align-items: center;
 }
+.theme-neobrutalism .sidebar > .nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-left: auto;
+}
+.theme-neobrutalism .nav-links .nav-sec:nth-child(2) {
+  display: none;
+}
 .theme-neobrutalism .ni {
+  color: #0C0C0C;
   border-left: none;
   border-bottom: 4px solid transparent;
-  padding: 24px 18px;
+  min-height: 69px;
+  padding: 22px 18px;
   font-size: 14px;
   font-weight: 700;
 }
@@ -426,8 +439,13 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 }
 .theme-neobrutalism .ni.active {
   background: #C94A00;
+  color: #FAF6EE;
   border-left-color: transparent;
   border-bottom-color: #C94A00;
+}
+.theme-neobrutalism .ni.active .nbadge {
+  background: #FAF6EE;
+  color: #0C0C0C;
 }
 
 /* We need to group the nav sections together so they flow horizontally */
@@ -785,6 +803,11 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   .theme-neobrutalism .sg{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:700px){
+  .theme-neobrutalism .sidebar{padding:0 14px;overflow-x:auto;justify-content:flex-start;}
+  .theme-neobrutalism .sb-logo{flex-shrink:0;}
+  .theme-neobrutalism .sb-name{display:none;}
+  .theme-neobrutalism .sidebar > .nav-links{margin-left:8px;flex-shrink:0;}
+  .theme-neobrutalism .ni{min-height:60px;padding:17px 10px;font-size:11px;}
   .theme-neobrutalism .page{padding:24px 18px;}
   .theme-neobrutalism .ph-title{font-size:36px;}
   .theme-neobrutalism .sg{grid-template-columns:1fr 1fr;gap:12px;}
