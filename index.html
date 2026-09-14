@@ -11,7 +11,6 @@
 </head>
 <body>
   <div id="app">
-    <!-- Sidebar / Mobile Nav -->
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-header">
         <div class="logo">
@@ -23,11 +22,9 @@
         </div>
         <button id="closeSidebar" class="icon-btn mobile-only" aria-label="Close menu">✕</button>
       </div>
-
       <div class="search-box">
         <input type="search" id="searchInput" placeholder="Search ledger / name..." autocomplete="off" />
       </div>
-
       <div class="sidebar-stats">
         <div class="stat">
           <span class="stat-label">Total Balance</span>
@@ -38,11 +35,8 @@
           <span class="stat-value" id="ledgerCount">—</span>
         </div>
       </div>
-
       <nav id="ledgerList" class="ledger-list"></nav>
     </aside>
-
-    <!-- Main Content -->
     <main class="main">
       <header class="topbar">
         <button id="openSidebar" class="icon-btn mobile-only" aria-label="Open menu">☰</button>
@@ -57,8 +51,6 @@
           <button id="homeBtn" class="btn btn-primary">Dashboard</button>
         </div>
       </header>
-
-      <!-- Dashboard View -->
       <section id="dashboardView" class="view active">
         <div class="cards-grid" id="dashboardCards"></div>
         <div class="table-wrap">
@@ -75,8 +67,6 @@
           </table>
         </div>
       </section>
-
-      <!-- Ledger Detail View -->
       <section id="ledgerView" class="view">
         <div class="ledger-header-card" id="ledgerHeader"></div>
         <div class="table-wrap ledger-table-wrap">
@@ -99,8 +89,7 @@
       </section>
     </main>
   </div>
-
-  <!-- Print styles handled in CSS -->
+  <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
