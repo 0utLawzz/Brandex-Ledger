@@ -884,7 +884,7 @@ let activeClientId  = null;
 let ledgerPage      = 1;
 const ROWS_PER_PAGE = 100;
 let ledgerFilter    = '';
-let selectedEntryId = null;
+let selectedEntryIds = new Set();
 let editingEntryId  = null;
 let editingClientId = null;
 
@@ -1354,7 +1354,8 @@ function renderLedger(c) {
       <div class="lh-actions">
         <button class="btn prim sm" onclick="openAddCase()">＋ Add Case Entry</button>
         <button class="btn ok sm" onclick="openAddPay()">💰 Add Payment</button>
-        <button class="btn purp sm" onclick="openReceipt()">🖨 Print / Export</button>
+        <button class="btn purp sm" onclick="openReceipt()">🖨 Print Sheet (All)</button>
+        <button class="btn ok sm" id="btn-print-selected" onclick="openSelectedPrint()" ${selectedEntryIds.size===0?'disabled':''}>🖨 Print Selected (${selectedEntryIds.size})</button>
         <button class="btn warn sm" onclick="openEditClient('${c.id}')">✏ Edit Client</button>
         <button class="btn del sm" onclick="deleteClient('${c.id}')">🗑 Delete Client</button>
       </div>
@@ -1375,6 +1376,7 @@ function renderLedger(c) {
       <table class="lt">
         <thead>
           <tr>
+            <th style="width:36px;text-align:center;"><input type="checkbox" id="chk-all-entries" onchange="toggleSelectAllEntries(this)" title="Select/Deselect All"></th>
             <th>Date</th>
             <th>Folder No</th>
             <th>Stage</th>
@@ -1391,8 +1393,6 @@ function renderLedger(c) {
     </div>`;
 
   renderLedgerBody(c);
-
-  // QR in header? We removed it from header to clean up, it's in print only
 }
 
 function renderLedgerBody(c) {
@@ -1413,6 +1413,12 @@ function renderLedgerBody(c) {
   const start = (ledgerPage - 1) * ROWS_PER_PAGE;
   const pageEntries = allEntries.slice(start, start + ROWS_PER_PAGE);
 
+  // Check all box status
+  const chkAll = document.getElementById('chk-all-entries');
+  if (chkAll) {
+    chkAll.checked = pageEntries.length > 0 && pageEntries.every(e => selectedEntryIds.has(e.id));
+  }
+
   // Compute running balance up to start
   let runBal = 0;
   const allCE = c.entries || [];
@@ -1424,7 +1430,7 @@ function renderLedgerBody(c) {
   }
 
   if (!pageEntries.length) {
-    tbody.innerHTML = '<tr><td colspan="9"><div class="empty"><div class="empty-ico">📋</div><div class="empty-t">' + (ledgerFilter ? 'No matching entries' : 'No entries yet') + '</div><div class="empty-s">' + (ledgerFilter ? 'Clear filter or try different terms' : 'Add a case entry or payment to start') + '</div></div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10"><div class="empty"><div class="empty-ico">📋</div><div class="empty-t">' + (ledgerFilter ? 'No matching entries' : 'No entries yet') + '</div><div class="empty-s">' + (ledgerFilter ? 'Clear filter or try different terms' : 'Add a case entry or payment to start') + '</div></div></td></tr>';
     return;
   }
 
@@ -1433,14 +1439,18 @@ function renderLedgerBody(c) {
     else if (e.type === 'pay') runBal -= (e.received||0);
     const rb = runBal;
     const rbClass = rb > 0 ? 'neg' : rb < 0 ? 'pos' : 'zero';
-    const trClass = (e.type === 'case' ? 'case-row' : 'pay-row') + (e.isComplete ? ' complete-row' : '') + (e.id === selectedEntryId ? ' selected-row' : '');
+    const isSel = selectedEntryIds.has(e.id);
+    const trClass = (e.type === 'case' ? 'case-row' : 'pay-row') + (e.isComplete ? ' complete-row' : '') + (isSel ? ' selected-row' : '');
     const sc = e.stage ? e.stage.toLowerCase() : '';
     const complBtn = e.isComplete
       ? `<span class="complete-check" title="Completed">✓</span>`
       : `<button class="row-btn complete" onclick="event.stopPropagation();markComplete('${c.id}','${e.id}')" title="Mark Complete">✓</button>`;
 
     if (e.type === 'case') {
-      return `<tr class="${trClass}" data-id="${e.id}" onclick="selectRow('${e.id}')">
+      return `<tr class="${trClass}" data-id="${e.id}" onclick="toggleSelectEntry('${e.id}')">
+        <td style="text-align:center;" onclick="event.stopPropagation();">
+          <input type="checkbox" class="row-chk" ${isSel?'checked':''} onchange="toggleSelectEntry('${e.id}')">
+        </td>
         <td class="date-cell">${e.date ? fmtDate(e.date) : ''}</td>
         <td><span class="folder-no">${e.folderNo||''}</span></td>
         <td>${e.stage ? `<span class="stage-b ${sc}">${e.stage.replace('S','S-')}</span>` : ''}</td>
@@ -1456,7 +1466,10 @@ function renderLedgerBody(c) {
         </div></td>
       </tr>`;
     } else {
-      return `<tr class="${trClass}" data-id="${e.id}" onclick="selectRow('${e.id}')">
+      return `<tr class="${trClass}" data-id="${e.id}" onclick="toggleSelectEntry('${e.id}')">
+        <td style="text-align:center;" onclick="event.stopPropagation();">
+          <input type="checkbox" class="row-chk" ${isSel?'checked':''} onchange="toggleSelectEntry('${e.id}')">
+        </td>
         <td class="date-cell">${e.date ? fmtDate(e.date) : ''}</td>
         <td></td><td></td>
         <td class="tm-cell">${e.tmNo||''}</td>
@@ -1474,10 +1487,42 @@ function renderLedgerBody(c) {
   }).join('');
 }
 
+function toggleSelectEntry(entryId) {
+  if (selectedEntryIds.has(entryId)) {
+    selectedEntryIds.delete(entryId);
+  } else {
+    selectedEntryIds.add(entryId);
+  }
+  updateSelectedPrintBtn();
+  const c = clients.find(x => x.id === activeClientId);
+  if (c) renderLedgerBody(c);
+}
+
+function toggleSelectAllEntries(chk) {
+  const c = clients.find(x => x.id === activeClientId);
+  if (!c) return;
+  const allEntries = filteredEntries(c);
+  if (chk.checked) {
+    allEntries.forEach(e => selectedEntryIds.add(e.id));
+  } else {
+    selectedEntryIds.clear();
+  }
+  updateSelectedPrintBtn();
+  renderLedgerBody(c);
+}
+
+function updateSelectedPrintBtn() {
+  const btn = document.getElementById('btn-print-selected');
+  const count = selectedEntryIds.size;
+  if (btn) {
+    btn.disabled = count === 0;
+    btn.textContent = count > 0 ? `🖨 Print Selected (${count})` : '🖨 Print Selected';
+  }
+}
+
 function selectRow(entryId) {
-  if (selectedEntryId === entryId) {
-    selectedEntryId = null;
-    document.getElementById('btn-print-selected').disabled = true;
+  toggleSelectEntry(entryId);
+}
   } else {
     selectedEntryId = entryId;
     document.getElementById('btn-print-selected').disabled = false;
@@ -1757,7 +1802,8 @@ function fetchTmData(inputId, infoId) {
 function buildPrintHTML(c, opts) {
   opts = opts || {};
   const selectedOnly = opts.selectedOnly || false;
-  const selId = opts.selectedEntryId || null;
+  const selIds = opts.selectedIds || (opts.selectedEntryId ? [opts.selectedEntryId] : []);
+  const selSet = new Set(selIds);
 
   const bal = clientBalance(c);
   const balSign = bal > 0 ? 'Outstanding' : bal < 0 ? 'Overpaid' : '✓ Cleared';
@@ -1765,43 +1811,28 @@ function buildPrintHTML(c, opts) {
 
   // Entries to show
   let entriesToShow = c.entries || [];
-  if (selectedOnly && selId) {
-    entriesToShow = entriesToShow.filter(e => e.id == selId);
+  if (selectedOnly && selSet.size > 0) {
+    entriesToShow = entriesToShow.filter(e => selSet.has(e.id));
   }
 
-  // Build table rows with running balance
+  // Running balance map for all entries
   let runBal = 0;
-  if (selectedOnly && selId) {
-    // Compute running balance up to (and including) selected entry
-    const allE = c.entries || [];
-    const selIdx = allE.findIndex(e => e.id == selId);
-    for (let i = 0; i <= selIdx; i++) {
-      const en = allE[i];
-      if (en.type === 'case') runBal += (en.due||0) - (en.received||0);
-      else runBal -= (en.received||0);
-    }
-    // Use only that final runBal for the single row
-    const singleRunBal = runBal;
-    entriesToShow = entriesToShow.map(e => ({ ...e, _rb: singleRunBal }));
-    runBal = 0; // reset for loop
-  }
+  const allE = c.entries || [];
+  const rbMap = {};
+  allE.forEach(e => {
+    if (e.type === 'case') runBal += (e.due||0) - (e.received||0);
+    else runBal -= (e.received||0);
+    rbMap[e.id] = runBal;
+  });
 
   const tableRows = entriesToShow.map(e => {
-    let rb;
-    if (e._rb !== undefined) {
-      rb = e._rb;
-    } else {
-      if (e.type === 'case') runBal += (e.due||0) - (e.received||0);
-      else runBal -= (e.received||0);
-      rb = runBal;
-    }
+    const rb = rbMap[e.id] !== undefined ? rbMap[e.id] : 0;
     const duColor  = '#C94A00';
     const recColor = '#0A6B52';
     const balColor = rb > 0 ? '#C94A00' : '#0A6B52';
-    const rowBg    = e.type === 'pay' ? '#DDEFE8' : '#F0E8D0';
 
     if (e.type === 'case') {
-      return `<tr style="background:${rowBg};">
+      return `<tr style="background:transparent;">
         <td>${e.date ? fmtDate(e.date) : ''}</td>
         <td><strong>${e.folderNo||''}</strong></td>
         <td>${e.stage ? e.stage.replace('S','S-') : ''}</td>
@@ -1812,7 +1843,7 @@ function buildPrintHTML(c, opts) {
         <td style="text-align:right;font-weight:800;color:${balColor};">PKR ${fmt(Math.abs(rb))}</td>
       </tr>`;
     } else {
-      return `<tr style="background:#DDEFE8;">
+      return `<tr style="background:transparent;">
         <td>${e.date ? fmtDate(e.date) : ''}</td>
         <td colspan="3"></td>
         <td style="color:#0A6B52;font-style:italic;font-weight:700;">↳ ${e.details||'PAYMENT RECEIVED'}</td>
@@ -1841,35 +1872,35 @@ function buildPrintHTML(c, opts) {
 
   return `<div class="receipt-wrap" id="receipt-inner">
     <style>
-      .receipt-wrap{background:#FAF6EE;color:#0A6B52;padding:24px;font-family:'Space Grotesk',Arial,sans-serif;max-width:900px;}
-      .r-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:3px solid #0A6B52;}
+      .receipt-wrap{background:#FFFFFF;color:#0A6B52;padding:24px;font-family:'Space Grotesk',Arial,sans-serif;max-width:900px;}
+      .r-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:2px solid #0A6B52;}
       .r-co-wrap{display:flex;align-items:center;gap:12px;}
       .r-co{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:24px;color:#0A6B52;letter-spacing:2px;display:block;}
       .r-co-sub{font-size:9px;color:#0A6B52;letter-spacing:2px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-top:2px;font-weight:700;}
       .r-co-addr{font-size:8.5px;color:#0A6B52;margin-top:4px;line-height:1.6;font-weight:600;}
-      .r-title-bar{background:#0A6B52;color:#FAF6EE;text-align:center;padding:9px;font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:18px;letter-spacing:4px;margin-bottom:14px;}
+      .r-title-bar{background:#FFFFFF;color:#0A6B52;border:2px solid #0A6B52;text-align:center;padding:7px;font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:18px;letter-spacing:4px;margin-bottom:14px;}
       .r-3boxes{display:grid;grid-template-columns:auto 1fr auto;gap:10px;margin-bottom:14px;}
-      .r-box{border:3px solid #0A6B52;padding:10px 16px;background:#FAF6EE;}
+      .r-box{border:2px solid #0A6B52;padding:8px 14px;background:#FFFFFF;}
       .r-box-lbl{font-size:7.5px;color:#0A6B52;letter-spacing:1.5px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:4px;font-weight:700;}
       .r-box-val{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:24px;line-height:1;color:#0A6B52;}
-      .r-box-accno{border-color:#C94A00;}.r-box-accno .r-box-val{color:#C94A00;font-size:34px;}
+      .r-box-accno{border-color:#C94A00;}.r-box-accno .r-box-val{color:#C94A00;font-size:32px;}
       .r-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
-      .r-meta-item{background:#E8DFC7;border:2px solid #0A6B52;padding:7px 10px;}
+      .r-meta-item{background:#FFFFFF;border:1.5px solid #0A6B52;padding:6px 10px;}
       .r-meta-lbl{font-size:7.5px;color:#0A6B52;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:2px;font-weight:700;}
       .r-meta-val{font-size:11px;font-weight:700;color:#0A6B52;}
-      .r-bank-box{background:#E8DFC7;border:2px solid #0A6B52;padding:8px 14px;margin-bottom:14px;}
+      .r-bank-box{background:#FFFFFF;border:1.5px solid #0A6B52;padding:8px 14px;margin-bottom:14px;}
       .r-bank-lbl{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:#0A6B52;margin-bottom:5px;font-weight:700;}
       .r-bank-items{display:flex;gap:20px;flex-wrap:wrap;font-size:10px;color:#0A6B52;}
       .r-table{width:100%;border-collapse:collapse;font-size:9px;margin-bottom:14px;}
-      .r-table th{padding:6px 8px;background:#0A6B52;color:#FAF6EE;text-align:left;font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+      .r-table th{padding:6px 8px;background:#FFFFFF;color:#0A6B52;border-top:2px solid #0A6B52;border-bottom:2px solid #0A6B52;text-align:left;font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;font-family:'DM Mono',monospace;font-weight:800;}
       .r-table th:nth-child(6),.r-table th:nth-child(7),.r-table th:nth-child(8){text-align:right;}
-      .r-table td{padding:5px 8px;border-bottom:1px solid #0A6B52;color:#0A6B52;}
-      .r-balance-box{display:flex;justify-content:space-between;align-items:center;background:${balBoxColor};color:#FAF6EE;padding:12px 16px;border:3px solid #0A6B52;margin-bottom:14px;}
-      .r-bal-lbl{font-size:9px;color:rgba(250,246,238,.9);letter-spacing:1.5px;text-transform:uppercase;font-family:'DM Mono',monospace;font-weight:700;}
-      .r-bal-amt{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:26px;color:#FAF6EE;}
-      .r-foot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:10px;border-top:2px solid #0A6B52;font-size:8.5px;color:#0A6B52;}
+      .r-table td{padding:5px 8px;border-bottom:1px solid #E0E0E0;color:#0A6B52;background:transparent;}
+      .r-balance-box{display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;color:${balBoxColor};padding:10px 16px;border:2px solid ${balBoxColor};margin-bottom:14px;}
+      .r-bal-lbl{font-size:9px;color:${balBoxColor};letter-spacing:1.5px;text-transform:uppercase;font-family:'DM Mono',monospace;font-weight:700;}
+      .r-bal-amt{font-family:'Bebas Neue','Arial Black',Arial,sans-serif;font-size:26px;color:${balBoxColor};}
+      .r-foot{display:flex;justify-content:space-between;align-items:flex-end;padding-top:10px;border-top:1.5px solid #0A6B52;font-size:8.5px;color:#0A6B52;}
       .r-sig-line{border-top:2px solid #C94A00;padding-top:4px;font-size:9.5px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-top:28px;color:#C94A00;}
-      @media print{@page{margin:10mm;}body{background:#FAF6EE !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+      @media print{@page{margin:8mm;}body{background:#FFFFFF !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
     </style>
 
     <!-- HEADER -->
@@ -1889,7 +1920,7 @@ function buildPrintHTML(c, opts) {
     </div>
 
     <!-- TITLE BAR -->
-    <div class="r-title-bar">${selectedOnly ? 'PAYMENT VOUCHER' : 'LEDGER — BALANCE SHEET'}</div>
+    <div class="r-title-bar">${selectedOnly ? (entriesToShow.length === 1 ? 'PAYMENT VOUCHER' : 'LEDGER — SELECTED ENTRIES RECEIPT') : 'LEDGER — BALANCE SHEET'}</div>
 
     <!-- 3-BOX CLIENT INFO -->
     <div class="r-3boxes">
@@ -1913,7 +1944,7 @@ function buildPrintHTML(c, opts) {
     <div class="r-meta-grid">
       <div class="r-meta-item"><div class="r-meta-lbl">Print Date</div><div class="r-meta-val">${now.toLocaleDateString('en-PK',{day:'2-digit',month:'short',year:'numeric'})}</div></div>
       <div class="r-meta-item"><div class="r-meta-lbl">Account No</div><div class="r-meta-val">${c.accNo}</div></div>
-      <div class="r-meta-item"><div class="r-meta-lbl">Total Entries</div><div class="r-meta-val">${(c.entries||[]).length}</div></div>
+      <div class="r-meta-item"><div class="r-meta-lbl">Entries Printed</div><div class="r-meta-val">${entriesToShow.length} of ${(c.entries||[]).length}</div></div>
     </div>
 
     <!-- BANK / PAYMENT INFO (before table) -->
@@ -1927,14 +1958,14 @@ function buildPrintHTML(c, opts) {
           <th>Details</th><th>Due (PKR)</th><th>Received (PKR)</th><th>Balance (PKR)</th>
         </tr>
       </thead>
-      <tbody>${tableRows || '<tr><td colspan="8" style="text-align:center;padding:16px;color:#0A6B52;font-weight:600;">No entries</td></tr>'}</tbody>
+      <tbody>${tableRows || '<tr><td colspan="8" style="text-align:center;padding:16px;color:#0A6B52;font-weight:600;">No entries selected</td></tr>'}</tbody>
     </table>
 
     <!-- BALANCE BOX -->
     <div class="r-balance-box">
       <div>
         <div class="r-bal-lbl">Final Balance</div>
-        <div style="font-size:9px;color:rgba(250,246,238,.9);margin-top:1px;font-weight:600;">${bal>0?'Outstanding amount':bal<0?'Account settled / overpaid':'Account cleared'}</div>
+        <div style="font-size:9px;color:${balBoxColor};margin-top:1px;font-weight:600;">${bal>0?'Outstanding amount':bal<0?'Account settled / overpaid':'Account cleared'}</div>
       </div>
       <div class="r-bal-amt">PKR ${fmt(Math.abs(bal))}</div>
     </div>
@@ -1967,14 +1998,15 @@ function openReceipt() {
 
 function openSelectedPrint() {
   const c = clients.find(x => x.id === activeClientId);
-  if (!c || !selectedEntryId) return;
-  const html = buildPrintHTML(c, { selectedOnly: true, selectedEntryId });
+  if (!c || selectedEntryIds.size === 0) {
+    toast('Select at least one entry using the checkboxes!', 'w');
+    return;
+  }
+  const html = buildPrintHTML(c, { selectedOnly: true, selectedIds: Array.from(selectedEntryIds) });
   document.getElementById('receipt-content').innerHTML = html;
   setTimeout(() => generateQRs(c), 150);
-  log('exp', 'Single row receipt generated for entry ' + selectedEntryId);
+  log('exp', 'Print preview for ' + selectedEntryIds.size + ' selected entries generated');
   openMo('mo-receipt');
-}
-
 function generateQRs(c) {
   const bal = clientBalance(c);
   const qrText = c.accNo + ' | ' + c.name + ' | Balance: PKR ' + fmt(Math.abs(bal));
@@ -1997,8 +2029,8 @@ function doPrint(saveAsPDF) {
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       *{box-sizing:border-box;margin:0;padding:0;}
-      body{background:#FAF6EE;font-family:'Space Grotesk',Arial,sans-serif;}
-      @media print{@page{margin:10mm;}body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+      body{background:#FFFFFF;font-family:'Space Grotesk',Arial,sans-serif;}
+      @media print{@page{margin:8mm;}body{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#FFFFFF !important;}}
     </style>
   </head><body>${html}</body></html>`);
   w.document.close();
