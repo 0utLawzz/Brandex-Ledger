@@ -351,98 +351,110 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .theme-neobrutalism ::-webkit-scrollbar-track{background:#F0E8D0;}
 .theme-neobrutalism ::-webkit-scrollbar-thumb{background:#0C0C0C;border-radius:0;}
 
-/* LAYOUT */
-.theme-neobrutalism .layout{background:#F0E8D0;}
-.theme-neobrutalism .sidebar{
-  background:#0C0C0C;
-  border-right:3px solid #C94A00;
-  width:260px;
-  box-shadow:5px 0 0 #0C0C0C;
-}
-.theme-neobrutalism .main{
-  margin-left:260px;
-  min-width:0;
-  background:#F0E8D0;
-}
-.theme-neobrutalism .page{
-  padding:32px 36px;
-  max-width:none;
-}
-.theme-neobrutalism .page.active{display:block;}
 
-/* SIDEBAR / PERMANENT DARK NAV */
-.theme-neobrutalism .sb-logo{
-  background:#0C0C0C;
-  border-bottom:3px solid #C94A00;
-  padding:20px 18px 16px;
+/* LAYOUT (Neo-Brutalism Top Nav) */
+.theme-neobrutalism .layout {
+  display: flex;
+  flex-direction: column;
+  background: #F0E8D0;
+  min-height: 100vh;
 }
-.theme-neobrutalism .sb-icon{
-  background:#C94A00;
-  color:#FAF6EE;
-  border:3px solid #FAF6EE;
-  border-radius:6px;
-  box-shadow:3px 3px 0 #C94A00;
-  font-family:'Bebas Neue','Arial Black',Arial,sans-serif;
-  font-size:17px;
+.theme-neobrutalism .sidebar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: auto;
+  border-right: none;
+  border-bottom: 3px solid #C94A00;
+  box-shadow: 0 5px 0 #0C0C0C;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 1000;
 }
-.theme-neobrutalism .sb-name{
-  color:#FAF6EE;
-  font-family:'Bebas Neue','Arial Black',Arial,sans-serif;
-  font-size:17px;
-  letter-spacing:1px;
+.theme-neobrutalism .main {
+  margin-left: 0;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  background: transparent;
+}
+.theme-neobrutalism .page {
+  padding: 40px 36px;
+  max-width: none;
+}
+.theme-neobrutalism .page.active {display:block;}
+
+/* TOP NAVIGATION */
+.theme-neobrutalism .sb-logo {
+  background: transparent;
+  border-bottom: none;
+  padding: 12px 0;
+}
+.theme-neobrutalism .sb-icon {
+  font-size: 20px;
+  padding: 8px 12px;
+}
+.theme-neobrutalism .sb-name {
+  font-size: 20px;
 }
 .theme-neobrutalism .sb-sub,
 .theme-neobrutalism .nav-lbl,
-.theme-neobrutalism .sb-foot{color:#888;}
-.theme-neobrutalism .nav-sec{padding:12px 0;}
-.theme-neobrutalism .ni{
-  color:#888;
-  border-left:4px solid transparent;
-  padding:11px 18px;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.5px;
+.theme-neobrutalism .sb-foot,
+.theme-neobrutalism .sb-stats,
+.theme-neobrutalism #sb-quick-list,
+.theme-neobrutalism .nav-sec:nth-child(3) .nav-lbl { /* Hide Quick Open */
+  display: none !important;
 }
-.theme-neobrutalism .ni:hover{
-  color:#FFF;
-  background:#232323;
-  border-left-color:#C94A00;
+.theme-neobrutalism .nav-sec {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.theme-neobrutalism .ni.active{
-  color:#FAF6EE;
-  background:#C94A00;
-  border-left-color:#FAF6EE;
+.theme-neobrutalism .ni {
+  border-left: none;
+  border-bottom: 4px solid transparent;
+  padding: 24px 18px;
+  font-size: 14px;
+  font-weight: 700;
 }
-.theme-neobrutalism .nbadge{
-  background:#C94A00;
-  color:#0C0C0C;
-  border:2px solid #FAF6EE;
-  border-radius:0;
+.theme-neobrutalism .ni:hover {
+  border-left-color: transparent;
+  border-bottom-color: #C94A00;
 }
-.theme-neobrutalism .nbadge.g{background:#0D9970;}
-.theme-neobrutalism .nbadge.r{background:#C94A00;}
-.theme-neobrutalism .sb-quickclients,
-.theme-neobrutalism .sb-stats{
-  background:#232323;
-  border:2px solid #FAF6EE;
-  border-radius:6px;
-  box-shadow:3px 3px 0 #C94A00;
+.theme-neobrutalism .ni.active {
+  background: #C94A00;
+  border-left-color: transparent;
+  border-bottom-color: #C94A00;
 }
-.theme-neobrutalism .sb-qc-header{
-  border-bottom:2px solid #FAF6EE;
-  color:#FAF6EE;
+
+/* We need to group the nav sections together so they flow horizontally */
+.theme-neobrutalism .sidebar > div {
+  display: flex;
+  flex-direction: row;
 }
-.theme-neobrutalism .sb-qc-item{border-bottom:1px solid #555;}
-.theme-neobrutalism .sb-qc-item:hover{background:#0A6B52;}
-.theme-neobrutalism .sb-qc-no{color:#0D9970;}
-.theme-neobrutalism .sb-qc-name{color:#AAA;}
-.theme-neobrutalism .sb-qc-bal.pos{color:#0D9970;}
-.theme-neobrutalism .sb-qc-bal.neg{color:#C94A00;}
-.theme-neobrutalism .sb-stat span:first-child{color:#AAA;}
-.theme-neobrutalism .sb-stat.b span:last-child{color:#C94A00;}
-.theme-neobrutalism .sb-stat.g span:last-child{color:#0D9970;}
-.theme-neobrutalism .sb-stat.r span:last-child{color:#D4A800;}
-.theme-neobrutalism .sb-foot{border-top:2px solid #FAF6EE;}
+
+/* Overriding base font sizes for Neo-Brutalism */
+.theme-neobrutalism .ph-title { font-size: 48px; }
+.theme-neobrutalism .ph-sub { font-size: 16px; margin-top: 8px; }
+.theme-neobrutalism .btn { font-size: 13px; padding: 12px 18px; }
+.theme-neobrutalism .sc-lbl { font-size: 14px; }
+.theme-neobrutalism .sc-val { font-size: 40px; }
+.theme-neobrutalism .sc-sub { font-size: 12px; }
+.theme-neobrutalism .cc-no { font-size: 24px; }
+.theme-neobrutalism .cc-name { font-size: 20px; }
+.theme-neobrutalism .cc-city { font-size: 12px; padding: 4px 10px; }
+.theme-neobrutalism .cc-bal { font-size: 18px; }
+.theme-neobrutalism .lh-company { font-size: 14px; }
+.theme-neobrutalism .lh-title { font-size: 36px; }
+.theme-neobrutalism .lh-bal-lbl { font-size: 14px; }
+.theme-neobrutalism .lh-bal-amt { font-size: 42px; }
+.theme-neobrutalism .lt th { font-size: 12px; padding: 14px 16px; }
+.theme-neobrutalism .lt td { font-size: 13px; padding: 14px 16px; }
+.theme-neobrutalism .srch, .theme-neobrutalism .fi, .theme-neobrutalism .fsel { font-size: 14px; padding: 12px 16px; }
+.theme-neobrutalism .flbl { font-size: 12px; }
 
 /* PAGE HEADERS */
 .theme-neobrutalism .ph{
@@ -792,6 +804,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 
 <!-- ════════════════════ SIDEBAR ════════════════════ -->
 <aside class="sidebar">
+  <!-- Logo -->
   <div class="sb-logo">
     <div class="sb-logomark">
       <div class="sb-icon">BLA</div>
@@ -802,7 +815,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     </div>
   </div>
 
-  <div class="nav-sec">
+  <div class="nav-links" style="display:flex;">
+    <div class="nav-sec">
     <div class="nav-lbl">Main</div>
     <div class="ni active" onclick="goPage('dashboard')" id="ni-dashboard">
       <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
@@ -844,6 +858,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     </div>
   </div>
 
+  </div>
   <div class="sb-stats">
     <div class="sb-stat b"><span>Clients</span><span id="ss-c">0</span></div>
     <div class="sb-stat g"><span>Received</span><span id="ss-r">—</span></div>

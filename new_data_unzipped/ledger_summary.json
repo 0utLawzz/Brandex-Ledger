@@ -1,0 +1,513 @@
+[
+  {
+    "sheet": "A-001",
+    "client_code": "A-001",
+    "client_name": "NOOR BAAF",
+    "header_balance": 27500,
+    "entry_count": 912
+  },
+  {
+    "sheet": "A-002",
+    "client_code": "A-002",
+    "client_name": "MR FURQAN BRAND EXPERTS",
+    "header_balance": 50000,
+    "entry_count": 81
+  },
+  {
+    "sheet": "A-003",
+    "client_code": "A-003",
+    "client_name": "MUMTAZ ALI GHUARI ",
+    "header_balance": 7975,
+    "entry_count": 179
+  },
+  {
+    "sheet": "A-004",
+    "client_code": "A-004",
+    "client_name": "MR HMMAS BADAR",
+    "header_balance": 154000,
+    "entry_count": 231
+  },
+  {
+    "sheet": "A-005",
+    "client_code": "A-005",
+    "client_name": "NAMEEM LAW ASSOCIATES",
+    "header_balance": 0,
+    "entry_count": 65
+  },
+  {
+    "sheet": "A-006A",
+    "client_code": "A-006A",
+    "client_name": "UMAIR",
+    "header_balance": 20500,
+    "entry_count": 80
+  },
+  {
+    "sheet": "A-006B",
+    "client_code": "A-006B",
+    "client_name": "IRFAN",
+    "header_balance": 0,
+    "entry_count": 15
+  },
+  {
+    "sheet": "A-007A",
+    "client_code": "A-007A",
+    "client_name": "UMAIR",
+    "header_balance": 0,
+    "entry_count": 47
+  },
+  {
+    "sheet": "A-007B",
+    "client_code": "A-007B",
+    "client_name": "IMRAN",
+    "header_balance": 0,
+    "entry_count": 13
+  },
+  {
+    "sheet": "A-008",
+    "client_code": "A-008",
+    "client_name": "RAJA WAQAR RWP CA",
+    "header_balance": 0,
+    "entry_count": 21
+  },
+  {
+    "sheet": "A-009",
+    "client_code": "A-009",
+    "client_name": "M IMTIAZ MULTAN CO FAIZ RASOOL X559",
+    "header_balance": 0,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-010",
+    "client_code": "A-010",
+    "client_name": "MANSOR KHI",
+    "header_balance": 39350,
+    "entry_count": 84
+  },
+  {
+    "sheet": "A-011",
+    "client_code": "A-011",
+    "client_name": "ANDAN ADV FSD",
+    "header_balance": -5500,
+    "entry_count": 42
+  },
+  {
+    "sheet": "A-012",
+    "client_code": "A-012",
+    "client_name": "ABID BLUE AREA ISB",
+    "header_balance": 0,
+    "entry_count": 49
+  },
+  {
+    "sheet": "A-013",
+    "client_code": "A-013",
+    "client_name": "ADVOCATE SHAFIQUE ISLAMABD",
+    "header_balance": 6000,
+    "entry_count": 18
+  },
+  {
+    "sheet": "A-014",
+    "client_code": "A-014",
+    "client_name": "ASIM SALEEM LAHORE ",
+    "header_balance": 0,
+    "entry_count": 25
+  },
+  {
+    "sheet": "A-015",
+    "client_code": "A-015",
+    "client_name": "M DANISH CO A022 EHTISHAM",
+    "header_balance": 0,
+    "entry_count": 17
+  },
+  {
+    "sheet": "A-016",
+    "client_code": "A-016",
+    "client_name": "SHEER M DAR FSD TAX",
+    "header_balance": 0,
+    "entry_count": 13
+  },
+  {
+    "sheet": "A-017",
+    "client_code": "A-017",
+    "client_name": "MS SHAFIQ TAX CONSULTANT",
+    "header_balance": 15000,
+    "entry_count": 51
+  },
+  {
+    "sheet": "A-018",
+    "client_code": "A-018",
+    "client_name": "KASHIF PWD RWP ZIVA",
+    "header_balance": 10000,
+    "entry_count": 25
+  },
+  {
+    "sheet": "A-019",
+    "client_code": "A-019",
+    "client_name": "ASIM QURESHI RWP",
+    "header_balance": 10000,
+    "entry_count": 5
+  },
+  {
+    "sheet": "A-020",
+    "client_code": "A-020",
+    "client_name": "MR SIBTAIN KARACHI",
+    "header_balance": 0,
+    "entry_count": 11
+  },
+  {
+    "sheet": "A-021",
+    "client_code": "A-021",
+    "client_name": "FAIZ RASOOL JAMPUR",
+    "header_balance": 0,
+    "entry_count": 12
+  },
+  {
+    "sheet": "A-022",
+    "client_code": "A-022",
+    "client_name": "EHTSAM ALI CHEEMA",
+    "header_balance": 8500,
+    "entry_count": 48
+  },
+  {
+    "sheet": "A-023",
+    "client_code": "A-023",
+    "client_name": "WASEEM HYD",
+    "header_balance": 0,
+    "entry_count": 6
+  },
+  {
+    "sheet": "A-024",
+    "client_code": "A-024",
+    "client_name": "WAJAHAT XYC PRIDE",
+    "header_balance": 0,
+    "entry_count": 15
+  },
+  {
+    "sheet": "A-025",
+    "client_code": "A-025",
+    "client_name": "IBRAHIM XYC KARACHI",
+    "header_balance": 0,
+    "entry_count": 15
+  },
+  {
+    "sheet": "A-026",
+    "client_code": "A-026",
+    "client_name": "DESIRED TECHNOLOGIES",
+    "header_balance": 0,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-027",
+    "client_code": "A-027",
+    "client_name": "FAHIM ADV OKARA",
+    "header_balance": 0,
+    "entry_count": 1
+  },
+  {
+    "sheet": "A-028A",
+    "client_code": "A-028A",
+    "client_name": "AZIZ UR REHMAN RWP",
+    "header_balance": 15000,
+    "entry_count": 46
+  },
+  {
+    "sheet": "A-028B",
+    "client_code": "A-010",
+    "client_name": "MANSOOR KRI",
+    "header_balance": -4500,
+    "entry_count": 68
+  },
+  {
+    "sheet": "A-029",
+    "client_code": "A-029",
+    "client_name": "QAZI PARVAIZ ADV",
+    "header_balance": 2000,
+    "entry_count": 36
+  },
+  {
+    "sheet": "A-030",
+    "client_code": "A-030",
+    "client_name": "ZEESHAN ADV FAISALABAD",
+    "header_balance": 0,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-031",
+    "client_code": "A-031",
+    "client_name": "AFTAB ADV GUJRANWALA",
+    "header_balance": 18000,
+    "entry_count": 12
+  },
+  {
+    "sheet": "A-032",
+    "client_code": "A-032",
+    "client_name": "MMH MM HASSAN",
+    "header_balance": 9200,
+    "entry_count": 18
+  },
+  {
+    "sheet": "A-033",
+    "client_code": "A-033",
+    "client_name": "AKK AWAIS KK CONSULTANT",
+    "header_balance": 0,
+    "entry_count": 5
+  },
+  {
+    "sheet": "A-034A",
+    "client_code": "A-034A",
+    "client_name": "SHOAIB ADV ISB",
+    "header_balance": 30000,
+    "entry_count": 31
+  },
+  {
+    "sheet": "A-034B",
+    "client_code": "A-034B",
+    "client_name": "MR. SHOAIB ADV ",
+    "header_balance": 0,
+    "entry_count": 24
+  },
+  {
+    "sheet": "A-034C",
+    "client_code": "A-034B",
+    "client_name": "MR. SHOAIB ADV ",
+    "header_balance": 22000,
+    "entry_count": 5
+  },
+  {
+    "sheet": "A-035",
+    "client_code": "A-035",
+    "client_name": "KHURRAM SHAHZAD ADV",
+    "header_balance": 7000,
+    "entry_count": 10
+  },
+  {
+    "sheet": "A-036",
+    "client_code": "A-036",
+    "client_name": "MEHWISH BUISNESS BABA",
+    "header_balance": 0,
+    "entry_count": 12
+  },
+  {
+    "sheet": "A-037",
+    "client_code": "A-037",
+    "client_name": "RAJA ARSHAD SAHIWAL SIP",
+    "header_balance": 16000,
+    "entry_count": 19
+  },
+  {
+    "sheet": "A-038",
+    "client_code": "A-038",
+    "client_name": "DR ALI KHI",
+    "header_balance": 24000,
+    "entry_count": 87
+  },
+  {
+    "sheet": "A-039",
+    "client_code": "A-039",
+    "client_name": "AMJAD UME COSMATICS",
+    "header_balance": 0,
+    "entry_count": 37
+  },
+  {
+    "sheet": "A-040",
+    "client_code": "A-040",
+    "client_name": "SHARJEEL AYUB SHARUKH KHI",
+    "header_balance": 0,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-041",
+    "client_code": "A-041",
+    "client_name": "M TARIQ AFTAB RWP",
+    "header_balance": 72000,
+    "entry_count": 116
+  },
+  {
+    "sheet": "A-042",
+    "client_code": "A-042",
+    "client_name": "KKC KAMRAN ISLAMABAD",
+    "header_balance": 19000,
+    "entry_count": 110
+  },
+  {
+    "sheet": "A-043",
+    "client_code": "A-043",
+    "client_name": "WAQAS CONSULTANT ISB",
+    "header_balance": 4000,
+    "entry_count": 32
+  },
+  {
+    "sheet": "A-044A",
+    "client_code": "A-044A",
+    "client_name": "ISO MURTAZA",
+    "header_balance": 16000,
+    "entry_count": 45
+  },
+  {
+    "sheet": "A-044B",
+    "client_code": "A-010",
+    "client_name": "MANSOOR KRI",
+    "header_balance": 0,
+    "entry_count": 21
+  },
+  {
+    "sheet": "A-045",
+    "client_code": "A-045",
+    "client_name": "MR SARMAD PSW",
+    "header_balance": 17000,
+    "entry_count": 48
+  },
+  {
+    "sheet": "A-046",
+    "client_code": "A-046",
+    "client_name": "SHAZAD KHI",
+    "header_balance": 0,
+    "entry_count": 7
+  },
+  {
+    "sheet": "A-047",
+    "client_code": "A-047",
+    "client_name": "JUNAID PESHAWAR CO MR SARMAD X073",
+    "header_balance": 1000,
+    "entry_count": 16
+  },
+  {
+    "sheet": "A-048",
+    "client_code": "A-048",
+    "client_name": "ALI WARAICH ADVOCATE ",
+    "header_balance": 0,
+    "entry_count": 35
+  },
+  {
+    "sheet": "A-049",
+    "client_code": "A-049",
+    "client_name": "ITNA CONSULTANT RWP",
+    "header_balance": 1100,
+    "entry_count": 27
+  },
+  {
+    "sheet": "A-050",
+    "client_code": "A-050",
+    "client_name": "MIAN USMAN BURYWALA",
+    "header_balance": 0,
+    "entry_count": 16
+  },
+  {
+    "sheet": "A-051",
+    "client_code": "A-051",
+    "client_name": "MR AURANGZAIB RWP",
+    "header_balance": 6000,
+    "entry_count": 39
+  },
+  {
+    "sheet": "A-052",
+    "client_code": "A-052",
+    "client_name": "TARIQ ADV HYDRABAD",
+    "header_balance": 12600,
+    "entry_count": 113
+  },
+  {
+    "sheet": "A-053",
+    "client_code": "A-053",
+    "client_name": "IRFAN CHEENA \nCO A022 IHTASHAM",
+    "header_balance": 0,
+    "entry_count": 1
+  },
+  {
+    "sheet": "A-054",
+    "client_code": "A-054",
+    "client_name": "KAMRAN SADIQ",
+    "header_balance": 18000,
+    "entry_count": 8
+  },
+  {
+    "sheet": "A-055",
+    "client_code": "A-055",
+    "client_name": "MUHAMMAD ZAHID",
+    "header_balance": 38200,
+    "entry_count": 48
+  },
+  {
+    "sheet": "A-056",
+    "client_code": "A-056",
+    "client_name": "AIMA MANAGEMENT",
+    "header_balance": 1000,
+    "entry_count": 20
+  },
+  {
+    "sheet": "A-057",
+    "client_code": "A-057",
+    "client_name": "IRFAN CHEEMA",
+    "header_balance": 0,
+    "entry_count": 8
+  },
+  {
+    "sheet": "A-058",
+    "client_code": "A-058",
+    "client_name": "M ASIF FAROOQ",
+    "header_balance": 0,
+    "entry_count": 4
+  },
+  {
+    "sheet": "A-059",
+    "client_code": "A-059",
+    "client_name": "WAQAS ILYAAS",
+    "header_balance": 1000,
+    "entry_count": 11
+  },
+  {
+    "sheet": "A-060",
+    "client_code": "A-060",
+    "client_name": "SHAHZAD KARACHI",
+    "header_balance": 0,
+    "entry_count": 28
+  },
+  {
+    "sheet": "A-061",
+    "client_code": "A-061",
+    "client_name": "M AASHAN ZAFAR EACCOUNTAX KHI",
+    "header_balance": 10000,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-062",
+    "client_code": "A-062",
+    "client_name": "CONSULTANCYFIN \nALTAF KHAN KRI",
+    "header_balance": 0,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-063",
+    "client_code": "A-063",
+    "client_name": " ATIF CO A048 MR ALI",
+    "header_balance": 0,
+    "entry_count": 5
+  },
+  {
+    "sheet": "A-064",
+    "client_code": "A-064",
+    "client_name": "M. AAMIR KRI",
+    "header_balance": 0,
+    "entry_count": 3
+  },
+  {
+    "sheet": "A-065",
+    "client_code": "A-065",
+    "client_name": "IFA ASSSOCIATES",
+    "header_balance": 2500,
+    "entry_count": 4
+  },
+  {
+    "sheet": "A-066",
+    "client_code": "A-010",
+    "client_name": "MANSOOR KRI",
+    "header_balance": 0,
+    "entry_count": 1
+  },
+  {
+    "sheet": "A-067",
+    "client_code": "A-067",
+    "client_name": null,
+    "header_balance": 0,
+    "entry_count": 1
+  }
+]
