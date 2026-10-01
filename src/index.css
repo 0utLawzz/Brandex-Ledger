@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F0E8D0;
+  --color-maroon: #6C1C1F;
+  --color-gold: #B0740E;
+  --color-cream-dark: #E8DDB8;
+  --color-maroon-light: #8B2E32;
+  --color-gold-light: #D4A017;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: var(--color-maroon);
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+
+  code, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Neo-Brutalism utilities */
+@layer utilities {
+  .neo-border {
+    border: 3px solid var(--color-maroon);
+  }
+  .neo-shadow {
+    box-shadow: 4px 4px 0 0 var(--color-maroon);
+  }
+  .neo-shadow-sm {
+    box-shadow: 2px 2px 0 0 var(--color-maroon);
+  }
+  .neo-card {
+    border: 3px solid var(--color-maroon);
+    box-shadow: 4px 4px 0 0 var(--color-maroon);
+    background: white;
+  }
+  .neo-btn {
+    border: 3px solid var(--color-maroon);
+    box-shadow: 3px 3px 0 0 var(--color-maroon);
+    font-weight: 600;
+    transition: all 0.1s ease;
+  }
+  .neo-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--color-maroon);
+  }
+  .neo-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+}
