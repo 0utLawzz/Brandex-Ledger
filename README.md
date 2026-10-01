@@ -1,72 +1,117 @@
-﻿# Brandex Law Associates — Ledger System
+# Brandex Law Associates — Ledger System v2
 
 ![Social Preview](social-preview.png)
 
-A **Neo-Brutalism** styled ledger and client account management system for Brandex Law Associates, built with vanilla HTML/JS and backed by **Supabase** (PostgreSQL).
+**TypeScript + React SaaS rewrite** of the original vanilla HTML ledger.
+
+Neo-Brutalism theme preserved (Cream `#F0E8D0`, Maroon `#6C1C1F`, Gold `#B0740E`).
+
+> **Branch:** `feature/typescript-saas`  
+> Original single-file app is still on `main` (and kept as `index.html` here for reference).
 
 ---
 
-## Features
+## What's new in v2
 
-- **73 Client Accounts** — Full ledger history for all clients (A-001 → A-067)
-- **Case Entries** — Track trademark filings with Folder No, Stage (S1–S4), TM No, and amounts due
-- **Payment Receipts** — Record payments received against client balances
-- **Dashboard** — Aggregated stats (total clients, total received, outstanding balance, total entries)
-- **Search & Filter** — Real-time client search across all accounts
-- **Ledger View** — Full scrollable ledger per client with running balance
-- **Export** — CSV export of clients and all entries
-- **Print / Receipt** — Print-optimised ledger receipts per client
-- **Activity Log** — Full audit trail of all actions
+- **TypeScript** throughout
+- **React 19 + Vite**
+- **Supabase Auth** (login / signup)
+- **TanStack Query** for data fetching
+- **Multi-tenant foundation** (organizations + profiles + roles)
+- Same Neo-Brutalism visual language
+- Dashboard, Clients list, per-client Ledger view
+- Ready for roles (`owner` / `admin` / `member` / `viewer`)
+
+---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Vanilla HTML + CSS + JavaScript |
-| Database | Supabase (PostgreSQL) |
-| Fonts | Bebas Neue, Space Grotesk, DM Mono |
-| Design | Neo-Brutalism — Cream #F0E8D0, Maroon #6C1C1F, Gold #B0740E |
-| Hosting | Vercel |
+| Layer        | Technology                          |
+|--------------|-------------------------------------|
+| Frontend     | React 19 + TypeScript + Vite        |
+| Styling      | Tailwind CSS 4 + Neo-Brutalism tokens |
+| Data         | Supabase (PostgreSQL) + TanStack Query |
+| Auth         | Supabase Auth                       |
+| Fonts        | Bebas Neue, Space Grotesk, DM Mono  |
+| Hosting      | Vercel (recommended)                |
 
-## Database Schema
+---
 
-### clients
-| Column | Type | Description |
-|--------|------|-------------|
-| client_code | text (PK) | Unique code e.g. A-001 |
-| client_name | text | Client display name |
-| header_balance | numeric | Opening ledger balance |
-| ank_name | text | Client bank name |
-| ank_account | text | Account number |
-| ank_iban | text | IBAN |
+## Quick Start
 
-### ledger_entries
-| Column | Type | Description |
-|--------|------|-------------|
-| client_code | text (FK) | Links to clients |
-| entry_date | date | Date of entry |
-| older_no | text | Case/Folder number |
-| stage | text | S1, S2, S3, S4 |
-| 	m_no | text | TM Registration number |
-| details | text | Description |
-| mount_due | numeric | Amount charged |
-| mount_received | numeric | Payment received |
-| unning_balance | numeric | Balance after entry |
-| entry_type | text | Auto: 'case' or 'payment' |
+```bash
+git clone https://github.com/0utLawzz/Brandex-Ledger.git
+cd Brandex-Ledger
+git checkout feature/typescript-saas
 
-## Setup & Development
+npm install
+cp .env.example .env
+# Fill in VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
 
-1. Clone the repo
-2. Copy .env.example to .env and fill in your Supabase keys
-3. Run the migration: supabase db push
-4. Seed the database: python migrate_to_supabase.py
-5. Open index.html in a browser or deploy to Vercel
+npm run dev
+```
 
-## Data Source
+App runs at http://localhost:5173
 
-All ledger data is sourced from 
-ew_data_unzipped/ledger_all_clients.json — the canonical JSON export of the original Excel ledger workbook with 73 client sheets.
+### Apply the new SaaS migration
+
+```bash
+# If you use Supabase CLI
+supabase db push
+# or run the SQL in supabase/migrations/20261002000001_saas_auth_and_tenancy.sql
+# via the Supabase SQL editor
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/layout/   # DashboardLayout
+├── contexts/            # AuthContext
+├── lib/                 # supabase client, utils
+├── pages/               # Login, Dashboard, Clients, ClientLedger
+├── types/               # Database types
+├── App.tsx
+├── main.tsx
+└── index.css            # Theme + Neo-Brutalism utilities
+```
+
+---
+
+## Environment
+
+```env
+VITE_SUPABASE_URL=https://sygfnemgebuhtqpmedbg.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_key_here
+```
+
+---
+
+## Roadmap (next steps)
+
+- [x] TypeScript + React rewrite
+- [x] Login / Sign up
+- [x] Dashboard KPIs
+- [x] Clients table + search
+- [x] Per-client ledger view
+- [x] Multi-tenant schema foundation
+- [ ] Org-scoped RLS policies (tighten after data migration)
+- [ ] Add / edit clients & ledger entries UI
+- [ ] CSV export + print receipts
+- [ ] Role-based permissions in UI
+- [ ] Activity log
+- [ ] Proper TanStack Router (file-based routes)
+
+---
+
+## Original v1
+
+The original vanilla HTML/JS version remains on the `main` branch and as `index.html` in this branch for reference / rollback.
+
+---
 
 ## License
 
-MIT — See [LICENSE](LICENSE)
+MIT
