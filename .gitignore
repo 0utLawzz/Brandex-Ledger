@@ -1,41 +1,34 @@
-# .env files
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
 .env
 .env.local
-.env.production
+.env.*.local
 
-# Python scripts (migration / one-off tools)
-*.py
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-*.egg-info/
-dist/
-build/
-
-# Node
-node_modules/
-npm-debug.log
-
-# OS
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Supabase local dev
-supabase/.temp/
+# Supabase
+supabase/.branches
+supabase/.temp
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Raw migration / temp data dumps — already imported to Supabase
-new_data_unzipped/
-
-# Vercel deployment artifact
-.vercel/
+# Vercel
+.vercel
