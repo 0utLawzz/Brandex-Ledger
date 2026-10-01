@@ -52,12 +52,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .from('profiles')
         .select('*')
         .eq('id', userId)
-        .single()
+        .maybeSingle()
 
       if (error && error.code !== 'PGRST116') {
         console.error('Error fetching profile:', error)
       }
-      setProfile(data)
+      setProfile((data as Profile) ?? null)
     } catch (err) {
       console.error(err)
     } finally {
@@ -79,13 +79,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
     })
     if (!error && data.user) {
-      // Profile will be created via trigger or we insert here
-      await supabase.from('profiles').upsert({
+      // Profile is also created by DB trigger; this is a safe fallback
+      const row = {
         id: data.user.id,
         email,
         full_name: fullName || null,
-        role: 'owner',
-      })
+        role: 'owner' as const,
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (supabase.from('profiles') as any).upsert(row)
     }
     return { error: error as Error | null }
   }
