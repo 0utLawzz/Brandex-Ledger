@@ -57,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (error && error.code !== 'PGRST116') {
         console.error('Error fetching profile:', error)
       }
-      setProfile((data as Profile) ?? null)
+      setProfile(data as Profile | null)
     } catch (err) {
       console.error(err)
     } finally {
@@ -79,7 +79,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
     })
     if (!error && data.user) {
-      // Profile is also created by DB trigger; this is a safe fallback
       const row = {
         id: data.user.id,
         email,
